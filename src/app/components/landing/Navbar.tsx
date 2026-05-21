@@ -7,7 +7,6 @@ import {
   GraduationCap,
   Menu,
   X,
-  ChevronDown,
   Sparkles,
 } from "lucide-react";
 
@@ -33,11 +32,10 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
             ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-indigo-500/5 border-b border-indigo-100/50"
             : "bg-transparent"
-        }`}
+          }`}
       >
         <div className="container-xl">
           <div className="flex items-center justify-between h-18 py-4">
@@ -51,9 +49,8 @@ export default function Navbar() {
               </div>
               <div>
                 <span
-                  className={`font-heading text-lg font-bold transition-colors duration-300 ${
-                    scrolled ? "text-slate-900" : "text-white"
-                  }`}
+                  className={`font-heading text-lg font-bold transition-colors duration-300 ${scrolled ? "text-slate-900" : "text-white"
+                    }`}
                 >
                   Faculties{" "}
                   <span className="gradient-text">Online</span>
@@ -67,11 +64,10 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 group ${
-                    scrolled
+                  className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 group ${scrolled
                       ? "text-slate-600 hover:text-indigo-600 hover:bg-indigo-50"
                       : "text-white/80 hover:text-white hover:bg-white/10"
-                  }`}
+                    }`}
                 >
                   {link.label}
                   <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-gradient-to-r from-indigo-500 to-violet-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full" />
@@ -83,11 +79,10 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className={`p-2 rounded-lg transition-all duration-300 ${
-                  scrolled
+                className={`p-2 rounded-lg transition-all duration-300 ${scrolled
                     ? "text-slate-600 hover:text-indigo-600 hover:bg-indigo-50"
                     : "text-white/80 hover:text-white hover:bg-white/10"
-                }`}
+                  }`}
                 aria-label="Search"
                 id="navbar-search-btn"
               >
@@ -97,11 +92,10 @@ export default function Navbar() {
               <Link
                 href="/login"
                 id="navbar-login-btn"
-                className={`px-5 py-2 text-sm font-semibold rounded-xl border transition-all duration-300 ${
-                  scrolled
+                className={`px-5 py-2 text-sm font-semibold rounded-xl border transition-all duration-300 ${scrolled
                     ? "border-indigo-300 text-indigo-600 hover:bg-indigo-50"
                     : "border-white/30 text-white hover:border-white/60 hover:bg-white/10"
-                }`}
+                  }`}
               >
                 Login
               </Link>
@@ -120,11 +114,10 @@ export default function Navbar() {
             <button
               id="navbar-mobile-toggle"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`lg:hidden p-2 rounded-lg transition-colors ${
-                scrolled
+              className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled
                   ? "text-slate-700 hover:bg-slate-100"
                   : "text-white hover:bg-white/10"
-              }`}
+                }`}
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -153,9 +146,8 @@ export default function Navbar() {
 
       {/* Mobile Menu Drawer */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
-          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
       >
         {/* Backdrop */}
         <div
@@ -165,9 +157,8 @@ export default function Navbar() {
 
         {/* Drawer */}
         <div
-          className={`absolute top-0 right-0 h-full w-80 bg-white shadow-2xl transform transition-transform duration-300 ${
-            mobileOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`absolute top-0 right-0 h-full w-80 bg-white shadow-2xl transform transition-transform duration-300 ${mobileOpen ? "translate-x-0" : "translate-x-full"
+            }`}
         >
           <div className="flex flex-col h-full">
             <div className="flex items-center justify-between p-5 border-b border-slate-100">

@@ -80,7 +80,7 @@ export default function PricingSection() {
             <span className="gradient-text">Teaching Career</span>
           </h2>
           <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            Start free and upgrade when you're ready. Premium members earn 3x more
+            Start free and upgrade when you&apos;re ready. Premium members earn 3x more
             students on average.
           </p>
         </div>

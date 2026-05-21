@@ -88,7 +88,7 @@ export default function TestimonialsSection() {
             <span className="gradient-text">&amp; Tutors</span>
           </h2>
           <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            Don't just take our word for it. Hear from thousands who transformed their
+            Don&apos;t just take our word for it. Hear from thousands who transformed their
             learning journey with Faculties Online.
           </p>
         </div>
@@ -132,7 +132,7 @@ export default function TestimonialsSection() {
                     i === 0 ? "text-white/90" : "text-slate-600"
                   }`}
                 >
-                  "{t.text}"
+                  &ldquo;{t.text}&rdquo;
                 </p>
 
                 {/* Author */}

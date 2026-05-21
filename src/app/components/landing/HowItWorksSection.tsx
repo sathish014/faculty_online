@@ -79,12 +79,10 @@ interface StepCardProps {
     color: string;
     highlight: string;
   };
-  index: number;
   isLast: boolean;
-  type: "student" | "tutor";
 }
 
-function StepCard({ step, index, isLast, type }: StepCardProps) {
+function StepCard({ step, isLast }: StepCardProps) {
   return (
     <div className="relative flex flex-col items-center text-center group">
       {/* Connector line */}
@@ -138,8 +136,8 @@ export default function HowItWorksSection() {
             Works for You
           </h2>
           <p className="text-slate-500 text-lg max-w-xl mx-auto">
-            Whether you're a student seeking knowledge or a tutor ready to teach,
-            we've made the process effortless.
+            Whether you&apos;re a student seeking knowledge or a tutor ready to teach,
+            we&apos;ve made the process effortless.
           </p>
         </div>
 
@@ -181,9 +179,7 @@ export default function HowItWorksSection() {
                 <StepCard
                   key={step.id}
                   step={step}
-                  index={i}
                   isLast={i === studentSteps.length - 1}
-                  type="student"
                 />
               ))}
             </div>
@@ -195,9 +191,7 @@ export default function HowItWorksSection() {
                 <StepCard
                   key={step.id}
                   step={step}
-                  index={i}
                   isLast={i === tutorSteps.length - 1}
-                  type="tutor"
                 />
               ))}
             </div>

@@ -56,14 +56,17 @@ export default function HeroSection() {
   const modeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setMounted(true);
+    const timer = setTimeout(() => setMounted(true), 0);
     const handleClickOutside = (e: MouseEvent) => {
       if (modeRef.current && !modeRef.current.contains(e.target as Node)) {
         setModeOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const modes = ["Any Mode", "Online", "Offline", "Home Tuition"];
@@ -71,7 +74,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden hero-bg pt-20"
+      className="relative min-h-screen flex flex-col justify-center hero-bg pt-20 z-20"
     >
       {/* Noise texture overlay */}
       <div className="noise-overlay" />
@@ -98,7 +101,7 @@ export default function HeroSection() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/20 text-white/90 text-sm font-medium">
               <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
-              <span>India's #1 Tutor Marketplace Platform</span>
+              <span>India&apos;s #1 Tutor Marketplace Platform</span>
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
             </div>
 
@@ -119,7 +122,7 @@ export default function HeroSection() {
 
               <p className="text-lg text-white/65 max-w-lg leading-relaxed font-sans">
                 Connect with verified tutors for online, offline & home tuition.
-                Learn at your pace, on your schedule, from India's best educators.
+                Learn at your pace, on your schedule, from India&apos;s best educators.
               </p>
             </div>
 
@@ -243,7 +246,7 @@ export default function HeroSection() {
             </div>
 
             {/* Floating Tutor Cards */}
-            {floatingCards.map((card, i) => (
+            {floatingCards.map((card) => (
               <div
                 key={card.id}
                 className={`absolute ${card.position} animate-float`}
@@ -297,12 +300,12 @@ export default function HeroSection() {
 
         {/* SMART SEARCH BAR */}
         <div className="relative -mb-16 z-20">
-          <div className="glass-light rounded-2xl border border-white/40 shadow-2xl p-2 md:p-3">
-            <div className="flex flex-col md:flex-row gap-2">
+          <div className="bg-white/95 backdrop-blur-xl rounded-3xl md:rounded-full border border-white shadow-2xl p-2 md:p-2.5 max-w-5xl mx-auto ring-1 ring-slate-900/5">
+            <div className="flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x divide-slate-200/80">
               {/* Subject */}
-              <div className="flex-1 relative">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <BookOpen className="w-5 h-5 text-indigo-400" />
+              <div className="flex-1 w-full relative group">
+                <div className="absolute left-6 top-1/2 -translate-y-1/2 pointer-events-none transition-transform group-focus-within:scale-110">
+                  <BookOpen className="w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
                 </div>
                 <input
                   type="text"
@@ -310,14 +313,14 @@ export default function HeroSection() {
                   onChange={(e) => setSubject(e.target.value)}
                   placeholder="Subject or Skill (e.g., Maths, Python)"
                   id="hero-search-subject"
-                  className="w-full pl-12 pr-4 py-4 bg-white/70 rounded-xl text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-indigo-200 transition-all"
+                  className="w-full pl-14 pr-6 py-4 md:py-4 bg-transparent rounded-full md:rounded-l-full md:rounded-r-none text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:bg-indigo-50/50 transition-all font-medium"
                 />
               </div>
 
               {/* Location */}
-              <div className="flex-1 relative">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <MapPin className="w-5 h-5 text-violet-400" />
+              <div className="flex-1 w-full relative group">
+                <div className="absolute left-6 top-1/2 -translate-y-1/2 pointer-events-none transition-transform group-focus-within:scale-110">
+                  <MapPin className="w-5 h-5 text-slate-400 group-focus-within:text-violet-600 transition-colors" />
                 </div>
                 <input
                   type="text"
@@ -325,53 +328,57 @@ export default function HeroSection() {
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder="Location (City or Online)"
                   id="hero-search-location"
-                  className="w-full pl-12 pr-4 py-4 bg-white/70 rounded-xl text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:bg-white focus:ring-2 focus:ring-violet-200 transition-all"
+                  className="w-full pl-14 pr-6 py-4 md:py-4 bg-transparent rounded-full md:rounded-none text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:bg-violet-50/50 transition-all font-medium"
                 />
               </div>
 
-              {/* Mode Dropdown */}
-              <div className="relative md:w-52" ref={modeRef}>
-                <button
-                  id="hero-search-mode-btn"
-                  onClick={() => setModeOpen(!modeOpen)}
-                  className="w-full flex items-center gap-3 px-4 py-4 bg-white/70 rounded-xl text-sm text-slate-700 hover:bg-white transition-all"
-                >
-                  <Monitor className="w-5 h-5 text-indigo-400 flex-shrink-0" />
-                  <span className="flex-1 text-left">{mode}</span>
-                  <ChevronDown
-                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${modeOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {modeOpen && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-50 animate-slide-up">
-                    {modes.map((m) => (
-                      <button
-                        key={m}
-                        onClick={() => {
-                          setMode(m);
-                          setModeOpen(false);
-                        }}
-                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${
-                          mode === m
-                            ? "bg-indigo-50 text-indigo-600 font-medium"
-                            : "text-slate-700 hover:bg-slate-50"
-                        }`}
-                      >
-                        {m}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+              {/* Mode Dropdown & Search Button */}
+              <div className="w-full md:w-auto flex flex-col md:flex-row items-center pl-0 md:pl-2 gap-2 md:gap-3 p-1">
+                <div className="relative w-full md:w-48" ref={modeRef}>
+                  <button
+                    id="hero-search-mode-btn"
+                    onClick={() => setModeOpen(!modeOpen)}
+                    className="w-full flex items-center gap-3 px-5 py-3 md:py-3.5 bg-transparent hover:bg-slate-50 rounded-full text-sm font-medium text-slate-700 transition-all group"
+                  >
+                    <Monitor className="w-4 h-4 text-slate-400 group-hover:text-indigo-500 flex-shrink-0 transition-colors" />
+                    <span className="flex-1 text-left">{mode}</span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${modeOpen ? "rotate-180 text-indigo-500" : ""}`}
+                    />
+                  </button>
+                  {modeOpen && (
+                    <div className="absolute top-full right-0 mt-3 w-full md:w-56 bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden z-50 animate-slide-up">
+                      <div className="p-2">
+                        {modes.map((m) => (
+                          <button
+                            key={m}
+                            onClick={() => {
+                              setMode(m);
+                              setModeOpen(false);
+                            }}
+                            className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-200 ${
+                              mode === m
+                                ? "bg-indigo-50 text-indigo-700 font-semibold"
+                                : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                            }`}
+                          >
+                            {m}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
 
-              {/* Search Button */}
-              <button
-                id="hero-search-submit"
-                className="btn-primary flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl font-semibold text-white text-sm whitespace-nowrap shadow-lg"
-              >
-                <Search className="w-5 h-5" />
-                Find Tutors
-              </button>
+                {/* Search Button */}
+                <button
+                  id="hero-search-submit"
+                  className="w-full md:w-auto btn-primary flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-white text-sm whitespace-nowrap shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 transition-all duration-300"
+                >
+                  <Search className="w-4 h-4" />
+                  Find Tutors
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -60,7 +60,7 @@ export default function FAQSection() {
               <span className="gradient-text">Questions</span>
             </h2>
             <p className="text-slate-500 text-lg leading-relaxed mb-8">
-              Everything you need to know about Faculties Online. Can't find an answer?
+              Everything you need to know about Faculties Online. Can&apos;t find an answer?
               Reach out to our support team anytime.
             </p>
 
