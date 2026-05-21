@@ -4,13 +4,7 @@ import StatsSection from "./components/landing/StatsSection";
 import CategoriesSection from "./components/landing/CategoriesSection";
 import HowItWorksSection from "./components/landing/HowItWorksSection";
 import FeaturedTutorsSection from "./components/landing/FeaturedTutorsSection";
-import BecomeTutorSection from "./components/landing/BecomeTutorSection";
-import PostRequirementSection from "./components/landing/PostRequirementSection";
-import StudentDashboardSection from "./components/landing/StudentDashboardSection";
-import TutorDashboardSection from "./components/landing/TutorDashboardSection";
 import TestimonialsSection from "./components/landing/TestimonialsSection";
-import PricingSection from "./components/landing/PricingSection";
-import FAQSection from "./components/landing/FAQSection";
 import Footer from "./components/landing/Footer";
 
 export default function Home() {
@@ -22,13 +16,7 @@ export default function Home() {
       <CategoriesSection />
       <HowItWorksSection />
       <FeaturedTutorsSection />
-      <BecomeTutorSection />
-      <PostRequirementSection />
-      <StudentDashboardSection />
-      <TutorDashboardSection />
       <TestimonialsSection />
-      <PricingSection />
-      <FAQSection />
       <Footer />
 
       {/* Mobile sticky CTA */}
