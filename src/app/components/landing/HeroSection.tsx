@@ -1,384 +1,286 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import {
   Search,
-  MapPin,
-  Monitor,
   ChevronDown,
-  ArrowRight,
-  BookOpen,
   Star,
   Users,
   CheckCircle,
-  Play,
   Sparkles,
+  ArrowRight,
   Zap,
+  GraduationCap,
+  BookOpen,
+  Monitor,
+  Laptop,
+  School,
+  Home,
+  RefreshCw,
 } from "lucide-react";
 
-const floatingCards = [
-  {
-    id: "fc1",
-    name: "Priya Sharma",
-    subject: "Mathematics",
-    rating: "4.9",
-    reviews: "128 reviews",
-    avatar: "PS",
-    color: "from-violet-500 to-purple-600",
-    position: "top-16 right-8",
-    delay: "0s",
-  },
-  {
-    id: "fc2",
-    name: "Rahul Verma",
-    subject: "Physics & Chemistry",
-    rating: "4.8",
-    reviews: "96 reviews",
-    avatar: "RV",
-    color: "from-blue-500 to-indigo-600",
-    position: "bottom-32 right-4",
-    delay: "2s",
-  },
+const modeOptions = [
+  { label: "Any Mode", icon: Search, desc: "All teaching modes" },
+  { label: "Online", icon: Laptop, desc: "Virtual sessions" },
+  { label: "Offline", icon: School, desc: "In-person classes" },
+  { label: "Online & Offline", icon: RefreshCw, desc: "Flexible mode" },
+  { label: "Home Tuition", icon: Home, desc: "Tutor comes to you" },
 ];
 
-const statsCards = [
-  { label: "Students Enrolled", value: "12,400+", icon: "👨‍🎓", delay: "1s" },
-  { label: "Avg. Session Rating", value: "4.9 ★", icon: "⭐", delay: "3s" },
-];
+const subjectTags = ["Mathematics", "Physics", "Python", "English", "Chemistry", "IELTS", "Data Science", "CAT Prep"];
 
 export default function HeroSection() {
   const [subject, setSubject] = useState("");
-  const [location, setLocation] = useState("");
-  const [mode, setMode] = useState("Any Mode");
+  const [mode, setMode] = useState(modeOptions[0]);
   const [modeOpen, setModeOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
   const modeRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const portalRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 0);
-    const handleClickOutside = (e: MouseEvent) => {
-      if (modeRef.current && !modeRef.current.contains(e.target as Node)) {
-        setModeOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      clearTimeout(timer);
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+  const recalcDropdown = useCallback(() => {
+    if (!btnRef.current) return;
+    const r = btnRef.current.getBoundingClientRect();
+    setDropdownStyle({
+      position: "fixed",
+      top: r.bottom + 8,
+      left: r.left,
+      width: 272,
+      zIndex: 9999,
+    });
   }, []);
 
-  const modes = ["Any Mode", "Online", "Offline", "Home Tuition"];
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 100);
+    const handler = (e: MouseEvent) => {
+      const target = e.target as Node;
+      const insideBtn = modeRef.current?.contains(target);
+      const insidePortal = portalRef.current?.contains(target);
+      if (!insideBtn && !insidePortal) setModeOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    const closeOnScroll = () => setModeOpen(false);
+    window.addEventListener("scroll", closeOnScroll);
+    window.addEventListener("resize", closeOnScroll);
+    return () => {
+      clearTimeout(t);
+      document.removeEventListener("mousedown", handler);
+      window.removeEventListener("scroll", closeOnScroll);
+      window.removeEventListener("resize", closeOnScroll);
+    };
+  }, []);
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center hero-bg pt-20 z-20"
+      className="relative min-h-screen flex flex-col"
+      style={{ paddingTop: "72px" }}
     >
-      {/* Noise texture overlay */}
-      <div className="noise-overlay" />
+      {/* ── BACKGROUND ── */}
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/hero-bg.png')" }} />
+      {/* gradient overlay — dark at edges, lighter in center so text pops */}
+      <div className="absolute inset-0" style={{
+        background: "linear-gradient(to bottom, rgba(10,8,30,0.72) 0%, rgba(10,8,30,0.55) 50%, rgba(10,8,30,0.80) 100%)"
+      }} />
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/25 via-transparent to-violet-900/15" />
 
-      {/* Floating background blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-blob" />
-        <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-violet-600/15 rounded-full blur-3xl animate-blob-delay-1" />
-        <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl animate-blob-delay-2" />
-        {/* Grid pattern */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-      </div>
+      {/* subtle dot grid */}
+      <div className="absolute inset-0 opacity-[0.06]" style={{
+        backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
+        backgroundSize: "36px 36px",
+      }} />
 
-      <div className="container-xl relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh] py-16">
-          {/* LEFT CONTENT */}
-          <div className={`${mounted ? "animate-slide-up" : "opacity-0"} space-y-8`}>
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/20 text-white/90 text-sm font-medium">
-              <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
-              <span>India&apos;s #1 Tutor Marketplace Platform</span>
-              <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+      {/* ── CONTENT ── */}
+      <div className={`relative z-10 flex-1 flex flex-col items-center justify-center px-4 sm:px-6 text-center transition-all duration-700 pb-28 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 text-white/90 text-xs font-semibold mb-7 tracking-wide"
+          style={{ background: "rgba(99,102,241,0.25)", backdropFilter: "blur(12px)" }}>
+          <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
+          India&apos;s #1 Tutor Marketplace Platform
+          <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+        </div>
+
+        {/* Heading */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-extrabold text-white leading-[1.1] tracking-tight mb-4 max-w-3xl">
+          Upgrade Your Skills with{" "}
+          <span className="bg-clip-text text-transparent" style={{
+            backgroundImage: "linear-gradient(90deg, #a5b4fc, #c084fc, #f0abfc)"
+          }}>
+            Faculties Online
+          </span>
+        </h1>
+
+        <p className="text-white/65 text-base sm:text-lg max-w-lg mx-auto mb-10 leading-relaxed">
+          Connect with verified tutors for online, offline &amp; home tuition.
+          Learn at your pace, from India&apos;s best educators.
+        </p>
+
+        {/* ── SEARCH BAR ── */}
+        <div className="w-full max-w-2xl mx-auto mb-6">
+          <div
+            className="flex flex-col sm:flex-row items-stretch rounded-2xl overflow-visible"
+            style={{ background: "rgba(255,255,255,0.97)", boxShadow: "0 12px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.15)" }}
+          >
+            {/* Search Input */}
+            <div className="flex-1 flex items-center gap-3 px-5 border-b sm:border-b-0 sm:border-r border-slate-200/70">
+              <Search className="w-4.5 h-4.5 text-indigo-400 flex-shrink-0" style={{ width: "18px", height: "18px" }} />
+              <input
+                id="hero-search-subject"
+                type="text"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                placeholder="Search tutors, subjects, or skills..."
+                className="flex-1 py-4 text-sm text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none font-medium"
+              />
             </div>
 
-            {/* Main Heading */}
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-6xl xl:text-7xl font-heading font-extrabold text-white leading-[1.05] tracking-tight">
-                Upgrade Your
-                <br />
-                <span className="relative">
-                  <span className="bg-gradient-to-r from-indigo-300 via-violet-300 to-purple-300 bg-clip-text text-transparent">
-                    Skills
-                  </span>
-                </span>{" "}
-                with{" "}
-                <br />
-                <span className="text-white">Expert Mentors</span>
-              </h1>
-
-              <p className="text-lg text-white/65 max-w-lg leading-relaxed font-sans">
-                Connect with verified tutors for online, offline & home tuition.
-                Learn at your pace, on your schedule, from India&apos;s best educators.
-              </p>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="#tutors"
-                id="hero-find-tutor-btn"
-                className="btn-primary flex items-center gap-2.5 px-8 py-4 rounded-2xl font-semibold text-white text-base shadow-lg"
+            {/* Mode Picker */}
+            <div className="relative flex-shrink-0" ref={modeRef} style={{ minWidth: "180px" }}>
+              <button
+                id="hero-mode-btn"
+                ref={btnRef}
+                onClick={() => {
+                  recalcDropdown();
+                  setModeOpen((o) => !o);
+                }}
+                className="w-full h-full flex items-center gap-2 px-4 py-4 text-sm font-medium text-slate-700 hover:bg-indigo-50/60 transition-colors border-b sm:border-b-0 border-slate-200/70 cursor-pointer"
               >
-                <Search className="w-5 h-5" />
-                Find a Tutor
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                <mode.icon className="w-4 h-4 text-indigo-500 flex-shrink-0" />
+                <span className="flex-1 text-left whitespace-nowrap">{mode.label}</span>
+                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 flex-shrink-0 ${modeOpen ? "rotate-180 text-indigo-600" : ""}`} />
+              </button>
 
-              <Link
-                href="#post-requirement"
-                id="hero-post-requirement-btn"
-                className="flex items-center gap-2.5 px-8 py-4 rounded-2xl font-semibold text-white border border-white/25 hover:bg-white/10 hover:border-white/40 transition-all duration-300 text-base"
-              >
-                <Zap className="w-5 h-5 text-yellow-400" />
-                Post Requirement
-              </Link>
+              {/* Portal dropdown — fixed position on body, escapes ALL parent overflow */}
+              {modeOpen && mounted && createPortal(
+                <div
+                  ref={portalRef}
+                  style={{
+                    ...dropdownStyle,
+                    background: "rgba(255,255,255,0.99)",
+                    backdropFilter: "blur(24px)",
+                    borderRadius: "16px",
+                    border: "1px solid rgba(226,232,240,0.9)",
+                    boxShadow: "0 24px 64px rgba(0,0,0,0.22), 0 4px 20px rgba(99,102,241,0.15)",
+                    overflow: "hidden",
+                    padding: "8px",
+                  }}
+                >
+                  {modeOptions.map((m) => {
+                    const active = mode.label === m.label;
+                    return (
+                      <button
+                        key={m.label}
+                        onMouseDown={(e) => {
+                          e.preventDefault(); // prevent blur/outside-click firing first
+                          setMode(m);
+                          setModeOpen(false);
+                        }}
+                        className={`w-full flex cursor-pointer items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all ${active ? "bg-indigo-600" : "hover:bg-indigo-50"}`}
+                      >
+                        <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 cursor-pointer ${active ? "bg-white/20" : "bg-indigo-50"}`}>
+                          <m.icon className={`w-4 h-4 ${active ? "text-white" : "text-indigo-600"}`} />
+                        </div>
+                        <div className="flex-1 text-left">
+                          <p className={`font-semibold text-sm leading-tight ${active ? "text-white" : "text-slate-800"}`}>{m.label}</p>
+                          <p className={`text-xs mt-0.5 ${active ? "text-white/70" : "text-slate-400"}`}>{m.desc}</p>
+                        </div>
+                        {active && <CheckCircle className="w-4 h-4 text-white/80 flex-shrink-0" />}
+                      </button>
+                    );
+                  })}
+                </div>,
+                document.body
+              )}
             </div>
 
-            {/* Trust indicators */}
-            <div className="flex flex-wrap items-center gap-6 pt-2">
-              {[
-                { icon: CheckCircle, text: "Verified Tutors" },
-                { icon: Star, text: "4.9/5 Rating" },
-                { icon: Users, text: "10K+ Students" },
-              ].map((item) => (
-                <div key={item.text} className="flex items-center gap-2 text-white/60 text-sm">
-                  <item.icon className="w-4 h-4 text-green-400" />
-                  <span>{item.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* RIGHT SIDE - Dashboard Mockup */}
-          <div className="relative hidden lg:block h-[600px]">
-            {/* Main Dashboard Card */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px]">
-              <div className="glass rounded-3xl p-6 shadow-2xl border border-white/20 animate-float-slow">
-                {/* Card Header */}
-                <div className="flex items-center justify-between mb-5">
-                  <div>
-                    <p className="text-white/50 text-xs font-medium uppercase tracking-wider">
-                      Your Dashboard
-                    </p>
-                    <h3 className="text-white font-heading font-bold text-lg mt-0.5">
-                      Welcome back! 👋
-                    </h3>
-                  </div>
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
-                    <BookOpen className="w-5 h-5 text-white" />
-                  </div>
-                </div>
-
-                {/* Stats Row */}
-                <div className="grid grid-cols-3 gap-3 mb-5">
-                  {[
-                    { label: "Sessions", value: "24", color: "text-indigo-300" },
-                    { label: "Hours", value: "48h", color: "text-violet-300" },
-                    { label: "Skills", value: "6", color: "text-blue-300" },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="bg-white/5 rounded-xl p-3 text-center border border-white/10"
-                    >
-                      <p className={`text-xl font-bold ${stat.color}`}>{stat.value}</p>
-                      <p className="text-white/40 text-xs mt-0.5">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Progress */}
-                <div className="space-y-3 mb-5">
-                  <p className="text-white/60 text-xs font-medium uppercase tracking-wider">
-                    Learning Progress
-                  </p>
-                  {[
-                    { subject: "Mathematics", progress: 78, color: "from-indigo-400 to-violet-500" },
-                    { subject: "Physics", progress: 55, color: "from-blue-400 to-cyan-500" },
-                    { subject: "English", progress: 90, color: "from-violet-400 to-purple-500" },
-                  ].map((item) => (
-                    <div key={item.subject}>
-                      <div className="flex justify-between text-xs text-white/60 mb-1.5">
-                        <span>{item.subject}</span>
-                        <span>{item.progress}%</span>
-                      </div>
-                      <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                        <div
-                          className={`h-full bg-gradient-to-r ${item.color} rounded-full`}
-                          style={{ width: `${item.progress}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Upcoming Session */}
-                <div className="bg-gradient-to-r from-indigo-500/20 to-violet-500/20 rounded-xl p-3 border border-indigo-500/30">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center flex-shrink-0">
-                      <Play className="w-3.5 h-3.5 text-white fill-white" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-white text-sm font-semibold truncate">
-                        Calculus with Priya
-                      </p>
-                      <p className="text-white/50 text-xs">Today, 5:00 PM</p>
-                    </div>
-                    <span className="text-xs px-2 py-1 rounded-full bg-green-400/20 text-green-300 border border-green-400/30 font-medium">
-                      Live Soon
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating Tutor Cards */}
-            {floatingCards.map((card) => (
-              <div
-                key={card.id}
-                className={`absolute ${card.position} animate-float`}
-                style={{ animationDelay: card.delay }}
+            {/* Find Button */}
+            <div className="p-2 flex-shrink-0">
+              <button
+                id="hero-search-submit"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white text-sm tracking-wide whitespace-nowrap transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5 cursor-pointer"
+                style={{
+                  background: "linear-gradient(135deg, #312e81 0%, #4338ca 50%, #6366f1 100%)",
+                  boxShadow: "0 4px 20px rgba(67,56,202,0.5)",
+                }}
               >
-                <div className="glass-light rounded-2xl p-4 shadow-xl w-52 border border-white/40">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-10 h-10 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}
-                    >
-                      {card.avatar}
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-semibold text-slate-900 text-sm truncate">
-                        {card.name}
-                      </p>
-                      <p className="text-indigo-600 text-xs truncate">{card.subject}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between mt-3">
-                    <span className="flex items-center gap-1 text-xs text-amber-600 font-semibold">
-                      <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                      {card.rating}
-                    </span>
-                    <span className="text-xs text-slate-500">{card.reviews}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            {/* Stats floating cards */}
-            {statsCards.map((stat) => (
-              <div
-                key={stat.label}
-                className="absolute bottom-20 left-0 animate-float"
-                style={{ animationDelay: stat.delay }}
-              >
-                <div className="glass rounded-xl p-3 border border-white/20 shadow-lg">
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-2xl">{stat.icon}</span>
-                    <div>
-                      <p className="text-white font-bold text-lg leading-none">{stat.value}</p>
-                      <p className="text-white/50 text-xs mt-0.5">{stat.label}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
+                FIND TUTOR
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* SMART SEARCH BAR */}
-        <div className="relative -mb-16 z-20">
-          <div className="bg-white/95 backdrop-blur-xl rounded-3xl md:rounded-full border border-white shadow-2xl p-2 md:p-2.5 max-w-5xl mx-auto ring-1 ring-slate-900/5">
-            <div className="flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x divide-slate-200/80">
-              {/* Subject */}
-              <div className="flex-1 w-full relative group">
-                <div className="absolute left-6 top-1/2 -translate-y-1/2 pointer-events-none transition-transform group-focus-within:scale-110">
-                  <BookOpen className="w-5 h-5 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
-                </div>
-                <input
-                  type="text"
-                  value={subject}
-                  onChange={(e) => setSubject(e.target.value)}
-                  placeholder="Subject or Skill (e.g., Maths, Python)"
-                  id="hero-search-subject"
-                  className="w-full pl-14 pr-6 py-4 md:py-4 bg-transparent rounded-full md:rounded-l-full md:rounded-r-none text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:bg-indigo-50/50 transition-all font-medium"
-                />
-              </div>
+        {/* Popular Tags */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+          <span className="text-white/45 text-xs font-medium mr-1">Popular:</span>
+          {subjectTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setSubject(tag)}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ${subject === tag
+                ? "bg-indigo-500/40 border-indigo-400/60 text-white"
+                : "bg-white/8 border-white/15 text-white/60 hover:bg-white/15 hover:text-white hover:border-white/30"
+                }`}
+              style={{ background: subject === tag ? "rgba(99,102,241,0.35)" : "rgba(255,255,255,0.07)" }}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
 
-              {/* Location */}
-              <div className="flex-1 w-full relative group">
-                <div className="absolute left-6 top-1/2 -translate-y-1/2 pointer-events-none transition-transform group-focus-within:scale-110">
-                  <MapPin className="w-5 h-5 text-slate-400 group-focus-within:text-violet-600 transition-colors" />
-                </div>
-                <input
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  placeholder="Location (City or Online)"
-                  id="hero-search-location"
-                  className="w-full pl-14 pr-6 py-4 md:py-4 bg-transparent rounded-full md:rounded-none text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:bg-violet-50/50 transition-all font-medium"
-                />
-              </div>
+        {/* Trust badges */}
+        <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-8">
+          {[
+            { icon: CheckCircle, label: "Verified Tutors", color: "#4ade80" },
+            { icon: Star, label: "4.9/5 Rating", color: "#fbbf24" },
+            { icon: Users, label: "10K+ Students", color: "#60a5fa" },
+          ].map((item) => (
+            <div key={item.label} className="flex items-center gap-2">
+              <item.icon className="w-4 h-4" style={{ color: item.color }} />
+              <span className="text-white/70 text-sm font-medium">{item.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
-              {/* Mode Dropdown & Search Button */}
-              <div className="w-full md:w-auto flex flex-col md:flex-row items-center pl-0 md:pl-2 gap-2 md:gap-3 p-1">
-                <div className="relative w-full md:w-48" ref={modeRef}>
-                  <button
-                    id="hero-search-mode-btn"
-                    onClick={() => setModeOpen(!modeOpen)}
-                    className="w-full flex items-center gap-3 px-5 py-3 md:py-3.5 bg-transparent hover:bg-slate-50 rounded-full text-sm font-medium text-slate-700 transition-all group"
-                  >
-                    <Monitor className="w-4 h-4 text-slate-400 group-hover:text-indigo-500 flex-shrink-0 transition-colors" />
-                    <span className="flex-1 text-left">{mode}</span>
-                    <ChevronDown
-                      className={`w-4 h-4 text-slate-400 transition-transform duration-300 ${modeOpen ? "rotate-180 text-indigo-500" : ""}`}
-                    />
-                  </button>
-                  {modeOpen && (
-                    <div className="absolute top-full right-0 mt-3 w-full md:w-56 bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden z-50 animate-slide-up">
-                      <div className="p-2">
-                        {modes.map((m) => (
-                          <button
-                            key={m}
-                            onClick={() => {
-                              setMode(m);
-                              setModeOpen(false);
-                            }}
-                            className={`w-full text-left px-4 py-3 rounded-xl text-sm transition-all duration-200 ${
-                              mode === m
-                                ? "bg-indigo-50 text-indigo-700 font-semibold"
-                                : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                            }`}
-                          >
-                            {m}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+      {/* ── BOTTOM STATS STRIP ── */}
+      <div className={`absolute bottom-0 left-0 right-0 z-20 transition-all duration-700 delay-300 ${mounted ? "opacity-100" : "opacity-0"}`}>
+        <div style={{ background: "rgba(10,8,30,0.75)", backdropFilter: "blur(20px)", borderTop: "1px solid rgba(255,255,255,0.10)" }}>
+          <div className="max-w-5xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-6 sm:gap-10">
+              {[
+                { icon: GraduationCap, value: "5,000+", label: "Expert Tutors" },
+                { icon: BookOpen, value: "200+", label: "Subjects" },
+                { icon: Monitor, value: "Online · Offline · Home", label: "Teaching Modes" },
+              ].map((s) => (
+                <div key={s.label} className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: "rgba(99,102,241,0.25)" }}>
+                    <s.icon className="w-4 h-4 text-indigo-300" />
+                  </div>
+                  <div>
+                    <p className="text-white font-bold text-sm leading-none">{s.value}</p>
+                    <p className="text-white/45 text-xs mt-0.5">{s.label}</p>
+                  </div>
                 </div>
-
-                {/* Search Button */}
-                <button
-                  id="hero-search-submit"
-                  className="w-full md:w-auto btn-primary flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-white text-sm whitespace-nowrap shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:-translate-y-0.5 transition-all duration-300"
-                >
-                  <Search className="w-4 h-4" />
-                  Find Tutors
-                </button>
-              </div>
+              ))}
+            </div>
+            <div className="flex items-center gap-3">
+              <Link href="#tutors" id="hero-find-tutor-btn"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-semibold text-sm transition-all hover:-translate-y-0.5"
+                style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)", boxShadow: "0 4px 15px rgba(99,102,241,0.4)" }}>
+                <Search className="w-4 h-4" />
+                Find a Tutor
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link href="#post-requirement" id="hero-post-requirement-btn"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white font-semibold text-sm hover:bg-white/10 transition-all"
+                style={{ borderColor: "rgba(255,255,255,0.2)" }}>
+                <Zap className="w-4 h-4 text-yellow-400" />
+                Post Requirement
+              </Link>
             </div>
           </div>
         </div>

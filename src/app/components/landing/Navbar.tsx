@@ -33,9 +33,17 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-            ? "bg-white/95 backdrop-blur-xl shadow-lg shadow-indigo-500/5 border-b border-indigo-100/50"
-            : "bg-transparent"
+          ? "backdrop-blur-xl shadow-lg border-b border-indigo-100/60"
+          : "border-b border-white/10 backdrop-blur-sm"
           }`}
+        style={{
+          background: scrolled
+            ? "rgba(238, 242, 255, 0.97)"    /* indigo-50 tinted frosted white */
+            : "rgba(15, 10, 40, 0.55)",       /* deep indigo-navy glass */
+          boxShadow: scrolled
+            ? "0 2px 24px rgba(99,102,241,0.10)"
+            : "none",
+        }}
       >
         <div className="container-xl">
           <div className="flex items-center justify-between h-18 py-4">
@@ -49,7 +57,7 @@ export default function Navbar() {
               </div>
               <div>
                 <span
-                  className={`font-heading text-lg font-bold transition-colors duration-300 ${scrolled ? "text-slate-900" : "text-white"
+                  className={`font-heading text-lg font-bold transition-colors duration-300 ${scrolled ? "text-indigo-950" : "text-white"
                     }`}
                 >
                   Faculties{" "}
@@ -65,8 +73,8 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 group ${scrolled
-                      ? "text-slate-600 hover:text-indigo-600 hover:bg-indigo-50"
-                      : "text-white/80 hover:text-white hover:bg-white/10"
+                    ? "text-indigo-800 hover:text-indigo-600 hover:bg-indigo-50"
+                    : "text-white/85 hover:text-white hover:bg-white/10"
                     }`}
                 >
                   {link.label}
@@ -77,24 +85,24 @@ export default function Navbar() {
 
             {/* Right Actions */}
             <div className="hidden lg:flex items-center gap-3">
-              <button
+              {/* <button
                 onClick={() => setSearchOpen(!searchOpen)}
                 className={`p-2 rounded-lg transition-all duration-300 ${scrolled
-                    ? "text-slate-600 hover:text-indigo-600 hover:bg-indigo-50"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
+                  ? "text-indigo-700 hover:text-indigo-600 hover:bg-indigo-50"
+                  : "text-white/85 hover:text-white hover:bg-white/10"
                   }`}
                 aria-label="Search"
                 id="navbar-search-btn"
               >
                 <Search className="w-5 h-5" />
-              </button>
+              </button> */}
 
               <Link
                 href="/login"
                 id="navbar-login-btn"
                 className={`px-5 py-2 text-sm font-semibold rounded-xl border transition-all duration-300 ${scrolled
-                    ? "border-indigo-300 text-indigo-600 hover:bg-indigo-50"
-                    : "border-white/30 text-white hover:border-white/60 hover:bg-white/10"
+                  ? "border-indigo-400 text-indigo-700 hover:bg-indigo-50"
+                  : "border-white/30 text-white hover:border-white/50 hover:bg-white/10"
                   }`}
               >
                 Login
@@ -115,8 +123,8 @@ export default function Navbar() {
               id="navbar-mobile-toggle"
               onClick={() => setMobileOpen(!mobileOpen)}
               className={`lg:hidden p-2 rounded-lg transition-colors ${scrolled
-                  ? "text-slate-700 hover:bg-slate-100"
-                  : "text-white hover:bg-white/10"
+                ? "text-indigo-800 hover:bg-indigo-50"
+                : "text-white hover:bg-white/10"
                 }`}
               aria-label="Toggle menu"
             >
