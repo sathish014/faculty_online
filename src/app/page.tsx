@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Navbar from "./components/landing/Navbar";
 import HeroSection from "./components/landing/HeroSection";
 import StatsSection from "./components/landing/StatsSection";
@@ -28,13 +29,13 @@ export default function Home() {
         >
           Find Tutor
         </a>
-        <a
-          href="#post-requirement"
+        <Link
+          href="/student-dashboard/post-requirement"
           id="mobile-sticky-post-req"
           className="flex-1 text-center py-3 rounded-xl border border-indigo-300 text-indigo-600 font-semibold text-sm hover:bg-indigo-50 transition-colors"
         >
           Post Requirement
-        </a>
+        </Link>
       </div>
     </main>
   );
