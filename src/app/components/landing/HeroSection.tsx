@@ -97,12 +97,12 @@ export default function HeroSection() {
       <div className={`relative z-10 flex-1 flex flex-col items-center justify-center px-4 sm:px-6 text-center transition-all duration-700 pb-28 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
 
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 text-white/90 text-xs font-semibold mb-7 tracking-wide"
+        {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 text-white/90 text-xs font-semibold mb-7 tracking-wide"
           style={{ background: "rgba(99,102,241,0.25)", backdropFilter: "blur(12px)" }}>
           <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
           India&apos;s #1 Tutor Marketplace Platform
           <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-        </div>
+        </div> */}
 
         {/* Heading */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-extrabold text-white leading-[1.1] tracking-tight mb-4 max-w-3xl">
@@ -275,7 +275,7 @@ export default function HeroSection() {
                 Find a Tutor
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
-              <Link href="#post-requirement" id="hero-post-requirement-btn"
+              <Link href="/student-dashboard/post-requirement" id="hero-post-requirement-btn"
                 className="flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white font-semibold text-sm hover:bg-white/10 transition-all"
                 style={{ borderColor: "rgba(255,255,255,0.2)" }}>
                 <Zap className="w-4 h-4 text-yellow-400" />

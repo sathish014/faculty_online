@@ -12,9 +12,9 @@ import {
 
 const navLinks = [
   { label: "Find Tutors", href: "#tutors" },
-  { label: "Become a Tutor", href: "#become-tutor" },
-  { label: "Post Requirement", href: "#post-requirement" },
-  { label: "Explore Skills", href: "#categories" },
+  { label: "Dashboard", href: "/student-dashboard" },
+  { label: "Post Requirement", href: "/student-dashboard/post-requirement" },
+  { label: "Become a Tutor", href: "/teacher-dashboard" },
   { label: "Resources", href: "#how-it-works" },
 ];
 
@@ -53,7 +53,7 @@ export default function Navbar() {
                 <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg group-hover:shadow-indigo-500/40 transition-shadow duration-300">
                   <GraduationCap className="w-5 h-5 text-white" />
                 </div>
-                <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full border border-white" />
+                {/* <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full border border-white" /> */}
               </div>
               <div>
                 <span
