@@ -1,6 +1,6 @@
 "use client";
 
-import { Users, BookOpen, Star, Headphones, TrendingUp, Award } from "lucide-react";
+import { Users, BookOpen, Star, TrendingUp, Award } from "lucide-react";
 
 const stats = [
   {
@@ -9,9 +9,7 @@ const stats = [
     value: "10K+",
     label: "Active Students",
     description: "Learning every day",
-    color: "from-indigo-500 to-blue-600",
-    bg: "from-indigo-50 to-blue-50",
-    border: "border-indigo-100",
+    iconGradient: "from-indigo-500 to-blue-500",
   },
   {
     id: "stat-tutors",
@@ -19,9 +17,7 @@ const stats = [
     value: "5K+",
     label: "Expert Tutors",
     description: "Verified & certified",
-    color: "from-violet-500 to-purple-600",
-    bg: "from-violet-50 to-purple-50",
-    border: "border-violet-100",
+    iconGradient: "from-violet-500 to-purple-500",
   },
   {
     id: "stat-skills",
@@ -29,9 +25,7 @@ const stats = [
     value: "100+",
     label: "Skills & Subjects",
     description: "Across all domains",
-    color: "from-blue-500 to-cyan-600",
-    bg: "from-blue-50 to-cyan-50",
-    border: "border-blue-100",
+    iconGradient: "from-cyan-500 to-teal-500",
   },
   {
     id: "stat-rating",
@@ -39,29 +33,7 @@ const stats = [
     value: "4.9★",
     label: "Average Rating",
     description: "Student satisfaction",
-    color: "from-amber-500 to-orange-500",
-    bg: "from-amber-50 to-orange-50",
-    border: "border-amber-100",
-  },
-  {
-    id: "stat-support",
-    icon: Headphones,
-    value: "24/7",
-    label: "Support",
-    description: "Always here for you",
-    color: "from-green-500 to-emerald-600",
-    bg: "from-green-50 to-emerald-50",
-    border: "border-green-100",
-  },
-  {
-    id: "stat-sessions",
-    icon: TrendingUp,
-    value: "50K+",
-    label: "Sessions Done",
-    description: "Successful learnings",
-    color: "from-pink-500 to-rose-600",
-    bg: "from-pink-50 to-rose-50",
-    border: "border-pink-100",
+    iconGradient: "from-amber-400 to-orange-500",
   },
 ];
 
@@ -73,46 +45,42 @@ export default function StatsSection() {
 
       <div className="container-xl relative z-10">
         {/* Section Label */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-sm font-semibold mb-4">
+        <div className="text-center mb-10">
+
+          <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-slate-800">
+            Numbers That Speak for Themselves
+
+          </h2>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-sm font-semibold mt-6">
             <TrendingUp className="w-3.5 h-3.5" />
             Trusted by thousands
           </div>
-          <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-slate-900">
-            Numbers That{" "}
-            <span className="gradient-text">Speak for Themselves</span>
-          </h2>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {/* Stats Grid — 4 cards, bigger size */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <div
               key={stat.id}
               id={stat.id}
-              className={`relative group rounded-2xl p-5 border ${stat.border} bg-gradient-to-br ${stat.bg} card-glow cursor-default`}
+              className="relative group bg-white rounded-2xl p-8 border border-slate-100 border-l-4 border-l-indigo-300 shadow-sm hover:shadow-lg hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1 cursor-default"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Icon */}
+              {/* Icon badge */}
               <div
-                className={`w-10 h-10 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 shadow-md group-hover:scale-110 transition-transform duration-300`}
+                className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${stat.iconGradient} flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform duration-300`}
               >
-                <stat.icon className="w-5 h-5 text-white" />
+                <stat.icon className="w-7 h-7 text-white" />
               </div>
 
               {/* Value */}
-              <p className="text-2xl font-heading font-extrabold text-slate-900 leading-none">
+              <p className="text-4xl font-heading font-extrabold leading-none text-slate-900">
                 {stat.value}
               </p>
 
               {/* Label */}
-              <p className="text-sm font-semibold text-slate-700 mt-1">{stat.label}</p>
-              <p className="text-xs text-slate-400 mt-0.5">{stat.description}</p>
-
-              {/* Decorative corner */}
-              <div
-                className={`absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-gradient-to-br ${stat.color} opacity-60`}
-              />
+              <p className="text-base font-bold text-slate-700 mt-2">{stat.label}</p>
+              <p className="text-sm text-slate-500 mt-1">{stat.description}</p>
             </div>
           ))}
         </div>
@@ -131,13 +99,9 @@ export default function StatsSection() {
                 "Spoken English",
                 "IIT-JEE Prep",
                 "NEET Coaching",
-                "Music",
-                "UI/UX Design",
                 "Data Science",
                 "Competitive Exams",
                 "School Tuition",
-                "Guitar Lessons",
-                "Drawing & Art",
                 "French Language",
               ].map((skill, i) => (
                 <div

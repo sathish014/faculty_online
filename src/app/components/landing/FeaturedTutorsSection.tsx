@@ -7,7 +7,6 @@ const tutors = [
     id: "tutor-1",
     name: "Priya Sharma",
     initials: "PS",
-    color: "from-violet-500 to-purple-600",
     subject: "Mathematics & Statistics",
     rating: 4.9,
     reviews: 128,
@@ -22,7 +21,6 @@ const tutors = [
     id: "tutor-2",
     name: "Rahul Verma",
     initials: "RV",
-    color: "from-blue-500 to-indigo-600",
     subject: "Physics & Chemistry",
     rating: 4.8,
     reviews: 96,
@@ -37,7 +35,6 @@ const tutors = [
     id: "tutor-3",
     name: "Anjali Mehta",
     initials: "AM",
-    color: "from-pink-500 to-rose-600",
     subject: "Spoken English & Communication",
     rating: 4.9,
     reviews: 215,
@@ -52,7 +49,6 @@ const tutors = [
     id: "tutor-4",
     name: "Vivek Nair",
     initials: "VN",
-    color: "from-green-500 to-emerald-600",
     subject: "Python & Web Development",
     rating: 4.7,
     reviews: 83,
@@ -67,7 +63,6 @@ const tutors = [
     id: "tutor-5",
     name: "Sunita Rao",
     initials: "SR",
-    color: "from-amber-500 to-orange-600",
     subject: "School Tuition (Class 6-10)",
     rating: 4.8,
     reviews: 174,
@@ -82,7 +77,6 @@ const tutors = [
     id: "tutor-6",
     name: "Arjun Singh",
     initials: "AS",
-    color: "from-indigo-500 to-blue-600",
     subject: "IIT-JEE & NEET Preparation",
     rating: 4.9,
     reviews: 301,
@@ -123,6 +117,7 @@ export default function FeaturedTutorsSection() {
           <button
             id="tutors-view-all-btn"
             className="flex items-center gap-2 px-6 py-3 rounded-xl border border-indigo-200 text-indigo-600 font-semibold text-sm hover:bg-indigo-50 transition-colors whitespace-nowrap"
+            suppressHydrationWarning
           >
             View All Tutors
             <ArrowRight className="w-4 h-4" />
@@ -137,15 +132,15 @@ export default function FeaturedTutorsSection() {
               id={tutor.id}
               className="group relative bg-white rounded-2xl border border-slate-100 shadow-sm card-hover overflow-hidden"
             >
-              {/* Top gradient strip */}
-              <div className={`h-1.5 bg-gradient-to-r ${tutor.color}`} />
+              {/* Top dark blue strip */}
+              <div className="h-1.5 bg-[#1e3a8a]" />
 
               <div className="p-6">
                 {/* Header row */}
                 <div className="flex items-start gap-4 mb-5">
                   {/* Avatar */}
                   <div
-                    className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${tutor.color} flex items-center justify-center text-white font-bold text-lg shadow-md flex-shrink-0`}
+                    className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1e3a8a] to-[#2563eb] flex items-center justify-center text-white font-bold text-lg shadow-md flex-shrink-0"
                   >
                     {tutor.initials}
                   </div>
@@ -186,7 +181,7 @@ export default function FeaturedTutorsSection() {
                   </div>
 
                   {/* Wishlist */}
-                  <button className="p-1.5 rounded-xl hover:bg-rose-50 text-slate-300 hover:text-rose-400 transition-colors">
+                  <button className="p-1.5 rounded-xl hover:bg-rose-50 text-slate-300 hover:text-rose-400 transition-colors" suppressHydrationWarning>
                     <Heart className="w-4 h-4" />
                   </button>
                 </div>
@@ -242,6 +237,7 @@ export default function FeaturedTutorsSection() {
                   <button
                     id={`${tutor.id}-view-profile`}
                     className="btn-primary flex items-center gap-1.5 px-5 py-2.5 rounded-xl font-semibold text-white text-sm"
+                    suppressHydrationWarning
                   >
                     View Profile
                     <ArrowRight className="w-3.5 h-3.5" />

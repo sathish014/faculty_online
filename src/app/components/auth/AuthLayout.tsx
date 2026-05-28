@@ -2,11 +2,17 @@ import React from 'react';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen w-full flex bg-slate-50 dark:bg-slate-950 font-sans selection:bg-blue-500/30">
-      {/* Background Effects */}
+    <div className="min-h-screen w-full flex font-sans bg-white">
+      {/* Decorative blobs — very subtle, cool-blue only */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-blue-500/10 blur-[120px] rounded-full mix-blend-multiply opacity-50 dark:opacity-20 animate-pulse" />
-        <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-slate-500/10 blur-[120px] rounded-full mix-blend-multiply opacity-50 dark:opacity-20" />
+        <div
+          className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full opacity-[0.06]"
+          style={{ background: 'radial-gradient(circle, #6366f1 0%, transparent 70%)' }}
+        />
+        <div
+          className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full opacity-[0.06]"
+          style={{ background: 'radial-gradient(circle, #3b82f6 0%, transparent 70%)' }}
+        />
       </div>
 
       {children}

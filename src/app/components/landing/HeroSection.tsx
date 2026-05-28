@@ -83,9 +83,8 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/hero-bg.png')" }} />
       {/* gradient overlay — dark at edges, lighter in center so text pops */}
       <div className="absolute inset-0" style={{
-        background: "linear-gradient(to bottom, rgba(10,8,30,0.72) 0%, rgba(10,8,30,0.55) 50%, rgba(10,8,30,0.80) 100%)"
+        background: "linear-gradient(to bottom, rgba(10,8,30,0.65) 0%, rgba(10,8,30,0.45) 50%, rgba(10,8,30,0.72) 100%)"
       }} />
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/25 via-transparent to-violet-900/15" />
 
       {/* subtle dot grid */}
       <div className="absolute inset-0 opacity-[0.06]" style={{
@@ -105,16 +104,18 @@ export default function HeroSection() {
         </div> */}
 
         {/* Heading */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-extrabold text-white leading-[1.1] tracking-tight mb-4 max-w-3xl">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-extrabold leading-[1.1] tracking-tight mb-4 max-w-3xl text-white"
+          style={{ textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}
+        >
           Upgrade Your Skills with{" "}
-          <span className="bg-clip-text text-transparent" style={{
-            backgroundImage: "linear-gradient(90deg, #a5b4fc, #c084fc, #f0abfc)"
-          }}>
+          <span className="text-white">
             Faculties Online
           </span>
         </h1>
 
-        <p className="text-white/65 text-base sm:text-lg max-w-lg mx-auto mb-10 leading-relaxed">
+        <p className="text-white text-base sm:text-lg max-w-lg mx-auto mb-10 leading-relaxed font-medium"
+          style={{ textShadow: "0 1px 8px rgba(0,0,0,0.35)" }}
+        >
           Connect with verified tutors for online, offline &amp; home tuition.
           Learn at your pace, from India&apos;s best educators.
         </p>
@@ -135,6 +136,7 @@ export default function HeroSection() {
                 onChange={(e) => setSubject(e.target.value)}
                 placeholder="Search tutors, subjects, or skills..."
                 className="flex-1 py-4 text-sm text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none font-medium"
+                suppressHydrationWarning
               />
             </div>
 
@@ -148,6 +150,7 @@ export default function HeroSection() {
                   setModeOpen((o) => !o);
                 }}
                 className="w-full h-full flex items-center gap-2 px-4 py-4 text-sm font-medium text-slate-700 hover:bg-indigo-50/60 transition-colors border-b sm:border-b-0 border-slate-200/70 cursor-pointer"
+                suppressHydrationWarning
               >
                 <mode.icon className="w-4 h-4 text-indigo-500 flex-shrink-0" />
                 <span className="flex-1 text-left whitespace-nowrap">{mode.label}</span>
@@ -206,6 +209,7 @@ export default function HeroSection() {
                   background: "linear-gradient(135deg, #312e81 0%, #4338ca 50%, #6366f1 100%)",
                   boxShadow: "0 4px 20px rgba(67,56,202,0.5)",
                 }}
+                suppressHydrationWarning
               >
                 FIND TUTOR
               </button>
@@ -215,16 +219,22 @@ export default function HeroSection() {
 
         {/* Popular Tags */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-          <span className="text-white/45 text-xs font-medium mr-1">Popular:</span>
+          <span className="text-white font-semibold text-xs mr-1 tracking-wide">Popular:</span>
           {subjectTags.map((tag) => (
             <button
               key={tag}
               onClick={() => setSubject(tag)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all duration-200 ${subject === tag
-                ? "bg-indigo-500/40 border-indigo-400/60 text-white"
-                : "bg-white/8 border-white/15 text-white/60 hover:bg-white/15 hover:text-white hover:border-white/30"
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${subject === tag
+                ? "text-white border-indigo-400"
+                : "text-white border-white/50 hover:border-white hover:text-white"
                 }`}
-              style={{ background: subject === tag ? "rgba(99,102,241,0.35)" : "rgba(255,255,255,0.07)" }}
+              style={{
+                background: subject === tag
+                  ? "rgba(99,102,241,0.55)"
+                  : "rgba(0,0,0,0.35)",
+                backdropFilter: "blur(8px)",
+              }}
+              suppressHydrationWarning
             >
               {tag}
             </button>

@@ -2,111 +2,127 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, BookOpen, Laptop, Award, Users } from 'lucide-react';
+import { GraduationCap, BookOpen, Users, BarChart2, Star, Clock, Award } from 'lucide-react';
+
+const stats = [
+  { label: 'Active Students', value: '12,500+', icon: Users, color: 'from-blue-400 to-indigo-500' },
+  { label: 'Expert Tutors', value: '480+', icon: GraduationCap, color: 'from-violet-400 to-purple-500' },
+  { label: 'Courses Available', value: '2,300+', icon: BookOpen, color: 'from-sky-400 to-blue-500' },
+];
+
+const testimonial = {
+  quote: 'FacultyOnline transformed the way I teach — my students are more engaged than ever.',
+  name: 'Dr. Priya Sharma',
+  title: 'Senior Educator',
+  initials: 'PS',
+};
+
+const floatingBadges = [
+  { icon: Star, label: '4.9 Rating', color: 'bg-amber-50 text-amber-700 border-amber-200', x: '10%', y: '15%', delay: 0 },
+  { icon: Award, label: 'Top Tutor', color: 'bg-indigo-50 text-indigo-700 border-indigo-200', x: '65%', y: '8%', delay: 0.3 },
+  { icon: Clock, label: '24/7 Access', color: 'bg-green-50 text-green-700 border-green-200', x: '5%', y: '75%', delay: 0.6 },
+  { icon: BarChart2, label: 'Live Analytics', color: 'bg-violet-50 text-violet-700 border-violet-200', x: '60%', y: '82%', delay: 0.9 },
+];
 
 export default function AuthIllustration() {
-  const floatingIcons = [
-    { Icon: GraduationCap, delay: 0, x: -80, y: -60, size: 'w-10 h-10', color: 'text-blue-400' },
-    { Icon: BookOpen, delay: 0.2, x: 100, y: -100, size: 'w-8 h-8', color: 'text-blue-300' },
-    { Icon: Laptop, delay: 0.4, x: -120, y: 80, size: 'w-12 h-12', color: 'text-blue-200' },
-    { Icon: Award, delay: 0.6, x: 90, y: 120, size: 'w-10 h-10', color: 'text-blue-400' },
-    { Icon: Users, delay: 0.8, x: -20, y: 160, size: 'w-8 h-8', color: 'text-blue-300' },
-  ];
-
   return (
-    <div className="hidden lg:flex flex-1 flex-col justify-center items-center relative z-10 p-12 bg-slate-900 overflow-hidden">
-      {/* Background Gradient & Pattern */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-900 via-slate-900 to-slate-900"></div>
-        {/* Soft glowing background patterns */}
-        <div className="absolute -top-[30%] -left-[10%] w-[70%] h-[70%] bg-blue-600/20 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
-        <div className="absolute bottom-[0%] -right-[20%] w-[60%] h-[60%] bg-blue-800/20 blur-[100px] rounded-full mix-blend-screen pointer-events-none" />
-      </div>
+    <div
+      className="hidden lg:flex flex-1 flex-col justify-center items-center relative z-10 p-12 overflow-hidden"
+      style={{ background: 'linear-gradient(145deg, #1e1b4b 0%, #312e81 40%, #1d4ed8 100%)' }}
+    >
+      {/* Glow effects */}
+      <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full opacity-20 blur-3xl" style={{ background: '#818cf8' }} />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full opacity-20 blur-3xl" style={{ background: '#60a5fa' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full opacity-10 blur-3xl" style={{ background: '#a78bfa' }} />
 
-      {/* Floating Icons */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-        {floatingIcons.map((item, index) => (
+      {/* Floating Badges */}
+      {floatingBadges.map((badge, i) => {
+        const Icon = badge.icon;
+        return (
           <motion.div
-            key={index}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{
-              opacity: [0.3, 0.6, 0.3],
-              y: [item.y, item.y - 15, item.y],
-              x: [item.x, item.x + 10, item.x],
-            }}
-            transition={{
-              duration: 4 + index,
-              repeat: Infinity,
-              repeatType: 'reverse',
-              delay: item.delay,
-            }}
-            className={`absolute ${item.color}`}
-            style={{ x: item.x, y: item.y }}
+            key={i}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1, y: [0, -8, 0] }}
+            transition={{ delay: badge.delay, duration: 3, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+            className={`absolute flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold shadow-lg ${badge.color}`}
+            style={{ left: badge.x, top: badge.y }}
           >
-            <item.Icon className={item.size} />
+            <Icon className="w-3 h-3" />
+            {badge.label}
           </motion.div>
-        ))}
-      </div>
+        );
+      })}
 
+      {/* Main Content */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative z-20 w-full max-w-xl flex flex-col items-center"
+        transition={{ duration: 0.8 }}
+        className="relative z-10 w-full max-w-md flex flex-col items-center"
       >
-        <div className="mb-6 inline-flex items-center justify-center p-3 bg-blue-600/20 rounded-2xl border border-blue-500/30 backdrop-blur-md">
-          <GraduationCap className="w-10 h-10 text-blue-400" />
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 shadow">
+          <GraduationCap className="w-3.5 h-3.5 text-indigo-300" />
+          Trusted by 12,500+ learners
         </div>
-        
-        <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl text-center mb-6 drop-shadow-sm">
-          Welcome to Faculty Portal
-        </h1>
-        <p className="text-lg leading-7 text-blue-100/80 text-center mb-12 max-w-lg">
-          Manage classes, assignments, attendance, progress tracking, and student collaboration seamlessly.
+
+        {/* Headline */}
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-white text-center leading-tight mb-4 tracking-tight drop-shadow-md">
+          Learn. Teach.{' '}
+          <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(90deg, #a5b4fc, #93c5fd)' }}>
+            Grow Together.
+          </span>
+        </h2>
+        <p className="text-base text-indigo-200/80 text-center mb-10 max-w-sm leading-relaxed">
+          Join the most powerful faculty management & e-learning platform designed for modern educators and students.
         </p>
 
-        {/* Modern Illustration: Virtual Classroom Dashboard Graphic */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="w-full relative group"
-        >
-          <div className="absolute inset-0 bg-blue-500/10 blur-2xl rounded-[2rem] transform group-hover:scale-105 transition-transform duration-700" />
-          <div className="relative w-full aspect-[16/9] bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden p-6 flex flex-col">
-            {/* Fake Dashboard Header */}
-            <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-amber-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-              </div>
-              <div className="w-1/3 h-2 bg-white/10 rounded-full" />
-            </div>
-            
-            {/* Fake Dashboard Content */}
-            <div className="flex-1 grid grid-cols-3 gap-4">
-              <div className="col-span-2 space-y-4">
-                <div className="w-full h-24 bg-gradient-to-r from-blue-600/30 to-blue-400/10 rounded-2xl border border-white/5" />
-                <div className="w-3/4 h-12 bg-white/5 rounded-xl border border-white/5" />
-                <div className="w-1/2 h-8 bg-white/5 rounded-xl border border-white/5" />
-              </div>
-              <div className="col-span-1 space-y-4">
-                <div className="w-full h-full bg-slate-800/50 rounded-2xl border border-white/5 flex flex-col p-4 gap-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-blue-400/20" />
-                    <div className="w-16 h-2 bg-white/10 rounded" />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-purple-400/20" />
-                    <div className="w-12 h-2 bg-white/10 rounded" />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-green-400/20" />
-                    <div className="w-20 h-2 bg-white/10 rounded" />
-                  </div>
+        {/* Stats Cards */}
+        <div className="w-full grid grid-cols-3 gap-3 mb-8">
+          {stats.map((stat, i) => {
+            const Icon = stat.icon;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.15, duration: 0.6 }}
+                className="flex flex-col items-center gap-2 p-4 rounded-2xl"
+                style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.15)' }}
+              >
+                <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${stat.color} flex items-center justify-center shadow-lg`}>
+                  <Icon className="w-4 h-4 text-white" />
                 </div>
-              </div>
+                <p className="text-lg font-extrabold text-white leading-none">{stat.value}</p>
+                <p className="text-[10px] text-indigo-200/70 text-center leading-tight font-medium">{stat.label}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Testimonial */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="w-full rounded-2xl p-5"
+          style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}
+        >
+          <div className="flex gap-1 mb-3">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-3.5 h-3.5 text-amber-400" fill="#fbbf24" />
+            ))}
+          </div>
+          <p className="text-sm text-white/85 italic leading-relaxed mb-4">
+            &quot;{testimonial.quote}&quot;
+          </p>
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-400 to-blue-500 flex items-center justify-center text-xs font-bold text-white shadow">
+              {testimonial.initials}
+            </div>
+            <div>
+              <p className="text-sm font-bold text-white">{testimonial.name}</p>
+              <p className="text-xs text-indigo-300">{testimonial.title}</p>
             </div>
           </div>
         </motion.div>

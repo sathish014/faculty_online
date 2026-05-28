@@ -41,8 +41,9 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${plusJakarta.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen bg-white antialiased">{children}</body>
+      <body className="min-h-screen bg-white antialiased" suppressHydrationWarning>{children}</body>
     </html>
   );
 }
