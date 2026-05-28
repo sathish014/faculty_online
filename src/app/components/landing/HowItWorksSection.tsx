@@ -1,7 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Search, MessageSquare, GraduationCap, UserPlus, Inbox, TrendingUp, ArrowRight, Users, Briefcase } from "lucide-react";
+import {
+  Search,
+  MessageSquare,
+  GraduationCap,
+  UserPlus,
+  Inbox,
+  TrendingUp,
+  ArrowRight,
+  Users,
+  Briefcase,
+} from "lucide-react";
 
 const studentSteps = [
   {
@@ -11,8 +21,10 @@ const studentSteps = [
     title: "Search Tutors",
     description:
       "Use our smart search to find verified tutors by subject, location, and mode. Filter by rating, experience, and budget.",
-    color: "from-blue-500 to-indigo-500",
-    highlight: "blue",
+    iconGradient: "from-blue-500 to-indigo-600",
+    cardAccent: "border-blue-200",
+    cardBg: "bg-blue-50/60",
+    stepColor: "text-blue-600",
   },
   {
     id: "step-s2",
@@ -21,8 +33,10 @@ const studentSteps = [
     title: "Connect & Chat",
     description:
       "Message tutors directly, discuss your learning goals, schedule a trial session, and choose the perfect match.",
-    color: "from-indigo-500 to-violet-500",
-    highlight: "indigo",
+    iconGradient: "from-indigo-500 to-violet-600",
+    cardAccent: "border-indigo-200",
+    cardBg: "bg-indigo-50/60",
+    stepColor: "text-indigo-600",
   },
   {
     id: "step-s3",
@@ -31,8 +45,10 @@ const studentSteps = [
     title: "Start Learning",
     description:
       "Begin your personalized learning journey. Track progress, share resources, and achieve your goals faster.",
-    color: "from-violet-500 to-purple-500",
-    highlight: "violet",
+    iconGradient: "from-violet-500 to-purple-600",
+    cardAccent: "border-violet-200",
+    cardBg: "bg-violet-50/60",
+    stepColor: "text-violet-600",
   },
 ];
 
@@ -44,8 +60,10 @@ const tutorSteps = [
     title: "Create Profile",
     description:
       "Build a compelling profile showcasing your expertise, experience, and teaching style. Upload certifications.",
-    color: "from-emerald-500 to-teal-500",
-    highlight: "emerald",
+    iconGradient: "from-emerald-500 to-teal-600",
+    cardAccent: "border-emerald-200",
+    cardBg: "bg-emerald-50/60",
+    stepColor: "text-emerald-600",
   },
   {
     id: "step-t2",
@@ -54,8 +72,10 @@ const tutorSteps = [
     title: "Receive Requests",
     description:
       "Get matched with students who need your skills. Receive notifications for relevant student requirements.",
-    color: "from-teal-500 to-cyan-500",
-    highlight: "teal",
+    iconGradient: "from-teal-500 to-cyan-600",
+    cardAccent: "border-teal-200",
+    cardBg: "bg-teal-50/60",
+    stepColor: "text-teal-600",
   },
   {
     id: "step-t3",
@@ -64,81 +84,70 @@ const tutorSteps = [
     title: "Earn & Grow",
     description:
       "Teach on your schedule, earn consistently, build reviews, and grow your student base. Go Premium for more leads.",
-    color: "from-cyan-500 to-blue-500",
-    highlight: "cyan",
+    iconGradient: "from-cyan-500 to-blue-600",
+    cardAccent: "border-cyan-200",
+    cardBg: "bg-cyan-50/60",
+    stepColor: "text-cyan-600",
   },
 ];
 
-interface StepCardProps {
-  step: {
-    id: string;
-    step: string;
-    icon: React.ComponentType<{ className?: string }>;
-    title: string;
-    description: string;
-    color: string;
-    highlight: string;
-  };
-  isLast: boolean;
-}
+type Step = (typeof studentSteps)[0];
 
-function StepCard({ step, isLast }: StepCardProps) {
+function StepCard({ step }: { step: Step }) {
   return (
-    <div className="relative flex flex-col items-center text-center group">
-      {/* Connector line */}
-      {!isLast && (
-        <div className="hidden md:block absolute top-10 left-1/2 w-full h-0.5 z-0">
-          <div className={`h-full bg-gradient-to-r ${step.color} opacity-30`} />
-          {/* Arrow dot */}
-          <div
-            className={`absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-gradient-to-br ${step.color}`}
-          />
-        </div>
-      )}
-
-      {/* Icon container */}
-      <div className="relative z-10 mb-5">
+    <div
+      className={`w-full rounded-2xl border ${step.cardAccent} ${step.cardBg} p-7 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group`}
+    >
+      {/* Top row: icon + step number */}
+      <div className="flex items-start justify-between mb-5">
         <div
-          className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:shadow-2xl transition-all duration-300`}
+          className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.iconGradient} flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300`}
         >
-          <step.icon className="w-9 h-9 text-white" />
+          <step.icon className="w-7 h-7 text-white" />
         </div>
-        {/* Step number badge */}
-        <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-white border-2 border-slate-100 flex items-center justify-center text-xs font-black text-slate-500 shadow-sm">
-          {step.step}
+
+        <div className="flex flex-col items-end">
+          <span className="text-[10px] font-bold tracking-widest uppercase text-slate-400 mb-0.5">
+            Step
+          </span>
+          <span className={`text-3xl font-black leading-none ${step.stepColor}`}>
+            {step.step}
+          </span>
         </div>
       </div>
 
       <h3 className="font-heading font-bold text-slate-900 text-lg mb-2">
         {step.title}
       </h3>
-      <p className="text-slate-500 text-sm leading-relaxed max-w-xs">{step.description}</p>
+      <p className="text-slate-500 text-sm leading-relaxed">{step.description}</p>
     </div>
   );
 }
 
 export default function HowItWorksSection() {
   const [activeTab, setActiveTab] = useState<"student" | "tutor">("student");
+  const steps = activeTab === "student" ? studentSteps : tutorSteps;
 
   return (
     <section id="how-it-works" className="py-24 bg-gradient-to-b from-slate-50 to-white">
       <div className="container-xl">
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-sm font-semibold mb-4">
-            <ArrowRight className="w-3.5 h-3.5" />
-            Simple & Seamless
-          </div>
+
           <h2 className="text-3xl md:text-4xl xl:text-5xl font-heading font-extrabold text-slate-900 mb-4">
             How{" "}
             <span className="gradient-text">Faculties Online</span>
             <br />
             Works for You
           </h2>
-          <p className="text-slate-500 text-lg max-w-xl mx-auto">
+          <p className="text-slate-500 text-lg max-w-xl mx-auto mb-4">
             Whether you&apos;re a student seeking knowledge or a tutor ready to teach,
             we&apos;ve made the process effortless.
           </p>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-sm font-semibold mb-4">
+            <ArrowRight className="w-3.5 h-3.5" />
+            Simple &amp; Seamless
+          </div>
         </div>
 
         {/* Tabs */}
@@ -147,11 +156,11 @@ export default function HowItWorksSection() {
             <button
               id="hiw-student-tab"
               onClick={() => setActiveTab("student")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                activeTab === "student"
-                  ? "bg-white text-indigo-600 shadow-md shadow-indigo-100"
-                  : "text-slate-500 hover:text-slate-700"
-              }`}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${activeTab === "student"
+                ? "bg-white text-indigo-600 shadow-md shadow-indigo-100"
+                : "text-slate-500 hover:text-slate-700"
+                }`}
+              suppressHydrationWarning
             >
               <Users className="w-4 h-4" />
               For Students
@@ -159,11 +168,11 @@ export default function HowItWorksSection() {
             <button
               id="hiw-tutor-tab"
               onClick={() => setActiveTab("tutor")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
-                activeTab === "tutor"
-                  ? "bg-white text-emerald-600 shadow-md shadow-emerald-100"
-                  : "text-slate-500 hover:text-slate-700"
-              }`}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${activeTab === "tutor"
+                ? "bg-white text-emerald-600 shadow-md shadow-emerald-100"
+                : "text-slate-500 hover:text-slate-700"
+                }`}
+              suppressHydrationWarning
             >
               <Briefcase className="w-4 h-4" />
               For Tutors
@@ -171,31 +180,19 @@ export default function HowItWorksSection() {
           </div>
         </div>
 
-        {/* Steps */}
-        <div className="relative">
-          {activeTab === "student" && (
-            <div className="grid md:grid-cols-3 gap-10 md:gap-8">
-              {studentSteps.map((step, i) => (
-                <StepCard
-                  key={step.id}
-                  step={step}
-                  isLast={i === studentSteps.length - 1}
-                />
-              ))}
+        {/* Steps grid — arrow sits in the gap between cards */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {steps.map((step, i) => (
+            <div key={step.id} className="relative">
+              <StepCard step={step} />
+              {/* Arrow icon positioned at the right edge, centered vertically */}
+              {i < steps.length - 1 && (
+                <div className="hidden md:flex absolute top-1/2 -right-3 -translate-y-1/2 z-10 w-6 h-6 rounded-full bg-white border border-slate-200 shadow items-center justify-center">
+                  <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                </div>
+              )}
             </div>
-          )}
-
-          {activeTab === "tutor" && (
-            <div className="grid md:grid-cols-3 gap-10 md:gap-8">
-              {tutorSteps.map((step, i) => (
-                <StepCard
-                  key={step.id}
-                  step={step}
-                  isLast={i === tutorSteps.length - 1}
-                />
-              ))}
-            </div>
-          )}
+          ))}
         </div>
 
         {/* Bottom CTA */}
@@ -204,6 +201,7 @@ export default function HowItWorksSection() {
             <button
               id="hiw-find-tutor-cta"
               className="btn-primary flex items-center gap-2 px-8 py-4 rounded-2xl font-semibold text-white shadow-lg"
+              suppressHydrationWarning
             >
               <Search className="w-5 h-5" />
               Start as Student
@@ -211,6 +209,7 @@ export default function HowItWorksSection() {
             <button
               id="hiw-become-tutor-cta"
               className="flex items-center gap-2 px-8 py-4 rounded-2xl font-semibold text-emerald-600 border border-emerald-200 hover:bg-emerald-50 transition-all"
+              suppressHydrationWarning
             >
               <Briefcase className="w-5 h-5" />
               Become a Tutor

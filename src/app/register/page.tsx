@@ -5,8 +5,8 @@ import AuthCard from '@/components/auth/AuthCard';
 import SignupForm from '@/components/auth/SignupForm';
 
 export const metadata: Metadata = {
-  title: 'Register - Faculty Online',
-  description: 'Create a new Faculty Online account.',
+  title: 'Create Account - FacultyOnline',
+  description: 'Sign up as a Tutor or Student and join FacultyOnline today.',
 };
 
 export default function RegisterPage() {
@@ -15,7 +15,7 @@ export default function RegisterPage() {
       <AuthIllustration />
       <AuthCard
         title="Create Your Account"
-        description="Fill in your details below to get started."
+        description="Choose your role and fill in your details to get started."
       >
         <SignupForm />
       </AuthCard>

@@ -8,26 +8,60 @@ import {
   Menu,
   X,
   Sparkles,
+  LogOut
 } from "lucide-react";
-
-const navLinks = [
-  { label: "Find Tutors", href: "#tutors" },
-  { label: "Dashboard", href: "/student-dashboard" },
-  { label: "Post Requirement", href: "/student-dashboard/post-requirement" },
-  { label: "Become a Tutor", href: "/teacher-dashboard" },
-  { label: "Resources", href: "#how-it-works" },
-];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
+  // Auth simulation state
+  const [isMounted, setIsMounted] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
+
   useEffect(() => {
+    setIsMounted(true);
+    const role = localStorage.getItem('userRole');
+    const loggedIn = localStorage.getItem('isLoggedIn');
+    if (loggedIn === 'true' && role) {
+      setIsLoggedIn(true);
+      setUserRole(role);
+    }
+
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('userRole');
+    localStorage.removeItem('isLoggedIn');
+    setIsLoggedIn(false);
+    setUserRole(null);
+  };
+
+  // Dynamic Navigation Links
+  const navLinks = [
+    { label: "Find Tutors", href: "#tutors", show: true },
+    { 
+      label: "Dashboard", 
+      href: userRole === 'tutor' ? "/teacher-dashboard" : "/student-dashboard", 
+      show: isLoggedIn 
+    },
+    { 
+      label: "Post Requirement", 
+      href: "/student-dashboard/post-requirement", 
+      show: userRole === 'student' || !isLoggedIn 
+    },
+    { 
+      label: "Become a Tutor", 
+      href: "/teacher-dashboard", 
+      show: !isLoggedIn 
+    },
+    { label: "Resources", href: "#how-it-works", show: true },
+  ].filter(link => link.show);
 
   return (
     <>
@@ -85,37 +119,50 @@ export default function Navbar() {
 
             {/* Right Actions */}
             <div className="hidden lg:flex items-center gap-3">
-              {/* <button
-                onClick={() => setSearchOpen(!searchOpen)}
-                className={`p-2 rounded-lg transition-all duration-300 ${scrolled
-                  ? "text-indigo-700 hover:text-indigo-600 hover:bg-indigo-50"
-                  : "text-white/85 hover:text-white hover:bg-white/10"
-                  }`}
-                aria-label="Search"
-                id="navbar-search-btn"
-              >
-                <Search className="w-5 h-5" />
-              </button> */}
+              {isMounted && isLoggedIn ? (
+                <>
+                  <Link
+                    href={userRole === 'tutor' ? "/teacher-dashboard" : "/student-dashboard"}
+                    className={`px-5 py-2 text-sm font-semibold rounded-xl transition-all duration-300 ${scrolled
+                      ? "bg-indigo-50 text-indigo-700 hover:bg-indigo-100"
+                      : "bg-white/10 text-white hover:bg-white/20"
+                      }`}
+                  >
+                    Go to Dashboard
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className={`p-2 rounded-xl border transition-all duration-300 ${scrolled
+                      ? "border-indigo-100 text-indigo-500 hover:bg-red-50 hover:text-red-500 hover:border-red-100"
+                      : "border-white/20 text-white hover:bg-red-500/20 hover:text-white hover:border-red-500/30"
+                      }`}
+                    title="Logout"
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    id="navbar-login-btn"
+                    className={`px-5 py-2 text-sm font-semibold rounded-xl border transition-all duration-300 ${scrolled
+                      ? "border-indigo-400 text-indigo-700 hover:bg-indigo-50"
+                      : "border-white/30 text-white hover:border-white/50 hover:bg-white/10"
+                      }`}
+                  >
+                    Login
+                  </Link>
 
-              <Link
-                href="/login"
-                id="navbar-login-btn"
-                className={`px-5 py-2 text-sm font-semibold rounded-xl border transition-all duration-300 ${scrolled
-                  ? "border-indigo-400 text-indigo-700 hover:bg-indigo-50"
-                  : "border-white/30 text-white hover:border-white/50 hover:bg-white/10"
-                  }`}
-              >
-                Login
-              </Link>
-
-              <Link
-                href="/register"
-                id="navbar-signup-btn"
-                className="px-5 py-2 text-sm font-semibold rounded-xl btn-primary text-white flex items-center gap-1.5"
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                Sign Up Free
-              </Link>
+                  <Link
+                    href="/register"
+                    id="navbar-signup-btn"
+                    className="px-5 py-2 text-sm font-semibold rounded-xl btn-primary text-white flex items-center gap-1.5"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile Toggle */}
@@ -200,18 +247,40 @@ export default function Navbar() {
             </nav>
 
             <div className="p-4 border-t border-slate-100 flex flex-col gap-3">
-              <Link
-                href="/login"
-                className="px-5 py-3 text-center text-sm font-semibold rounded-xl border border-indigo-300 text-indigo-600 hover:bg-indigo-50 transition-colors"
-              >
-                Login
-              </Link>
-              <Link
-                href="/register"
-                className="px-5 py-3 text-center text-sm font-semibold rounded-xl btn-primary text-white"
-              >
-                Sign Up Free
-              </Link>
+              {isMounted && isLoggedIn ? (
+                <>
+                  <Link
+                    href={userRole === 'tutor' ? "/teacher-dashboard" : "/student-dashboard"}
+                    className="px-5 py-3 text-center text-sm font-semibold rounded-xl btn-primary text-white"
+                  >
+                    Go to Dashboard
+                  </Link>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setMobileOpen(false);
+                    }}
+                    className="px-5 py-3 text-center text-sm font-semibold rounded-xl border border-red-200 text-red-600 hover:bg-red-50 transition-colors"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="px-5 py-3 text-center text-sm font-semibold rounded-xl border border-indigo-300 text-indigo-600 hover:bg-indigo-50 transition-colors"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="px-5 py-3 text-center text-sm font-semibold rounded-xl btn-primary text-white"
+                  >
+                    Sign Up Free
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -111,12 +111,14 @@ export default function Footer() {
                       placeholder="Enter your email"
                       id="footer-newsletter-email"
                       className="w-full pl-10 pr-4 py-3.5 input-premium rounded-xl text-sm"
+                      suppressHydrationWarning
                     />
                   </div>
                   <button
                     type="submit"
                     id="footer-newsletter-submit"
                     className="btn-primary flex items-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-white text-sm whitespace-nowrap"
+                    suppressHydrationWarning
                   >
                     <Send className="w-4 h-4" />
                     Subscribe
@@ -250,13 +252,14 @@ export default function Footer() {
       <div className="relative border-t border-white/5 py-6">
         <div className="container-xl flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/30 text-sm">
-            © 2025 Faculties Online. All rights reserved.
+            © 2026 Faculties Online. All rights reserved.
           </p>
 
           <div className="flex items-center gap-1 text-white/30 text-sm">
             Made with{" "}
-            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 mx-1" />
-            in India
+            <Link href="https://digimabble.com" target="_blank" rel="noopener noreferrer">
+              DigiMabble
+            </Link>
           </div>
 
           <div className="flex items-center gap-5">
