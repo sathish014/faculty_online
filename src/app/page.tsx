@@ -15,9 +15,9 @@ export default function Home() {
       <HeroSection />
       <StatsSection />
       <CategoriesSection />
-      <HowItWorksSection />
       <FeaturedTutorsSection />
       <TestimonialsSection />
+      <HowItWorksSection />
       <Footer />
 
       {/* Mobile sticky CTA */}
@@ -25,14 +25,15 @@ export default function Home() {
         <a
           href="#tutors"
           id="mobile-sticky-find-tutor"
-          className="flex-1 text-center py-3 rounded-xl btn-primary text-white font-semibold text-sm"
+          className="flex-1 text-center py-2.5 rounded-xl text-white font-semibold text-sm"
+          style={{ background: "linear-gradient(135deg, #4f46e5, #7c3aed)" }}
         >
           Find Tutor
         </a>
         <Link
           href="/student-dashboard/post-requirement"
           id="mobile-sticky-post-req"
-          className="flex-1 text-center py-3 rounded-xl border border-indigo-300 text-indigo-600 font-semibold text-sm hover:bg-indigo-50 transition-colors"
+          className="flex-1 text-center py-2.5 rounded-xl border border-indigo-200 text-indigo-600 font-semibold text-sm hover:bg-indigo-50 transition-colors"
         >
           Post Requirement
         </Link>
