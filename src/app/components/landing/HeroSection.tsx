@@ -6,19 +6,14 @@ import Link from "next/link";
 import {
   Search,
   ChevronDown,
-  Star,
-  Users,
   CheckCircle,
-  Sparkles,
-  ArrowRight,
-  Zap,
-  GraduationCap,
-  BookOpen,
-  Monitor,
+  Users,
+  Star,
   Laptop,
   School,
   Home,
   RefreshCw,
+  Zap,
 } from "lucide-react";
 
 const modeOptions = [
@@ -29,7 +24,7 @@ const modeOptions = [
   { label: "Home Tuition", icon: Home, desc: "Tutor comes to you" },
 ];
 
-const subjectTags = ["Mathematics", "Physics", "Python", "English", "Chemistry", "IELTS", "Data Science", "CAT Prep"];
+const popularTags = ["Mathematics", "Physics", "Python", "English"];
 
 export default function HeroSection() {
   const [subject, setSubject] = useState("");
@@ -46,20 +41,20 @@ export default function HeroSection() {
     const r = btnRef.current.getBoundingClientRect();
     setDropdownStyle({
       position: "fixed",
-      top: r.bottom + 8,
+      top: r.bottom + 6,
       left: r.left,
-      width: 272,
+      width: 240,
       zIndex: 9999,
     });
   }, []);
 
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 100);
+    const t = setTimeout(() => setMounted(true), 80);
     const handler = (e: MouseEvent) => {
       const target = e.target as Node;
-      const insideBtn = modeRef.current?.contains(target);
-      const insidePortal = portalRef.current?.contains(target);
-      if (!insideBtn && !insidePortal) setModeOpen(false);
+      if (!modeRef.current?.contains(target) && !portalRef.current?.contains(target)) {
+        setModeOpen(false);
+      }
     };
     document.addEventListener("mousedown", handler);
     const closeOnScroll = () => setModeOpen(false);
@@ -76,222 +71,317 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col"
-      style={{ paddingTop: "72px" }}
+      className="relative bg-white overflow-hidden"
+      style={{ paddingTop: "64px", minHeight: "560px" }}
     >
-      {/* ── BACKGROUND ── */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/hero-bg.png')" }} />
-      {/* gradient overlay — dark at edges, lighter in center so text pops */}
-      <div className="absolute inset-0" style={{
-        background: "linear-gradient(to bottom, rgba(10,8,30,0.65) 0%, rgba(10,8,30,0.45) 50%, rgba(10,8,30,0.72) 100%)"
-      }} />
+      {/* Subtle top background gradient */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 0% 50%, rgba(238,242,255,0.8) 0%, transparent 60%), radial-gradient(ellipse at 100% 0%, rgba(245,243,255,0.5) 0%, transparent 55%)",
+        }}
+      />
 
-      {/* subtle dot grid */}
-      <div className="absolute inset-0 opacity-[0.06]" style={{
-        backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
-        backgroundSize: "36px 36px",
-      }} />
-
-      {/* ── CONTENT ── */}
-      <div className={`relative z-10 flex-1 flex flex-col items-center justify-center px-4 sm:px-6 text-center transition-all duration-700 pb-28 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-
-        {/* Badge */}
-        {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 text-white/90 text-xs font-semibold mb-7 tracking-wide"
-          style={{ background: "rgba(99,102,241,0.25)", backdropFilter: "blur(12px)" }}>
-          <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
-          India&apos;s #1 Tutor Marketplace Platform
-          <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-        </div> */}
-
-        {/* Heading */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] font-heading font-extrabold leading-[1.1] tracking-tight mb-4 max-w-3xl text-white"
-          style={{ textShadow: "0 2px 20px rgba(0,0,0,0.5)" }}
-        >
-          Upgrade Your Skills with{" "}
-          <span className="text-white">
-            Faculties Online
-          </span>
-        </h1>
-
-        <p className="text-white text-base sm:text-lg max-w-lg mx-auto mb-10 leading-relaxed font-medium"
-          style={{ textShadow: "0 1px 8px rgba(0,0,0,0.35)" }}
-        >
-          Connect with verified tutors for online, offline &amp; home tuition.
-          Learn at your pace, from India&apos;s best educators.
-        </p>
-
-        {/* ── SEARCH BAR ── */}
-        <div className="w-full max-w-2xl mx-auto mb-6">
+      <div className="container-xl relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 items-center py-14 lg:py-20">
+          {/* ── LEFT CONTENT ── */}
           <div
-            className="flex flex-col sm:flex-row items-stretch rounded-2xl overflow-visible"
-            style={{ background: "rgba(255,255,255,0.97)", boxShadow: "0 12px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.15)" }}
+            className={`transition-all duration-700 ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
           >
-            {/* Search Input */}
-            <div className="flex-1 flex items-center gap-3 px-5 border-b sm:border-b-0 sm:border-r border-slate-200/70">
-              <Search className="w-4.5 h-4.5 text-indigo-400 flex-shrink-0" style={{ width: "18px", height: "18px" }} />
-              <input
-                id="hero-search-subject"
-                type="text"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                placeholder="Search tutors, subjects, or skills..."
-                className="flex-1 py-4 text-sm text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none font-medium"
-                suppressHydrationWarning
-              />
-            </div>
-
-            {/* Mode Picker */}
-            <div className="relative flex-shrink-0" ref={modeRef} style={{ minWidth: "180px" }}>
-              <button
-                id="hero-mode-btn"
-                ref={btnRef}
-                onClick={() => {
-                  recalcDropdown();
-                  setModeOpen((o) => !o);
-                }}
-                className="w-full h-full flex items-center gap-2 px-4 py-4 text-sm font-medium text-slate-700 hover:bg-indigo-50/60 transition-colors border-b sm:border-b-0 border-slate-200/70 cursor-pointer"
-                suppressHydrationWarning
-              >
-                <mode.icon className="w-4 h-4 text-indigo-500 flex-shrink-0" />
-                <span className="flex-1 text-left whitespace-nowrap">{mode.label}</span>
-                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-300 flex-shrink-0 ${modeOpen ? "rotate-180 text-indigo-600" : ""}`} />
-              </button>
-
-              {/* Portal dropdown — fixed position on body, escapes ALL parent overflow */}
-              {modeOpen && mounted && createPortal(
-                <div
-                  ref={portalRef}
-                  style={{
-                    ...dropdownStyle,
-                    background: "rgba(255,255,255,0.99)",
-                    backdropFilter: "blur(24px)",
-                    borderRadius: "16px",
-                    border: "1px solid rgba(226,232,240,0.9)",
-                    boxShadow: "0 24px 64px rgba(0,0,0,0.22), 0 4px 20px rgba(99,102,241,0.15)",
-                    overflow: "hidden",
-                    padding: "8px",
-                  }}
-                >
-                  {modeOptions.map((m) => {
-                    const active = mode.label === m.label;
-                    return (
-                      <button
-                        key={m.label}
-                        onMouseDown={(e) => {
-                          e.preventDefault(); // prevent blur/outside-click firing first
-                          setMode(m);
-                          setModeOpen(false);
-                        }}
-                        className={`w-full flex cursor-pointer items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all ${active ? "bg-indigo-600" : "hover:bg-indigo-50"}`}
-                      >
-                        <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 cursor-pointer ${active ? "bg-white/20" : "bg-indigo-50"}`}>
-                          <m.icon className={`w-4 h-4 ${active ? "text-white" : "text-indigo-600"}`} />
-                        </div>
-                        <div className="flex-1 text-left">
-                          <p className={`font-semibold text-sm leading-tight ${active ? "text-white" : "text-slate-800"}`}>{m.label}</p>
-                          <p className={`text-xs mt-0.5 ${active ? "text-white/70" : "text-slate-400"}`}>{m.desc}</p>
-                        </div>
-                        {active && <CheckCircle className="w-4 h-4 text-white/80 flex-shrink-0" />}
-                      </button>
-                    );
-                  })}
-                </div>,
-                document.body
-              )}
-            </div>
-
-            {/* Find Button */}
-            <div className="p-2 flex-shrink-0">
-              <button
-                id="hero-search-submit"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white text-sm tracking-wide whitespace-nowrap transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5 cursor-pointer"
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 mb-6">
+              <div
+                className="flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold"
                 style={{
-                  background: "linear-gradient(135deg, #312e81 0%, #4338ca 50%, #6366f1 100%)",
-                  boxShadow: "0 4px 20px rgba(67,56,202,0.5)",
+                  background: "rgba(99,102,241,0.08)",
+                  border: "1px solid rgba(99,102,241,0.2)",
+                  color: "#4f46e5",
                 }}
-                suppressHydrationWarning
               >
-                FIND TUTOR
-              </button>
+                <span
+                  className="w-1.5 h-1.5 rounded-full animate-pulse"
+                  style={{ background: "#4ade80" }}
+                />
+                Powered by 100+ Active Students
+              </div>
+            </div>
+
+            {/* Heading */}
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-[3.1rem] font-extrabold leading-[1.12] tracking-tight text-slate-900 mb-5">
+              Upgrade Your Skills with{" "}
+              <span
+                style={{
+                  background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                Faculties Online
+              </span>
+            </h1>
+
+            {/* Description */}
+            <p className="text-slate-500 text-base sm:text-lg leading-relaxed mb-8 max-w-md">
+              Connect with verified tutors for online, offline &amp; home tuition. Learn at your
+              pace, from India&apos;s best educators in any subject you desire.
+            </p>
+
+            {/* Search Bar */}
+            <div className="w-full mb-5">
+              <div
+                className="flex flex-col sm:flex-row items-stretch rounded-2xl overflow-visible"
+                style={{
+                  background: "#fff",
+                  border: "1.5px solid #e2e8f0",
+                  boxShadow: "0 4px 24px rgba(79,70,229,0.10)",
+                }}
+              >
+                {/* Search Input */}
+                <div className="flex-1 flex items-center gap-3 px-4 border-b sm:border-b-0 sm:border-r border-slate-200">
+                  <Search className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                  <input
+                    id="hero-search-subject"
+                    type="text"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    placeholder="Search tutors, subjects, or skills..."
+                    className="flex-1 py-3.5 text-sm text-slate-800 placeholder-slate-400 bg-transparent focus:outline-none"
+                    suppressHydrationWarning
+                  />
+                </div>
+
+                {/* Mode Picker */}
+                <div
+                  className="relative flex-shrink-0"
+                  ref={modeRef}
+                  style={{ minWidth: "160px" }}
+                >
+                  <button
+                    id="hero-mode-btn"
+                    ref={btnRef}
+                    onClick={() => {
+                      recalcDropdown();
+                      setModeOpen((o) => !o);
+                    }}
+                    className="w-full h-full flex items-center gap-2 px-4 py-3.5 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors cursor-pointer border-b sm:border-b-0 border-slate-200"
+                    suppressHydrationWarning
+                  >
+                    <mode.icon className="w-4 h-4 text-indigo-500 flex-shrink-0" />
+                    <span className="flex-1 text-left whitespace-nowrap">{mode.label}</span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-slate-400 transition-transform duration-300 flex-shrink-0 ${
+                        modeOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {modeOpen &&
+                    mounted &&
+                    createPortal(
+                      <div
+                        ref={portalRef}
+                        style={{
+                          ...dropdownStyle,
+                          background: "#fff",
+                          borderRadius: "14px",
+                          border: "1px solid #e2e8f0",
+                          boxShadow: "0 16px 48px rgba(0,0,0,0.14)",
+                          overflow: "hidden",
+                          padding: "6px",
+                        }}
+                      >
+                        {modeOptions.map((m) => {
+                          const active = mode.label === m.label;
+                          return (
+                            <button
+                              key={m.label}
+                              onMouseDown={(e) => {
+                                e.preventDefault();
+                                setMode(m);
+                                setModeOpen(false);
+                              }}
+                              className={`w-full flex cursor-pointer items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all ${
+                                active ? "bg-indigo-600" : "hover:bg-indigo-50"
+                              }`}
+                            >
+                              <div
+                                className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                                  active ? "bg-white/20" : "bg-indigo-50"
+                                }`}
+                              >
+                                <m.icon
+                                  className={`w-3.5 h-3.5 ${active ? "text-white" : "text-indigo-600"}`}
+                                />
+                              </div>
+                              <div className="flex-1 text-left">
+                                <p
+                                  className={`font-semibold text-sm leading-tight ${
+                                    active ? "text-white" : "text-slate-800"
+                                  }`}
+                                >
+                                  {m.label}
+                                </p>
+                                <p
+                                  className={`text-xs mt-0.5 ${
+                                    active ? "text-white/70" : "text-slate-400"
+                                  }`}
+                                >
+                                  {m.desc}
+                                </p>
+                              </div>
+                              {active && <CheckCircle className="w-4 h-4 text-white/80 flex-shrink-0" />}
+                            </button>
+                          );
+                        })}
+                      </div>,
+                      document.body
+                    )}
+                </div>
+
+                {/* Find Button */}
+                <div className="p-2 flex-shrink-0">
+                  <button
+                    id="hero-search-submit"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-white text-sm tracking-wide whitespace-nowrap transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5 cursor-pointer"
+                    style={{
+                      background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
+                      boxShadow: "0 4px 16px rgba(79,70,229,0.45)",
+                    }}
+                    suppressHydrationWarning
+                  >
+                    Find Tutor
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Popular Tags */}
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-slate-400 text-xs font-semibold">Popular:</span>
+              {popularTags.map((tag) => (
+                <button
+                  key={tag}
+                  onClick={() => setSubject(tag)}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-200 ${
+                    subject === tag
+                      ? "text-white"
+                      : "text-slate-600 hover:text-indigo-600 hover:border-indigo-300"
+                  }`}
+                  style={{
+                    background: subject === tag ? "linear-gradient(135deg,#4f46e5,#7c3aed)" : "transparent",
+                    border: subject === tag ? "1px solid transparent" : "1px solid #d1d5db",
+                  }}
+                  suppressHydrationWarning
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* ── RIGHT IMAGE ── */}
+          <div
+            className={`relative hidden lg:block transition-all duration-700 delay-200 ${
+              mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
+            {/* Decorative blob behind image */}
+            <div
+              className="absolute -top-8 -right-8 w-80 h-80 rounded-full pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.08) 60%, transparent 80%)",
+                filter: "blur(30px)",
+              }}
+            />
+            <div
+              className="absolute -bottom-6 -left-6 w-60 h-60 rounded-full pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(167,139,250,0.12) 0%, transparent 70%)",
+                filter: "blur(20px)",
+              }}
+            />
+
+            {/* Hero Image */}
+            <div
+              className="relative rounded-2xl overflow-hidden"
+              style={{
+                boxShadow: "0 24px 64px rgba(79,70,229,0.18), 0 4px 16px rgba(0,0,0,0.10)",
+              }}
+            >
+              <img
+                src="/hero-banner-new.png"
+                alt="Students learning online with Faculties Online"
+                className="w-full h-full object-cover"
+                style={{ maxHeight: "420px", minHeight: "320px" }}
+              />
+
+              {/* Floating trust card */}
+              <div
+                className="absolute bottom-5 left-5 rounded-xl px-4 py-3 flex items-center gap-3"
+                style={{
+                  background: "rgba(255,255,255,0.95)",
+                  backdropFilter: "blur(16px)",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.14)",
+                  border: "1px solid rgba(255,255,255,0.8)",
+                }}
+              >
+                <div
+                  className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: "rgba(99,102,241,0.1)" }}
+                >
+                  <Users className="w-4.5 h-4.5 text-indigo-600" style={{ width: "18px", height: "18px" }} />
+                </div>
+                <div>
+                  <p className="font-bold text-slate-900 text-sm leading-none">10,000+</p>
+                  <p className="text-slate-500 text-xs mt-0.5">Active Students</p>
+                </div>
+              </div>
+
+              {/* Floating rating card */}
+              <div
+                className="absolute top-5 right-5 rounded-xl px-4 py-3 flex items-center gap-2"
+                style={{
+                  background: "rgba(255,255,255,0.95)",
+                  backdropFilter: "blur(16px)",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.14)",
+                  border: "1px solid rgba(255,255,255,0.8)",
+                }}
+              >
+                <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                <div>
+                  <p className="font-bold text-slate-900 text-sm leading-none">4.9/5</p>
+                  <p className="text-slate-500 text-xs mt-0.5">Avg Rating</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Popular Tags */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-          <span className="text-white font-semibold text-xs mr-1 tracking-wide">Popular:</span>
-          {subjectTags.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setSubject(tag)}
-              className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 ${subject === tag
-                ? "text-white border-indigo-400"
-                : "text-white border-white/50 hover:border-white hover:text-white"
-                }`}
-              style={{
-                background: subject === tag
-                  ? "rgba(99,102,241,0.55)"
-                  : "rgba(0,0,0,0.35)",
-                backdropFilter: "blur(8px)",
-              }}
-              suppressHydrationWarning
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
-
-        {/* Trust badges */}
-        <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-8">
-          {[
-            { icon: CheckCircle, label: "Verified Tutors", color: "#4ade80" },
-            { icon: Star, label: "4.9/5 Rating", color: "#fbbf24" },
-            { icon: Users, label: "10K+ Students", color: "#60a5fa" },
-          ].map((item) => (
-            <div key={item.label} className="flex items-center gap-2">
-              <item.icon className="w-4 h-4" style={{ color: item.color }} />
-              <span className="text-white/70 text-sm font-medium">{item.label}</span>
-            </div>
-          ))}
-        </div>
       </div>
 
-      {/* ── BOTTOM STATS STRIP ── */}
-      <div className={`absolute bottom-0 left-0 right-0 z-20 transition-all duration-700 delay-300 ${mounted ? "opacity-100" : "opacity-0"}`}>
-        <div style={{ background: "rgba(10,8,30,0.75)", backdropFilter: "blur(20px)", borderTop: "1px solid rgba(255,255,255,0.10)" }}>
-          <div className="max-w-5xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-6 sm:gap-10">
-              {[
-                { icon: GraduationCap, value: "5,000+", label: "Expert Tutors" },
-                { icon: BookOpen, value: "200+", label: "Subjects" },
-                { icon: Monitor, value: "Online · Offline · Home", label: "Teaching Modes" },
-              ].map((s) => (
-                <div key={s.label} className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl flex items-center justify-center" style={{ background: "rgba(99,102,241,0.25)" }}>
-                    <s.icon className="w-4 h-4 text-indigo-300" />
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-sm leading-none">{s.value}</p>
-                    <p className="text-white/45 text-xs mt-0.5">{s.label}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="flex items-center gap-3">
-              <Link href="#tutors" id="hero-find-tutor-btn"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-semibold text-sm transition-all hover:-translate-y-0.5"
-                style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)", boxShadow: "0 4px 15px rgba(99,102,241,0.4)" }}>
-                <Search className="w-4 h-4" />
-                Find a Tutor
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-              <Link href="/student-dashboard/post-requirement" id="hero-post-requirement-btn"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl border text-white font-semibold text-sm hover:bg-white/10 transition-all"
-                style={{ borderColor: "rgba(255,255,255,0.2)" }}>
-                <Zap className="w-4 h-4 text-yellow-400" />
-                Post Requirement
-              </Link>
-            </div>
+      {/* Verified badge strip */}
+      <div
+        className="border-t border-slate-100"
+        style={{ background: "rgba(248,250,252,0.8)" }}
+      >
+        <div className="container-xl py-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-6 sm:gap-10">
+            {[
+              { icon: CheckCircle, label: "Verified Tutors", color: "#22c55e" },
+              { icon: Star, label: "4.9/5 Rating", color: "#f59e0b" },
+              { icon: Users, label: "10K+ Students", color: "#6366f1" },
+              { icon: Zap, label: "Instant Matching", color: "#a855f7" },
+            ].map((item) => (
+              <div key={item.label} className="flex items-center gap-2">
+                <item.icon className="w-4 h-4" style={{ color: item.color }} />
+                <span className="text-slate-500 text-sm font-medium">{item.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
