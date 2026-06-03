@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { GraduationCap, Menu, X, LogOut } from "lucide-react";
+import RequestTutorModal from "../ui/RequestTutorModal";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [requestModalOpen, setRequestModalOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
@@ -32,19 +34,24 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { label: "Find Tutors", href: "#tutors", show: true },
+    { label: "Find Tutors", href: "/tutor/search", show: true },
     {
       label: "Dashboard",
       href: userRole === "tutor" ? "/teacher-dashboard" : "/student-dashboard",
       show: isLoggedIn,
     },
     {
-      label: "Post Requirement",
-      href: "/student-dashboard/post-requirement",
-      show: userRole === "student" || !isLoggedIn,
+      label: "Request a Tutor",
+      href: "#",
+      onClick: () => setRequestModalOpen(true),
+      show: !isLoggedIn,
     },
-    { label: "Become a Tutor", href: "/teacher-dashboard", show: !isLoggedIn },
-    { label: "Resources", href: "#how-it-works", show: true },
+    {
+      label: "Find Jobs",
+      href: "/jobs",
+      show: true,
+    },
+    { label: "Resources", href: "/resources", show: true },
   ].filter((l) => l.show);
 
   return (
@@ -81,13 +88,23 @@ export default function Navbar() {
             {/* Center Nav */}
             <nav className="hidden lg:flex items-center gap-0.5">
               {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="relative px-4 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all duration-200"
-                >
-                  {link.label}
-                </Link>
+                link.onClick ? (
+                  <button
+                    key={link.label}
+                    onClick={link.onClick}
+                    className="relative px-4 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all duration-200"
+                  >
+                    {link.label}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="relative px-4 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all duration-200"
+                  >
+                    {link.label}
+                  </Link>
+                )
               ))}
             </nav>
 
@@ -182,14 +199,27 @@ export default function Navbar() {
 
             <nav className="flex flex-col gap-1 p-4 flex-1">
               {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
-                >
-                  {link.label}
-                </Link>
+                link.onClick ? (
+                  <button
+                    key={link.label}
+                    onClick={() => {
+                      setMobileOpen(false);
+                      link.onClick();
+                    }}
+                    className="px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors text-left"
+                  >
+                    {link.label}
+                  </button>
+                ) : (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                )
               ))}
             </nav>
 
@@ -231,6 +261,11 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      <RequestTutorModal 
+        isOpen={requestModalOpen} 
+        onClose={() => setRequestModalOpen(false)} 
+      />
     </>
   );
 }
