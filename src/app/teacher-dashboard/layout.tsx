@@ -37,49 +37,50 @@ export default function TeacherDashboardLayout({
   const pathname = usePathname();
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen flex font-sans" style={{ background: "var(--bg-primary)" }}>
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-slate-900/50 lg:hidden"
+          className="fixed inset-0 z-40 bg-[#1A1A24]/60 backdrop-blur-xs lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside 
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 transform transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 flex flex-col ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 border-r border-[#1A1A24]/10 transform transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 flex flex-col ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
+        style={{ background: "var(--bg-sidebar)" }}
       >
         {/* Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-slate-100 flex-shrink-0">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
-              <GraduationCap className="w-4 h-4 text-white" />
+        <div className="h-16 flex items-center px-6 border-b border-[#1A1A24]/10 flex-shrink-0">
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-8 h-8 rounded-lg bg-[#4D148C] flex items-center justify-center shadow-md shadow-[#4D148C]/20 transition-transform group-hover:scale-105">
+              <GraduationCap className="w-4 h-4 text-[#ff6200]" />
             </div>
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-900 to-indigo-600">
-              Faculties Online
+            <span className="text-lg font-extrabold text-[#1A1A24] tracking-tight">
+              Faculties<span className="text-[#ff6200]">.</span><span className="font-normal text-[#1A1A24]/70">Online</span>
             </span>
           </Link>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto custom-scrollbar">
           {sidebarLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium transition-colors ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-bold text-sm transition-all duration-200 ${
                   isActive
-                    ? "bg-indigo-50 text-indigo-700"
-                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                    ? "bg-[#4D148C] text-white shadow-md shadow-[#4D148C]/20"
+                    : "text-[#1A1A24]/70 hover:bg-[#1A1A24]/5 hover:text-[#1A1A24]"
                 }`}
                 onClick={() => setSidebarOpen(false)}
               >
-                <link.icon className={`w-5 h-5 ${isActive ? "text-indigo-600" : "text-slate-400"}`} />
+                <link.icon className={`w-5 h-5 ${isActive ? "text-[#ff6200]" : "text-[#1A1A24]/50"}`} />
                 {link.name}
               </Link>
             );
@@ -87,10 +88,13 @@ export default function TeacherDashboardLayout({
         </nav>
 
         {/* Bottom actions (Go Premium & Switch to Student) */}
-        <div className="p-4 border-t border-slate-100 space-y-3 flex-shrink-0">
+        <div className="p-4 border-t border-[#1A1A24]/10 space-y-3 flex-shrink-0">
           {/* Go Premium Banner */}
           {showPremiumBanner && (
-            <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-orange-500/20">
+            <div 
+              className="rounded-2xl p-4 text-white relative overflow-hidden shadow-lg shadow-[#ff6200]/20"
+              style={{ background: "linear-gradient(135deg, #ff6200 0%, #d94e00 100%)" }}
+            >
               <div className="absolute top-0 right-0 w-16 h-16 bg-white/20 rounded-full blur-xl -mr-4 -mt-4"></div>
               <button 
                 onClick={() => setShowPremiumBanner(false)}
@@ -100,52 +104,55 @@ export default function TeacherDashboardLayout({
                 <X className="w-4 h-4" />
               </button>
               <div className="relative z-10 flex flex-col gap-2">
-                <div className="flex items-center gap-2 font-bold text-sm pr-4">
+                <div className="flex items-center gap-2 font-black text-sm pr-4">
                   <Zap className="w-4 h-4 flex-shrink-0" />
                   Go Premium
                 </div>
-                <p className="text-xs text-white/90 leading-tight">Get 3x more student leads and priority listing.</p>
-                <Link href="/pricing" className="mt-1 bg-white text-orange-600 py-1.5 px-3 rounded-lg text-xs font-bold w-full hover:bg-orange-50 transition-colors shadow-sm text-center flex items-center justify-center inline-block">
+                <p className="text-xs text-white/90 leading-tight font-medium">Get 3x more student leads and priority listing.</p>
+                <Link href="/pricing" className="mt-1 bg-[#1A1A24] text-white py-1.5 px-3 rounded-xl text-xs font-bold w-full hover:bg-[#2a2a38] transition-colors shadow-sm text-center flex items-center justify-center">
                   Upgrade Now
                 </Link>
               </div>
             </div>
           )}
 
-          <Link href="/student-dashboard" className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 font-semibold text-sm hover:bg-slate-50 transition-colors">
-            <User className="w-4 h-4" />
+          <Link href="/student-dashboard" className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-[#1A1A24]/15 bg-white/80 text-[#1A1A24] font-bold text-sm hover:bg-white hover:border-[#ff6200] transition-all">
+            <User className="w-4 h-4 text-[#ff6200]" />
             Switch to Student
           </Link>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0">
+      <main className="flex-1 flex flex-col min-w-0 overflow-x-hidden">
         {/* Header */}
-        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 z-30 sticky top-0">
+        <header 
+          className="h-16 border-b border-[#1A1A24]/10 flex items-center justify-between px-4 sm:px-6 z-30 sticky top-0 backdrop-blur-md"
+          style={{ background: "rgba(253, 244, 234, 0.85)" }}
+        >
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="p-2 -ml-2 text-slate-500 hover:bg-slate-100 rounded-lg lg:hidden"
+              className="p-2 -ml-2 text-[#1A1A24]/70 hover:bg-[#1A1A24]/5 rounded-lg lg:hidden"
             >
               <Menu className="w-5 h-5" />
             </button>
-            <div className="hidden sm:flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200 focus-within:border-indigo-300 focus-within:ring-1 focus-within:ring-indigo-300 transition-all">
-              <Search className="w-4 h-4 text-slate-400" />
+            <div className="hidden sm:flex items-center gap-2 bg-[#1A1A24]/5 px-3.5 py-2 rounded-xl border border-[#1A1A24]/10 focus-within:border-[#ff6200] focus-within:ring-2 focus-within:ring-[#ff6200]/20 transition-all">
+              <Search className="w-4 h-4 text-[#1A1A24]/40" />
               <input 
                 type="text"
                 placeholder="Search jobs, students..."
-                className="bg-transparent border-none focus:outline-none text-sm text-slate-700 w-48"
+                className="bg-transparent border-none focus:outline-none text-sm font-medium text-[#1A1A24] placeholder:text-[#1A1A24]/40 w-56"
               />
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <button className="relative p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors">
+            <button className="relative p-2 text-[#1A1A24]/70 hover:bg-[#1A1A24]/5 rounded-full transition-colors">
               <Bell className="w-5 h-5" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#ff6200] rounded-full border-2 border-[var(--bg-sidebar)] animate-coral-pulse"></span>
             </button>
-            <Link href="/teacher-dashboard/profile" className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-indigo-200 transition-all shadow-sm">
-              <span className="text-white text-xs font-bold">T</span>
+            <Link href="/teacher-dashboard/profile" className="w-9 h-9 rounded-full bg-[#4D148C] flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-[#ff6200] transition-all shadow">
+              <span className="text-[#ff6200] text-sm font-black">T</span>
             </Link>
           </div>
         </header>

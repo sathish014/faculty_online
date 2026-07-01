@@ -177,7 +177,7 @@ export default function RequestTutorModal({ isOpen, onClose }: RequestTutorModal
                 <button 
                   type="button"
                   onClick={handleVerifyCode}
-                  className="px-6 py-2.5 bg-indigo-600 text-white font-medium text-sm rounded-xl hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-600/20 whitespace-nowrap"
+                  className="px-6 py-2.5 bg-[#ff6200] text-white font-medium text-sm rounded-xl hover:bg-[#e55800] transition-colors shadow-sm shadow-[#ff6200]/20 whitespace-nowrap"
                 >
                   Submit
                 </button>
@@ -198,8 +198,8 @@ export default function RequestTutorModal({ isOpen, onClose }: RequestTutorModal
           <div className="md:col-span-2 pt-2">
             <button 
               type="submit"
-              className="w-full py-3.5 rounded-xl text-white font-semibold shadow-lg shadow-indigo-600/25 transition-transform hover:-translate-y-0.5 active:translate-y-0"
-              style={{ background: "linear-gradient(135deg, #4f46e5, #7c3aed)" }}
+              className="w-full py-3.5 rounded-xl text-white font-semibold shadow-lg shadow-[#ff6200]/25 transition-transform hover:-translate-y-0.5 active:translate-y-0"
+              style={{ background: "#ff6200" }}
             >
               Submit Request
             </button>

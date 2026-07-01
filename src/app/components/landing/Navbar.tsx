@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { GraduationCap, Menu, X, LogOut } from "lucide-react";
+import { BookOpen, Menu, X, LogOut, ArrowRight } from "lucide-react";
 import RequestTutorModal from "../ui/RequestTutorModal";
 
 export default function Navbar() {
@@ -21,7 +21,7 @@ export default function Navbar() {
       setIsLoggedIn(true);
       setUserRole(role);
     }
-    const handleScroll = () => setScrolled(window.scrollY > 8);
+    const handleScroll = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -46,53 +46,43 @@ export default function Navbar() {
       onClick: () => setRequestModalOpen(true),
       show: !isLoggedIn,
     },
-    {
-      label: "Find Jobs",
-      href: "/jobs",
-      show: true,
-    },
+    { label: "Find Jobs", href: "/jobs", show: true },
     { label: "Resources", href: "/resources", show: true },
   ].filter((l) => l.show);
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300"
-        style={{
-          borderBottom: "1px solid #e8eaf0",
-          boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.07)" : "none",
-        }}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 navbar-blur border-b border-white/15"
+        style={{ background: "#4D148C" }}
       >
         <div className="container-xl">
           <div className="flex items-center justify-between h-16">
+
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-sm">
-                <GraduationCap className="w-4.5 h-4.5 text-white" style={{ width: "18px", height: "18px" }} />
+            <Link href="/" className="flex items-center gap-3 group">
+              <div
+                className="w-8 h-8 flex items-center justify-center relative border border-white/30 rounded-md"
+              >
+                <BookOpen className="w-4 h-4 text-[#ff6200]" />
               </div>
-              <span className="font-heading text-base font-bold text-slate-900">
-                Faculties{" "}
-                <span
-                  style={{
-                    background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Online
-                </span>
+              <span
+                className="text-[15px] font-bold tracking-tight text-[#FFFFFF]"
+              >
+                Faculties
+                <span className="text-[#ff6200]">.</span>
+                <span className="text-white/75 font-normal">Online</span>
               </span>
             </Link>
 
             {/* Center Nav */}
-            <nav className="hidden lg:flex items-center gap-0.5">
-              {navLinks.map((link) => (
+            <nav className="hidden lg:flex items-center gap-1">
+              {navLinks.map((link) =>
                 link.onClick ? (
                   <button
                     key={link.label}
                     onClick={link.onClick}
-                    className="relative px-4 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all duration-200"
+                    className="px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 text-white/80 hover:text-white hover:bg-white/10"
                   >
                     {link.label}
                   </button>
@@ -100,27 +90,27 @@ export default function Navbar() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="relative px-4 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all duration-200"
+                    className="px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 text-white/80 hover:text-white hover:bg-white/10"
                   >
                     {link.label}
                   </Link>
                 )
-              ))}
+              )}
             </nav>
 
             {/* Right Actions */}
-            <div className="hidden lg:flex items-center gap-2.5">
+            <div className="hidden lg:flex items-center gap-3">
               {isMounted && isLoggedIn ? (
                 <>
                   <Link
                     href={userRole === "tutor" ? "/teacher-dashboard" : "/student-dashboard"}
-                    className="px-4 py-2 text-sm font-semibold text-indigo-600 rounded-lg border border-indigo-200 hover:bg-indigo-50 transition-all"
+                    className="px-4 py-2 text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10 transition-all"
                   >
                     Dashboard
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="p-2 rounded-lg border border-slate-200 text-slate-500 hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-all"
+                    className="p-2 rounded-md transition-all text-white/80 hover:text-white border border-white/20 hover:bg-white/10"
                     title="Logout"
                   >
                     <LogOut className="w-4 h-4" />
@@ -131,20 +121,17 @@ export default function Navbar() {
                   <Link
                     href="/login"
                     id="navbar-login-btn"
-                    className="px-5 py-2 text-sm font-semibold text-slate-700 rounded-lg hover:bg-slate-50 transition-all"
+                    className="px-4 py-2 text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10 transition-all"
                   >
                     Login
                   </Link>
                   <Link
                     href="/register"
                     id="navbar-signup-btn"
-                    className="px-5 py-2 text-sm font-semibold text-white rounded-lg transition-all hover:-translate-y-0.5"
-                    style={{
-                      background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
-                      boxShadow: "0 4px 12px rgba(79,70,229,0.35)",
-                    }}
+                    className="px-5 py-2 text-sm font-bold btn-coral rounded-md flex items-center gap-2"
                   >
-                    Sign Up
+                    Get Started
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </>
               )}
@@ -154,7 +141,7 @@ export default function Navbar() {
             <button
               id="navbar-mobile-toggle"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
+              className="lg:hidden p-2 rounded-md transition-colors text-white/90 border border-white/20 hover:bg-white/10"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -170,43 +157,52 @@ export default function Navbar() {
         }`}
       >
         <div
-          className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+          className="absolute inset-0"
+          style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)" }}
           onClick={() => setMobileOpen(false)}
         />
         <div
-          className={`absolute top-0 right-0 h-full w-72 bg-white shadow-2xl transform transition-transform duration-300 ${
+          className={`absolute top-0 right-0 h-full w-72 transform transition-transform duration-300 ${
             mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
+          style={{
+            background: "#4D148C",
+            borderLeft: "1px solid rgba(255,255,255,0.15)",
+            color: "#FFFFFF"
+          }}
         >
           <div className="flex flex-col h-full">
-            <div className="flex items-center justify-between p-5 border-b border-slate-100">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
-                  <GraduationCap className="w-4 h-4 text-white" />
+            {/* Header */}
+            <div
+              className="flex items-center justify-between p-5 border-b border-white/15"
+            >
+              <div className="flex items-center gap-2.5">
+                <div
+                  className="w-7 h-7 flex items-center justify-center border border-white/30 rounded-[5px]"
+                >
+                  <BookOpen className="w-3.5 h-3.5 text-[#ff6200]" />
                 </div>
-                <span className="font-heading font-bold text-slate-900 text-sm">
-                  Faculties{" "}
-                  <span className="gradient-text">Online</span>
+                <span className="font-bold text-sm text-[#FFFFFF]">
+                  Faculties<span className="text-[#ff6200]">.</span>
+                  <span className="text-white/75 font-normal">Online</span>
                 </span>
               </div>
               <button
                 onClick={() => setMobileOpen(false)}
-                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500"
+                className="p-1.5 rounded-md text-white/70 hover:text-white hover:bg-white/10"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
+            {/* Nav Links */}
             <nav className="flex flex-col gap-1 p-4 flex-1">
-              {navLinks.map((link) => (
+              {navLinks.map((link) =>
                 link.onClick ? (
                   <button
                     key={link.label}
-                    onClick={() => {
-                      setMobileOpen(false);
-                      link.onClick();
-                    }}
-                    className="px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors text-left"
+                    onClick={() => { setMobileOpen(false); link.onClick(); }}
+                    className="px-4 py-2.5 text-sm font-medium text-left rounded-md transition-colors text-white/85 hover:text-white hover:bg-white/10"
                   >
                     {link.label}
                   </button>
@@ -215,27 +211,27 @@ export default function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                    className="px-4 py-2.5 text-sm font-medium rounded-md transition-colors text-white/85 hover:text-white hover:bg-white/10"
                   >
                     {link.label}
                   </Link>
                 )
-              ))}
+              )}
             </nav>
 
-            <div className="p-4 border-t border-slate-100 flex flex-col gap-2">
+            {/* Bottom CTA */}
+            <div className="p-4 flex flex-col gap-2 border-t border-white/15">
               {isMounted && isLoggedIn ? (
                 <>
                   <Link
                     href={userRole === "tutor" ? "/teacher-dashboard" : "/student-dashboard"}
-                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-lg text-white"
-                    style={{ background: "linear-gradient(135deg, #4f46e5, #7c3aed)" }}
+                    className="px-5 py-2.5 text-center text-sm font-bold btn-coral rounded-md"
                   >
                     Dashboard
                   </Link>
                   <button
                     onClick={() => { handleLogout(); setMobileOpen(false); }}
-                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-lg border border-red-200 text-red-600 hover:bg-red-50"
+                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10"
                   >
                     Logout
                   </button>
@@ -243,17 +239,16 @@ export default function Navbar() {
               ) : (
                 <>
                   <Link
-                    href="/login"
-                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50"
+                    href="/register"
+                    className="px-5 py-2.5 text-center text-sm font-bold btn-coral rounded-md"
                   >
-                    Login
+                    Get Started
                   </Link>
                   <Link
-                    href="/register"
-                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-lg text-white"
-                    style={{ background: "linear-gradient(135deg, #4f46e5, #7c3aed)" }}
+                    href="/login"
+                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10"
                   >
-                    Sign Up
+                    Login
                   </Link>
                 </>
               )}
@@ -262,9 +257,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      <RequestTutorModal 
-        isOpen={requestModalOpen} 
-        onClose={() => setRequestModalOpen(false)} 
+      <RequestTutorModal
+        isOpen={requestModalOpen}
+        onClose={() => setRequestModalOpen(false)}
       />
     </>
   );

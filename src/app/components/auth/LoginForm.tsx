@@ -73,14 +73,14 @@ export default function LoginForm() {
     <div className="w-full">
       {/* Role Toggle */}
       <div className="mb-6">
-        <p className="text-sm font-semibold text-slate-700 mb-3 text-center">Sign in as</p>
-        <div className="relative flex bg-slate-100 rounded-2xl p-1">
+        <p className="text-sm font-bold text-[#1A1A24] mb-3 text-center">Sign in as</p>
+        <div className="relative flex bg-[#1A1A24]/5 border border-[#1A1A24]/10 rounded-2xl p-1">
           {/* Sliding indicator */}
           <div
             className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-xl shadow-md transition-all duration-300 ease-in-out
               ${selectedRole === 'tutor'
-                ? 'left-1 bg-gradient-to-r from-indigo-500 to-blue-600'
-                : 'left-[calc(50%+2px)] bg-gradient-to-r from-violet-500 to-purple-600'
+                ? 'left-1 bg-[#4D148C]'
+                : 'left-[calc(50%+2px)] bg-[#ff6200]'
               }`}
           />
           {roles.map((role) => {
@@ -91,8 +91,8 @@ export default function LoginForm() {
                 key={role.value}
                 type="button"
                 onClick={() => setSelectedRole(role.value)}
-                className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl font-semibold text-sm transition-colors duration-200
-                  ${isActive ? 'text-white' : 'text-slate-500 hover:text-slate-700'}`}
+                className={`relative z-10 flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl font-bold text-sm transition-colors duration-200
+                  ${isActive ? 'text-white' : 'text-[#1A1A24]/65 hover:text-[#1A1A24]'}`}
               >
                 <Icon className="w-4 h-4" />
                 {role.label}
@@ -105,18 +105,18 @@ export default function LoginForm() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Email */}
         <div className="space-y-1.5">
-          <label htmlFor="login-email" className="block text-sm font-semibold text-slate-700">
+          <label htmlFor="login-email" className="block text-sm font-bold text-[#1A1A24]">
             Email Address
           </label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#1A1A24]/40" />
             <input
               id="login-email"
               type="email"
               placeholder="name@example.com"
               {...register('email')}
-              className={`w-full pl-10 pr-4 py-2.5 rounded-xl border bg-white text-slate-900 text-sm transition-all outline-none focus:ring-2 placeholder:text-slate-400
-                ${errors.email ? 'border-red-400 focus:ring-red-200' : 'border-slate-200 focus:ring-indigo-200 focus:border-indigo-400'}`}
+              className={`w-full pl-10 pr-4 py-2.5 rounded-xl border bg-white/80 text-[#1A1A24] text-sm transition-all outline-none focus:ring-2 placeholder:text-[#1A1A24]/40
+                ${errors.email ? 'border-red-400 focus:ring-red-200' : 'border-[#1A1A24]/15 focus:ring-[#ff6200]/20 focus:border-[#ff6200]'}`}
             />
           </div>
           {errors.email && <p className="text-xs text-red-500 font-medium">{errors.email.message}</p>}
@@ -125,27 +125,27 @@ export default function LoginForm() {
         {/* Password */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between">
-            <label htmlFor="login-password" className="block text-sm font-semibold text-slate-700">
+            <label htmlFor="login-password" className="block text-sm font-bold text-[#1A1A24]">
               Password
             </label>
-            <Link href="/forgot-password" className="text-xs font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
+            <Link href="/forgot-password" className="text-xs font-bold text-[#ff6200] hover:text-[#e55800] transition-colors">
               Forgot password?
             </Link>
           </div>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#1A1A24]/40" />
             <input
               id="login-password"
               type={showPassword ? 'text' : 'password'}
               placeholder="••••••••"
               {...register('password')}
-              className={`w-full pl-10 pr-10 py-2.5 rounded-xl border bg-white text-slate-900 text-sm transition-all outline-none focus:ring-2 placeholder:text-slate-400
-                ${errors.password ? 'border-red-400 focus:ring-red-200' : 'border-slate-200 focus:ring-indigo-200 focus:border-indigo-400'}`}
+              className={`w-full pl-10 pr-10 py-2.5 rounded-xl border bg-white/80 text-[#1A1A24] text-sm transition-all outline-none focus:ring-2 placeholder:text-[#1A1A24]/40
+                ${errors.password ? 'border-red-400 focus:ring-red-200' : 'border-[#1A1A24]/15 focus:ring-[#ff6200]/20 focus:border-[#ff6200]'}`}
             />
             <button
               type="button"
               onClick={() => setShowPassword((s) => !s)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#1A1A24]/40 hover:text-[#1A1A24] transition-colors"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -162,7 +162,7 @@ export default function LoginForm() {
             id="rememberMe"
             onClick={() => setValue('rememberMe', !rememberMe)}
             className={`w-4 h-4 rounded flex items-center justify-center border-2 transition-all
-              ${rememberMe ? 'bg-indigo-600 border-indigo-600' : 'bg-white border-slate-300 hover:border-indigo-400'}`}
+              ${rememberMe ? 'bg-[#ff6200] border-[#ff6200]' : 'bg-white border-[#1A1A24]/30 hover:border-[#ff6200]'}`}
           >
             {rememberMe && (
               <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
@@ -170,7 +170,7 @@ export default function LoginForm() {
               </svg>
             )}
           </button>
-          <label htmlFor="rememberMe" className="text-sm text-slate-600 cursor-pointer select-none" onClick={() => setValue('rememberMe', !rememberMe)}>
+          <label htmlFor="rememberMe" className="text-sm font-medium text-[#1A1A24]/80 cursor-pointer select-none" onClick={() => setValue('rememberMe', !rememberMe)}>
             Remember me
           </label>
         </div>
@@ -179,11 +179,7 @@ export default function LoginForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full py-3 px-6 rounded-xl font-bold text-sm text-white transition-all duration-200 shadow-lg active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed
-            ${selectedRole === 'tutor'
-              ? 'bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 shadow-indigo-200'
-              : 'bg-gradient-to-r from-violet-500 to-purple-600 hover:from-violet-600 hover:to-purple-700 shadow-violet-200'
-            }`}
+          className="w-full py-3 px-6 rounded-xl font-bold text-sm text-white bg-[#ff6200] hover:bg-[#e55800] transition-all duration-200 shadow-lg shadow-[#ff6200]/20 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <span className="flex items-center justify-center gap-2">
@@ -203,10 +199,10 @@ export default function LoginForm() {
       <div className="mt-6">
         <div className="relative mb-4">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-slate-200" />
+            <div className="w-full border-t border-[#1A1A24]/15" />
           </div>
           <div className="relative flex justify-center">
-            <span className="bg-white px-3 text-xs font-medium text-slate-400 uppercase tracking-wider">
+            <span className="bg-[#fdf8f2] px-3 text-xs font-bold text-[#1A1A24]/50 uppercase tracking-wider">
               Or continue with
             </span>
           </div>
@@ -215,7 +211,7 @@ export default function LoginForm() {
         <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
-            className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-all text-sm font-semibold text-slate-700 shadow-sm hover:shadow-md"
+            className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-[#1A1A24]/15 bg-white/80 hover:bg-white transition-all text-sm font-bold text-[#1A1A24] shadow-sm hover:shadow-md hover:border-[#ff6200]/40"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path fill="#EA4335" d="M5.266 9.765A7.077 7.077 0 0 1 12 4.909c1.69 0 3.218.6 4.418 1.582L19.91 3C17.782 1.145 15.055 0 12 0 7.27 0 3.198 2.698 1.24 6.65l4.026 3.115Z"/>
@@ -227,7 +223,7 @@ export default function LoginForm() {
           </button>
           <button
             type="button"
-            className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition-all text-sm font-semibold text-slate-700 shadow-sm hover:shadow-md"
+            className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-[#1A1A24]/15 bg-white/80 hover:bg-white transition-all text-sm font-bold text-[#1A1A24] shadow-sm hover:shadow-md hover:border-[#ff6200]/40"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="#00A4EF">
               <path d="M0 0h11.5v11.5H0zm12.5 0H24v11.5H12.5zM0 12.5h11.5V24H0zm12.5 0H24V24H12.5z"/>
@@ -237,9 +233,9 @@ export default function LoginForm() {
         </div>
       </div>
 
-      <p className="mt-6 text-center text-sm text-slate-500">
+      <p className="mt-6 text-center text-sm font-medium text-[#1A1A24]/70">
         Don&apos;t have an account?{' '}
-        <Link href="/register" className="font-bold text-indigo-600 hover:text-indigo-500 transition-colors">
+        <Link href="/register" className="font-bold text-[#ff6200] hover:text-[#e55800] transition-colors">
           Create account
         </Link>
       </p>
