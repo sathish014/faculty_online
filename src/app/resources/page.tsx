@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/landing/Navbar";
 import Footer from "../components/landing/Footer";
-import { FileText, Folder, Video, Link2, Clock, Eye, ShoppingCart, Search } from "lucide-react";
+import { FileText, Folder, Video, Link2, Clock, Eye, ShoppingCart, Search, BookOpen } from "lucide-react";
 
 export default function ResourcesPage() {
   const resources = [
@@ -59,7 +59,8 @@ export default function ResourcesPage() {
       date: "Mar 4, 2025",
       price: "39.99",
       postedBy: "Sahil Laskar",
-    }, {
+    },
+    {
       type: "Video",
       typeIcon: <Video className="w-3.5 h-3.5" />,
       category: "Physics",
@@ -73,55 +74,54 @@ export default function ResourcesPage() {
   ];
 
   return (
-    <main className="min-h-screen flex flex-col bg-slate-50">
+    <main className="min-h-screen flex flex-col bg-[#fff9f0]">
       <Navbar />
+      
       {/* Hero Section */}
-      <div
-        className="relative pt-32 pb-24 px-4 flex flex-col items-center justify-center bg-slate-900"
-        style={{
-          backgroundImage: "linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
-          Learning Resources
-        </h1>
-        <p className="text-lg text-white/90 max-w-2xl text-center">
-          Discover high-quality educational materials to enhance your learning journey
-        </p>
+      <div className="relative pt-36 pb-16 px-4 bg-gradient-to-b from-[#fdf4ea] to-[#fff9f0] border-b border-[#1A1A24]/5">
+        <div className="max-w-7xl mx-auto text-center space-y-4 animate-fade-up">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-[#4D148C]/15 text-[#4D148C] border border-[#4D148C]/30 uppercase tracking-wider">
+            <BookOpen className="w-3.5 h-3.5" /> Study & Teaching Library
+          </span>
+          <h1 className="text-4xl md:text-5xl font-black text-[#1A1A24] tracking-tight">
+            Learning <span className="text-[#ff6200]">Resources</span>
+          </h1>
+          <p className="text-base md:text-lg font-medium text-[#1A1A24]/70 max-w-2xl mx-auto">
+            Discover curated assignments, video courses, and interactive study labs posted by expert faculty.
+          </p>
+        </div>
       </div>
 
-      <div className="flex-grow container-xl max-w-7xl mx-auto w-full px-4 pt-10 pb-24">
+      <div className="flex-grow max-w-7xl mx-auto w-full px-4 pt-8 pb-24">
 
         {/* Search Input */}
-        <div className="flex justify-center mb-8 mt-8">
-          <div className="flex items-center w-full max-w-2xl bg-white border border-slate-200 rounded-xl px-4 py-3 shadow-sm">
-            <Search className="w-5 h-5 text-slate-400 mr-3 flex-shrink-0" />
+        <div className="flex justify-center mb-8">
+          <div className="flex items-center w-full max-w-2xl bg-white/80 border border-[#1A1A24]/10 rounded-2xl px-4 py-3 shadow-sm focus-within:border-[#ff6200] focus-within:ring-2 focus-within:ring-[#ff6200]/20 transition-all">
+            <Search className="w-5 h-5 text-[#1A1A24]/40 mr-3 flex-shrink-0" />
             <input
               type="text"
-              placeholder="Search resources..."
-              className="w-full focus:outline-none text-sm text-slate-700 bg-transparent"
+              placeholder="Search study materials, subjects, or keywords..."
+              className="w-full focus:outline-none text-sm font-medium text-[#1A1A24] bg-transparent"
             />
           </div>
         </div>
 
         {/* Filters Bar */}
-        <div className="bg-white border border-slate-200 rounded-xl p-4 md:p-6 shadow-sm mb-12 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-white/80 border border-[#1A1A24]/10 rounded-3xl p-5 shadow-sm mb-12 flex flex-col md:flex-row items-center justify-between gap-6 animate-fade-up">
 
           <div className="flex items-center gap-4 w-full md:w-auto">
-            <span className="font-bold text-[#c25c0e] text-sm whitespace-nowrap">Price Range:</span>
-            <div className="flex items-center gap-3">
-              <input type="text" placeholder="Min Price" className="w-24 px-3 py-2.5 border border-[#f3da90] bg-slate-50/30 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#c25c0e] text-slate-600" />
-              <span className="text-[#c25c0e] font-medium">-</span>
-              <input type="text" placeholder="Max Price" className="w-24 px-3 py-2.5 border border-[#f3da90] bg-slate-50/30 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#c25c0e] text-slate-600" />
+            <span className="font-extrabold text-[#1A1A24] text-xs uppercase tracking-wider whitespace-nowrap">Price Range:</span>
+            <div className="flex items-center gap-2">
+              <input type="text" placeholder="Min ₹" className="w-24 px-3 py-2 border border-[#1A1A24]/15 bg-[#1A1A24]/5 rounded-xl text-sm font-bold focus:outline-none focus:border-[#ff6200] text-[#1A1A24]" />
+              <span className="text-[#1A1A24]/40 font-bold">-</span>
+              <input type="text" placeholder="Max ₹" className="w-24 px-3 py-2 border border-[#1A1A24]/15 bg-[#1A1A24]/5 rounded-xl text-sm font-bold focus:outline-none focus:border-[#ff6200] text-[#1A1A24]" />
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center gap-6 w-full md:w-auto">
-            <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
-              <span className="font-bold text-[#c25c0e] text-sm">Category:</span>
-              <select className="px-4 py-2.5 border border-[#c25c0e] bg-white text-[#c25c0e] rounded-lg text-sm font-medium focus:outline-none w-40 cursor-pointer">
+          <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
+            <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
+              <span className="font-extrabold text-[#1A1A24] text-xs uppercase tracking-wider">Category:</span>
+              <select className="px-4 py-2.5 border border-[#1A1A24]/15 bg-white text-[#1A1A24] rounded-xl text-sm font-bold focus:outline-none focus:border-[#ff6200] w-44 cursor-pointer">
                 <option>All Resources</option>
                 <option>Mathematics</option>
                 <option>Physics</option>
@@ -129,10 +129,10 @@ export default function ResourcesPage() {
               </select>
             </div>
 
-            <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start">
-              <span className="font-bold text-[#c25c0e] text-sm whitespace-nowrap">Price Range:</span>
-              <select className="px-4 py-2.5 border border-[#c25c0e] bg-white text-[#c25c0e] rounded-lg text-sm font-medium focus:outline-none w-40 cursor-pointer">
-                <option>All Prices</option>
+            <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
+              <span className="font-extrabold text-[#1A1A24] text-xs uppercase tracking-wider">Type:</span>
+              <select className="px-4 py-2.5 border border-[#1A1A24]/15 bg-white text-[#1A1A24] rounded-xl text-sm font-bold focus:outline-none focus:border-[#ff6200] w-36 cursor-pointer">
+                <option>All Types</option>
                 <option>Free</option>
                 <option>Paid</option>
               </select>
@@ -141,55 +141,60 @@ export default function ResourcesPage() {
 
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mb-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-black text-[#1A1A24] tracking-tight">Available Resources</h2>
+          <span className="text-sm font-bold text-[#1A1A24]/60">{resources.length} study materials</span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mb-8">
           {resources.map((resource, index) => (
-            <div key={index} className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 text-left hover:shadow-md transition-shadow flex flex-col h-full">
+            <div key={index} className="card-minimal bg-white/80 p-6 rounded-3xl border border-[#1A1A24]/10 hover:border-[#4D148C]/40 hover:shadow-lg transition-all flex flex-col h-full group">
 
               {/* Tags */}
-              <div className="flex items-center gap-3 mb-4">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-xs font-semibold">
+              <div className="flex items-center gap-2.5 mb-4">
+                <span className="flex items-center gap-1.5 px-3 py-1 bg-[#4D148C]/10 text-[#4D148C] rounded-xl text-xs font-extrabold">
                   {resource.typeIcon}
                   <span>{resource.type}</span>
-                </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 text-blue-600 rounded-lg text-xs font-semibold">
+                </span>
+                <span className="flex items-center gap-1.5 px-3 py-1 bg-[#ff6200]/10 text-[#ff6200] rounded-xl text-xs font-extrabold">
                   {resource.categoryIcon}
                   <span>{resource.category}</span>
-                </div>
+                </span>
               </div>
 
               {/* Title & Description */}
-              <h3 className="text-lg font-bold text-slate-900 mb-2">{resource.title}</h3>
-              <p className="text-sm text-slate-500 mb-5 leading-relaxed line-clamp-2">
+              <h3 className="text-lg font-extrabold text-[#1A1A24] mb-2 group-hover:text-[#ff6200] transition-colors">{resource.title}</h3>
+              <p className="text-sm font-medium text-[#1A1A24]/70 mb-6 leading-relaxed line-clamp-2">
                 {resource.description}
               </p>
 
-              <div className="mt-auto">
+              <div className="mt-auto pt-4 border-t border-[#1A1A24]/10">
                 {/* Date Pill */}
-                <div className="flex items-center gap-2 px-3 py-2 bg-slate-50 rounded-xl text-xs font-medium text-slate-600 mb-4 w-full">
-                  <Clock className="w-4 h-4 text-blue-600" />
-                  {resource.date}
+                <div className="flex items-center gap-2 text-xs font-bold text-[#1A1A24]/50 mb-4">
+                  <Clock className="w-3.5 h-3.5 text-[#ff6200]" />
+                  Uploaded on {resource.date}
                 </div>
 
                 {/* Bottom Row 1: Price and Buttons */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="text-emerald-500 font-bold px-2 py-1 bg-emerald-50 rounded-lg text-sm">
-                    Rs {resource.price}
+                <div className="flex items-center justify-between mb-3">
+                  <div className="font-black text-lg text-[#1A1A24] bg-[#fdf4ea] px-3 py-1 rounded-xl border border-[#1A1A24]/5">
+                    ₹{resource.price}
                   </div>
                   <div className="flex items-center gap-2">
-                    <button className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50 transition-colors">
-                      <Eye className="w-4 h-4" />
+                    <button className="flex items-center gap-1.5 px-3 py-2 bg-[#1A1A24]/5 text-[#1A1A24] rounded-xl text-xs font-bold hover:bg-[#1A1A24]/10 transition-colors">
+                      <Eye className="w-3.5 h-3.5" />
                       Preview
                     </button>
-                    <button className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
-                      <ShoppingCart className="w-4 h-4" />
-                      Purchase
+                    <button className="flex items-center gap-1.5 px-3.5 py-2 btn-coral rounded-xl text-xs font-bold transition-all shadow-sm active:scale-95">
+                      <ShoppingCart className="w-3.5 h-3.5" />
+                      Buy
                     </button>
                   </div>
                 </div>
 
                 {/* Bottom Row 2: Posted By */}
-                <div className="text-right text-xs font-bold text-slate-800">
-                  Posted By:- {resource.postedBy}
+                <div className="text-right text-xs font-extrabold text-[#1A1A24]/70">
+                  By <span className="text-[#4D148C]">{resource.postedBy}</span>
                 </div>
               </div>
 
@@ -201,3 +206,4 @@ export default function ResourcesPage() {
     </main>
   );
 }
+
