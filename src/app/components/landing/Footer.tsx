@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Globe, Mail } from "lucide-react";
+import { BookOpen, Globe, Mail, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 const footerLinks = {
@@ -31,6 +31,18 @@ const footerLinks = {
   ],
 };
 
+const linkCols = [
+  { title: "Company", links: footerLinks.company },
+  { title: "For Tutors", links: footerLinks.tutors },
+  { title: "For Students", links: footerLinks.students },
+  { title: "Support", links: footerLinks.support },
+];
+
+const socialLinks = [
+  { icon: Globe, label: "Website", id: "footer-social-globe", href: "#" },
+  { icon: Mail, label: "Email", id: "footer-social-email", href: "mailto:hello@facultiesonline.com" },
+];
+
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
@@ -44,284 +56,265 @@ export default function Footer() {
   };
 
   return (
-    <footer
-      id="footer"
-      style={{ background: "#161b2e" }} className="pb-7 pt-6"
-    >
-      {/* ── NEWSLETTER CARD ── */}
-      <div className="container-xl pt-14 pb-2">
+    <footer id="footer" style={{ background: "var(--bg-secondary)" }}>
+
+      {/* Top divider */}
+      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(26,26,36,0.12), transparent)" }} />
+
+      {/* ── NEWSLETTER STRIP ── */}
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "3rem 2rem" }}>
         <div
-          className="relative mt-10 rounded-2xl p-8 md:p-10 mb-8"
           style={{
-            background: "linear-gradient(135deg, #4f46e5 0%, #6d28d9 100%)",
+            background: "var(--bg-sidebar)",
+            border: "1px solid rgba(26,26,36,0.08)",
+            borderRadius: "16px",
+            padding: "2.5rem",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "1.5rem",
           }}
         >
-          {/* Subtle decorative circles */}
-          <div
-            className="absolute -top-12 -right-12 w-48 h-48 rounded-full pointer-events-none"
-            style={{ background: "rgba(255,255,255,0.06)" }}
-          />
-          <div
-            className="absolute -bottom-8 right-32 w-32 h-32 rounded-full pointer-events-none"
-            style={{ background: "rgba(255,255,255,0.04)" }}
-          />
+          <div>
+            <h3 style={{ color: "#1A1A24", fontWeight: 700, fontSize: "1.125rem", margin: "0 0 4px 0" }}>
+              Stay sharp.
+            </h3>
+            <p style={{ color: "rgba(26,26,36,0.55)", fontSize: "0.875rem", margin: 0 }}>
+              Tutor tips, student resources & platform updates — weekly.
+            </p>
+          </div>
 
-          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
-            {/* Left text */}
-            <div>
-              <h3 className="font-heading font-bold text-white text-2xl md:text-3xl mb-2 leading-snug">
-                Stay Ahead with Our Newsletter
-              </h3>
-              <p className="text-white/65 text-sm leading-relaxed max-w-sm">
-                Get expert tutor tips, student resources, and platform updates every week.
-              </p>
-            </div>
-
-            {/* Right form */}
-            <div className="flex-shrink-0 w-full md:w-auto">
-              {subscribed ? (
-                <div
-                  className="flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold"
+          <div style={{ flexShrink: 0 }}>
+            {subscribed ? (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  padding: "10px 20px",
+                  borderRadius: "12px",
+                  fontSize: "0.875rem",
+                  fontWeight: 600,
+                  background: "rgba(255,98,0,0.1)",
+                  border: "1px solid rgba(255,98,0,0.3)",
+                  color: "#ff6200",
+                }}
+              >
+                ✓ Subscribed! Check your inbox.
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} style={{ display: "flex", gap: "8px" }}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  id="footer-newsletter-email"
+                  suppressHydrationWarning
                   style={{
-                    background: "rgba(255,255,255,0.15)",
-                    color: "#fff",
-                    border: "1px solid rgba(255,255,255,0.3)",
+                    background: "rgba(26,26,36,0.05)",
+                    border: "1px solid rgba(26,26,36,0.15)",
+                    color: "#1A1A24",
+                    borderRadius: "12px",
+                    padding: "10px 16px",
+                    fontSize: "0.875rem",
+                    width: "220px",
+                    outline: "none",
+                  }}
+                />
+                <button
+                  type="submit"
+                  id="footer-newsletter-submit"
+                  suppressHydrationWarning
+                  style={{
+                    background: "#ff6200",
+                    color: "#FFFFFF",
+                    fontWeight: 700,
+                    borderRadius: "12px",
+                    padding: "10px 20px",
+                    fontSize: "0.875rem",
+                    border: "none",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  ✓ Subscribed! Check your inbox.
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe}>
-                  <div className="flex items-stretch gap-3">
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email"
-                      id="footer-newsletter-email"
-                      className="flex-1 md:w-64 px-4 py-3.5 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-white/40 transition-all"
-                      style={{
-                        background: "#fff",
-                        border: "none",
-                      }}
-                      suppressHydrationWarning
-                    />
-                    <button
-                      type="submit"
-                      id="footer-newsletter-submit"
-                      className="px-6 py-3.5 rounded-xl font-semibold text-slate-800 text-sm whitespace-nowrap transition-all hover:bg-slate-100 active:scale-95"
-                      style={{
-                        background: "#fff",
-                        border: "none",
-                      }}
-                      suppressHydrationWarning
-                    >
-                      Subscribe
-                    </button>
-                  </div>
-                  <p className="text-white/45 text-xs mt-2.5">
-                    No spam, only valuable learning insights.
-                  </p>
-                </form>
-              )}
-            </div>
+                  Subscribe
+                  <ArrowRight style={{ width: "14px", height: "14px" }} />
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
 
-      {/* ── MAIN FOOTER LINKS ── */}
-      <div className="container-xl py-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-6">
+      {/* ── MAIN LINK COLUMNS ── */}
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 2rem 3rem" }}>
+        {/* Thin divider */}
+        <div style={{ height: "1px", background: "rgba(26,26,36,0.07)", marginBottom: "3rem" }} />
 
-          {/* Brand Column */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+          {/* Brand column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
-            <Link href="/" className="inline-block mb-4">
-              <span
-                className="font-heading font-bold text-white text-xl"
+            <Link
+              href="/"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "10px",
+                marginBottom: "20px",
+                textDecoration: "none",
+              }}
+            >
+              <div
+                style={{
+                  width: "28px",
+                  height: "28px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  border: "1px solid rgba(255,107,53,0.4)",
+                  borderRadius: "5px",
+                }}
               >
-                Faculties Online
+                <BookOpen style={{ width: "14px", height: "14px", color: "#ff6200" }} />
+              </div>
+              <span style={{ fontWeight: 700, fontSize: "0.875rem", color: "#1A1A24" }}>
+                Faculties<span style={{ color: "#ff6200" }}>.</span>
+                <span style={{ color: "rgba(26,26,36,0.6)" }}>Online</span>
               </span>
             </Link>
-
-            <p className="text-white/45 text-sm leading-relaxed mb-7">
-              Connecting passionate learners with expert educators across India.
-              Online, offline, and home tuition — all in one platform.
+            <p
+              style={{
+                color: "rgba(26,26,36,0.5)",
+                fontSize: "0.875rem",
+                lineHeight: 1.7,
+                marginBottom: "24px",
+              }}
+            >
+              Connecting learners with expert educators across India. Online, offline, and home tuition.
             </p>
-
-            {/* Social Icons */}
-            <div className="flex items-center gap-3">
-              <a
-                href="#"
-                aria-label="Website"
-                id="footer-social-globe"
-                className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-white/15"
-                style={{
-                  background: "rgba(255,255,255,0.08)",
-                  color: "rgba(255,255,255,0.5)",
-                }}
-              >
-                <Globe className="w-4 h-4" />
-              </a>
-              <a
-                href="mailto:hello@facultiesonline.com"
-                aria-label="Email"
-                id="footer-social-email"
-                className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 hover:bg-white/15"
-                style={{
-                  background: "rgba(255,255,255,0.08)",
-                  color: "rgba(255,255,255,0.5)",
-                }}
-              >
-                <Mail className="w-4 h-4" />
-              </a>
+            <div style={{ display: "flex", gap: "8px" }}>
+              {socialLinks.map(({ icon: Icon, label, id, href }) => (
+                <a
+                  key={id}
+                  href={href}
+                  aria-label={label}
+                  id={id}
+                  style={{
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "8px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "rgba(26,26,36,0.05)",
+                    border: "1px solid rgba(26,26,36,0.1)",
+                    color: "rgba(26,26,36,0.5)",
+                    transition: "all 0.2s ease",
+                    textDecoration: "none",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(255,98,0,0.4)";
+                    e.currentTarget.style.color = "#ff6200";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(26,26,36,0.1)";
+                    e.currentTarget.style.color = "rgba(26,26,36,0.5)";
+                  }}
+                >
+                  <Icon style={{ width: "14px", height: "14px" }} />
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Company */}
-          <div>
-            <h4
-              className="text-xs font-bold uppercase tracking-widest mb-5"
-              style={{ color: "rgba(255,255,255,0.9)", letterSpacing: "0.1em" }}
-            >
-              Company
-            </h4>
-            <ul className="space-y-3.5">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm transition-colors"
-                    style={{ color: "rgba(255,255,255,0.45)" }}
-                    onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.85)")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)")
-                    }
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* For Tutors */}
-          <div>
-            <h4
-              className="text-xs font-bold uppercase tracking-widest mb-5"
-              style={{ color: "rgba(255,255,255,0.9)", letterSpacing: "0.1em" }}
-            >
-              For Tutors
-            </h4>
-            <ul className="space-y-3.5">
-              {footerLinks.tutors.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm transition-colors"
-                    style={{ color: "rgba(255,255,255,0.45)" }}
-                    onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.85)")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)")
-                    }
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* For Students */}
-          <div>
-            <h4
-              className="text-xs font-bold uppercase tracking-widest mb-5"
-              style={{ color: "rgba(255,255,255,0.9)", letterSpacing: "0.1em" }}
-            >
-              For Students
-            </h4>
-            <ul className="space-y-3.5">
-              {footerLinks.students.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm transition-colors"
-                    style={{ color: "rgba(255,255,255,0.45)" }}
-                    onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.85)")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)")
-                    }
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div>
-            <h4
-              className="text-xs font-bold uppercase tracking-widest mb-5"
-              style={{ color: "rgba(255,255,255,0.9)", letterSpacing: "0.1em" }}
-            >
-              Support
-            </h4>
-            <ul className="space-y-3.5">
-              {footerLinks.support.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm transition-colors"
-                    style={{ color: "rgba(255,255,255,0.45)" }}
-                    onMouseEnter={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.85)")
-                    }
-                    onMouseLeave={(e) =>
-                      ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.45)")
-                    }
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Link columns */}
+          {linkCols.map(({ title, links }) => (
+            <div key={title}>
+              <h4
+                style={{
+                  color: "rgba(26,26,36,0.4)",
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.12em",
+                  marginBottom: "20px",
+                }}
+              >
+                {title}
+              </h4>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      style={{
+                        color: "rgba(26,26,36,0.65)",
+                        fontSize: "0.875rem",
+                        textDecoration: "none",
+                        transition: "color 0.2s ease",
+                      }}
+                      onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#1A1A24")}
+                      onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(26,26,36,0.65)")}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* ── BOTTOM BAR ── */}
-      <div className="mt-7  mb-7">
-        <div className="container-xl py-5 flex flex-col sm:flex-row items-center justify-between gap-3 ">
-          <p style={{ color: "rgba(255,255,255,0.3)" }} className="text-xs">
-            © 2024 Faculties Online. All rights reserved.
-          </p>
-          <p style={{ color: "rgba(255,255,255,0.3)" }} className="text-xs">
-            Made by <Link href="https://digimabble.com/" target="_blank">DigiMabbel</Link>
-          </p>
-          <div className="flex items-center gap-5">
-            {["Privacy Policy", "Terms of Use", "Cookie Settings"].map((label) => (
-              <Link
-                key={label}
-                href="#"
-                className="text-xs transition-colors"
-                style={{ color: "rgba(255,255,255,0.3)" }}
-                onMouseEnter={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)")
-                }
-                onMouseLeave={(e) =>
-                  ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.3)")
-                }
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
+      <div style={{ height: "1px", background: "rgba(26,26,36,0.07)" }} />
+      <div
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "20px 2rem",
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "12px",
+        }}
+      >
+        <p style={{ color: "rgba(26,26,36,0.45)", fontSize: "0.75rem", margin: 0 }}>
+          © 2024 Faculties Online. All rights reserved.
+        </p>
+        <p style={{ color: "rgba(26,26,36,0.45)", fontSize: "0.75rem", margin: 0 }}>
+          Made by{" "}
+          <Link
+            href="https://digimabble.com/"
+            target="_blank"
+            style={{ color: "rgba(255,107,53,0.8)", textDecoration: "none" }}
+          >
+            DigiMabbel
+          </Link>
+        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          {["Privacy Policy", "Terms of Use", "Cookie Settings"].map((label) => (
+            <Link
+              key={label}
+              href="#"
+              style={{
+                color: "rgba(26,26,36,0.45)",
+                fontSize: "0.75rem",
+                textDecoration: "none",
+                transition: "color 0.2s ease",
+              }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#1A1A24")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(26,26,36,0.45)")}
+            >
+              {label}
+            </Link>
+          ))}
         </div>
       </div>
     </footer>

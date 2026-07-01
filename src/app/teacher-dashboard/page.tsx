@@ -10,88 +10,98 @@ import {
   ArrowRight,
   Clock,
   CheckCircle2,
-  Users
+  Users,
+  Search
 } from "lucide-react";
 
 export default function TeacherDashboardHome() {
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
-      {/* Welcome Section */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Welcome back, Expert! 🎓</h1>
-          <p className="text-slate-500 mt-2 text-lg">Here's an overview of your tutoring business today.</p>
-        </div>
-        <div className="flex gap-3">
-          <Link 
-            href="/teacher-dashboard/profile"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white border border-slate-200 text-slate-700 rounded-xl font-medium hover:bg-slate-50 transition-colors shadow-sm"
-          >
-            Edit Profile
-          </Link>
-          <Link 
-            href="/#post-requirement" // Placeholder for 'Browse Jobs'
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-200"
-          >
-            <SearchIcon className="w-5 h-5" />
-            Browse New Jobs
-          </Link>
+    <div className="max-w-6xl mx-auto space-y-8 animate-fade-up">
+      {/* Welcome Banner */}
+      <div 
+        className="rounded-3xl p-8 text-white relative overflow-hidden shadow-xl"
+        style={{ background: "linear-gradient(135deg, #4D148C 0%, #2e0854 100%)" }}
+      >
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#ff6200]/20 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div>
+            <span className="inline-block px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[#ff6200] text-xs font-bold mb-3 tracking-wide uppercase">
+              Faculty Portal
+            </span>
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">Welcome back, Expert! 🎓</h1>
+            <p className="text-white/80 mt-2 text-base sm:text-lg max-w-xl">Here&apos;s an overview of your tutoring business, student leads, and reviews today.</p>
+          </div>
+          <div className="flex flex-wrap gap-3 shrink-0">
+            <Link 
+              href="/teacher-dashboard/profile"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white/10 border border-white/20 text-white rounded-xl font-bold text-sm hover:bg-white/20 transition-all shadow-sm backdrop-blur-xs"
+            >
+              Edit Profile
+            </Link>
+            <Link 
+              href="/#post-requirement"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 btn-coral rounded-xl font-bold text-sm shadow-lg"
+            >
+              <Search className="w-4 h-4" />
+              Browse New Jobs
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Earnings Card */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden group">
+        <div className="card-minimal rounded-2xl p-6 relative overflow-hidden group bg-white/80">
           <div className="flex justify-between items-start mb-4">
-            <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center group-hover:bg-green-100 transition-colors">
-              <Wallet className="w-6 h-6 text-green-600" />
+            <div className="w-12 h-12 bg-[#ff6200]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Wallet className="w-6 h-6 text-[#ff6200]" />
             </div>
-            <span className="flex items-center gap-1 text-sm font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-lg">
-              <TrendingUp className="w-4 h-4" /> +12%
+            <span className="flex items-center gap-1 text-xs font-bold text-[#ff6200] bg-[#ff6200]/10 border border-[#ff6200]/20 px-2.5 py-1 rounded-full">
+              <TrendingUp className="w-3.5 h-3.5" /> +12%
             </span>
           </div>
-          <p className="text-sm font-medium text-slate-500">Total Earnings (This Month)</p>
-          <h3 className="text-3xl font-bold text-slate-900 mt-1">₹45,200</h3>
+          <p className="text-xs font-bold text-[#1A1A24]/50 uppercase tracking-wider">Total Earnings (This Month)</p>
+          <h3 className="text-3xl font-black text-[#1A1A24] mt-1">₹45,200</h3>
         </div>
 
         {/* Active Jobs Card */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden group">
+        <div className="card-minimal rounded-2xl p-6 relative overflow-hidden group bg-white/80">
           <div className="flex justify-between items-start mb-4">
-            <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-              <Briefcase className="w-6 h-6 text-blue-600" />
+            <div className="w-12 h-12 bg-[#4D148C]/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Briefcase className="w-6 h-6 text-[#4D148C]" />
             </div>
           </div>
-          <p className="text-sm font-medium text-slate-500">Active Students / Jobs</p>
-          <h3 className="text-3xl font-bold text-slate-900 mt-1">8</h3>
+          <p className="text-xs font-bold text-[#1A1A24]/50 uppercase tracking-wider">Active Students / Jobs</p>
+          <h3 className="text-3xl font-black text-[#1A1A24] mt-1">8</h3>
         </div>
 
         {/* Rating Card */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden group">
+        <div className="card-minimal rounded-2xl p-6 relative overflow-hidden group bg-white/80">
           <div className="flex justify-between items-start mb-4">
-            <div className="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center group-hover:bg-yellow-100 transition-colors">
-              <Star className="w-6 h-6 text-yellow-500" />
+            <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Star className="w-6 h-6 text-amber-500 fill-amber-500" />
             </div>
-            <span className="flex items-center gap-1 text-sm font-semibold text-slate-600 bg-slate-50 px-2 py-1 rounded-lg">
-              Based on 42 reviews
+            <span className="flex items-center gap-1 text-xs font-bold text-[#1A1A24]/60 bg-[#1A1A24]/5 border border-[#1A1A24]/10 px-2.5 py-1 rounded-full">
+              42 reviews
             </span>
           </div>
-          <p className="text-sm font-medium text-slate-500">Average Rating</p>
-          <h3 className="text-3xl font-bold text-slate-900 mt-1 flex items-baseline gap-1">
-            4.9 <span className="text-lg text-slate-400 font-medium">/ 5.0</span>
+          <p className="text-xs font-bold text-[#1A1A24]/50 uppercase tracking-wider">Average Rating</p>
+          <h3 className="text-3xl font-black text-[#1A1A24] mt-1 flex items-baseline gap-1">
+            4.9 <span className="text-base text-[#1A1A24]/40 font-bold">/ 5.0</span>
           </h3>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Recent Jobs/Students */}
-        <section className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-          <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-            <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-              <Users className="w-5 h-5 text-indigo-500" />
+        <section className="bg-white/80 rounded-2xl border border-[#1A1A24]/10 shadow-sm overflow-hidden">
+          <div className="p-6 border-b border-[#1A1A24]/10 flex items-center justify-between">
+            <h2 className="text-lg font-extrabold text-[#1A1A24] flex items-center gap-2">
+              <Users className="w-5 h-5 text-[#4D148C]" />
               Recent Jobs
             </h2>
-            <Link href="/teacher-dashboard/my-jobs" className="text-sm font-medium text-indigo-600 hover:text-indigo-700 flex items-center gap-1">
+            <Link href="/teacher-dashboard/my-jobs" className="text-sm font-bold text-[#ff6200] hover:text-[#e55800] flex items-center gap-1 transition-colors">
               View All <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -100,18 +110,18 @@ export default function TeacherDashboardHome() {
               { name: "Rahul Sharma", subject: "Mathematics CBSE 10th", mode: "Online", status: "Active" },
               { name: "Sneha Gupta", subject: "Python Programming", mode: "Home Tuition", status: "Completed" },
             ].map((job, i) => (
-              <div key={i} className="flex items-center justify-between p-4 sm:px-6 border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors">
+              <div key={i} className="flex items-center justify-between p-5 border-b border-[#1A1A24]/5 last:border-0 hover:bg-[#1A1A24]/2 transition-colors">
                 <div>
-                  <h4 className="font-semibold text-slate-800">{job.name}</h4>
-                  <p className="text-sm text-slate-500">{job.subject} • {job.mode}</p>
+                  <h4 className="font-extrabold text-[#1A1A24] text-base">{job.name}</h4>
+                  <p className="text-xs font-medium text-[#1A1A24]/60 mt-0.5">{job.subject} • {job.mode}</p>
                 </div>
                 <div>
                   {job.status === 'Active' ? (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-[#ff6200]/15 text-[#ff6200] border border-[#ff6200]/30">
                       <Clock className="w-3.5 h-3.5" /> {job.status}
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-[#4D148C]/15 text-[#4D148C] border border-[#4D148C]/30">
                       <CheckCircle2 className="w-3.5 h-3.5" /> {job.status}
                     </span>
                   )}
@@ -122,21 +132,21 @@ export default function TeacherDashboardHome() {
         </section>
 
         {/* Recent Reviews */}
-        <section className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-          <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-            <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-              <Star className="w-5 h-5 text-yellow-500" />
+        <section className="bg-white/80 rounded-2xl border border-[#1A1A24]/10 shadow-sm overflow-hidden">
+          <div className="p-6 border-b border-[#1A1A24]/10 flex items-center justify-between">
+            <h2 className="text-lg font-extrabold text-[#1A1A24] flex items-center gap-2">
+              <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
               Recent Reviews
             </h2>
-            <Link href="/teacher-dashboard/reviews" className="text-sm font-medium text-indigo-600 hover:text-indigo-700 flex items-center gap-1">
+            <Link href="/teacher-dashboard/reviews" className="text-sm font-bold text-[#ff6200] hover:text-[#e55800] flex items-center gap-1 transition-colors">
               View All <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
           <div className="p-6 space-y-6">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-slate-800 text-sm">Amit K.</span>
-                <div className="flex items-center text-yellow-400">
+                <span className="font-extrabold text-[#1A1A24] text-sm">Amit K.</span>
+                <div className="flex items-center text-amber-500">
                   <Star className="w-3.5 h-3.5 fill-current" />
                   <Star className="w-3.5 h-3.5 fill-current" />
                   <Star className="w-3.5 h-3.5 fill-current" />
@@ -144,20 +154,20 @@ export default function TeacherDashboardHome() {
                   <Star className="w-3.5 h-3.5 fill-current" />
                 </div>
               </div>
-              <p className="text-sm text-slate-600 italic">"Excellent tutor! Explains complex concepts very clearly. Highly recommended for math."</p>
+              <p className="text-sm text-[#1A1A24]/75 italic font-medium">&quot;Excellent tutor! Explains complex concepts very clearly. Highly recommended for math.&quot;</p>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 pt-4 border-t border-[#1A1A24]/10">
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-slate-800 text-sm">Priya M.</span>
-                <div className="flex items-center text-yellow-400">
+                <span className="font-extrabold text-[#1A1A24] text-sm">Priya M.</span>
+                <div className="flex items-center text-amber-500">
                   <Star className="w-3.5 h-3.5 fill-current" />
                   <Star className="w-3.5 h-3.5 fill-current" />
                   <Star className="w-3.5 h-3.5 fill-current" />
                   <Star className="w-3.5 h-3.5 fill-current" />
-                  <Star className="w-3.5 h-3.5 text-slate-200 fill-current" />
+                  <Star className="w-3.5 h-3.5 text-[#1A1A24]/20 fill-current" />
                 </div>
               </div>
-              <p className="text-sm text-slate-600 italic">"Good teaching style, helped me improve my programming basics significantly."</p>
+              <p className="text-sm text-[#1A1A24]/75 italic font-medium">&quot;Good teaching style, helped me improve my programming basics significantly.&quot;</p>
             </div>
           </div>
         </section>
@@ -166,22 +176,3 @@ export default function TeacherDashboardHome() {
   );
 }
 
-function SearchIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
-    </svg>
-  );
-}
