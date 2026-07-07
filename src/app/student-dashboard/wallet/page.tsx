@@ -27,7 +27,7 @@ export default function WalletPage() {
               <WalletIcon className="w-5 h-5 text-[#ff6200]" />
               <span className="font-bold text-white/80 text-sm uppercase tracking-wider">Current Balance</span>
             </div>
-            <h2 className="text-4xl font-black tracking-tight mb-8">₹0.00</h2>
+            <h2 className="text-4xl font-bold text-white tracking-tight mb-8">₹0.00</h2>
             <button className="w-full py-3.5 btn-coral rounded-xl font-bold transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95">
               <CreditCard className="w-4 h-4" />
               Add Funds

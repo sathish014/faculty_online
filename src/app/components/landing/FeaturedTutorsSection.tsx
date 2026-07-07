@@ -192,7 +192,7 @@ export default function FeaturedTutorsSection() {
           {/* Tutor Cards — horizontal scroll */}
           <div
             ref={scrollRef}
-            className={`flex gap-5 overflow-x-auto pb-4 scroll-smooth custom-scrollbar transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+            className={`flex gap-5 overflow-x-auto pb-4 scroll-smooth custom-scrollbar w-full min-w-0 max-w-full transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             style={{ transitionDelay: "250ms" }}
           >
           {tutors.map((tutor, i) => (

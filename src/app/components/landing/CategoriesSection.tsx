@@ -58,7 +58,7 @@ export default function CategoriesSection() {
     <section
       id="categories"
       ref={ref}
-      className="pt-8 pb-16"
+      className="pt-8 pb-10"
       style={{ background: "var(--bg-primary)" }}
     >
       <div className="line-divider mb-10" />
@@ -110,17 +110,17 @@ export default function CategoriesSection() {
 
         {/* Trending Topics Block */}
         <div
-          className={`rounded-2xl p-8 md:p-10 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+          className={`rounded-2xl p-5 sm:p-8 md:p-10 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           style={{
             background: "var(--bg-secondary)",
             border: "1px solid rgba(26,26,36,0.08)",
             transitionDelay: "400ms",
           }}
         >
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-xl font-bold text-[#1A1A24]">Trending topics</h3>
-            <div className="h-px flex-1 mx-6" style={{ background: "rgba(26,26,36,0.07)" }} />
-            <span className="text-xs text-[#ff6200] font-semibold uppercase tracking-wider">This week</span>
+          <div className="flex items-center justify-between gap-2 mb-8">
+            <h3 className="text-xl font-bold text-[#1A1A24] whitespace-nowrap">Trending topics</h3>
+            <div className="hidden sm:block h-px flex-1 mx-6" style={{ background: "rgba(26,26,36,0.07)" }} />
+            <span className="text-xs text-[#ff6200] font-semibold uppercase tracking-wider whitespace-nowrap">This week</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

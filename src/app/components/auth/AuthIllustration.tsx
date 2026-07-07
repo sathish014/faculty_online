@@ -18,9 +18,9 @@ const testimonial = {
 };
 
 const floatingBadges = [
-  { icon: Star, label: '4.9 Rating', color: 'bg-[#fff9f0] text-[#1A1A24] border-[#ff6200]/30 shadow-md', x: '10%', y: '15%', delay: 0 },
+  { icon: Star, label: '4.9 Rating', color: 'bg-white text-[#1A1A24] border-[#ff6200]/30 shadow-md', x: '10%', y: '15%', delay: 0 },
   { icon: Award, label: 'Top Tutor', color: 'bg-[#ff6200] text-white border-[#ff6200] shadow-md', x: '65%', y: '8%', delay: 0.3 },
-  { icon: Clock, label: '24/7 Access', color: 'bg-[#fff9f0] text-[#1A1A24] border-white/40 shadow-md', x: '5%', y: '75%', delay: 0.6 },
+  { icon: Clock, label: '24/7 Access', color: 'bg-white text-[#1A1A24] border-white/40 shadow-md', x: '5%', y: '75%', delay: 0.6 },
   { icon: BarChart2, label: 'Live Analytics', color: 'bg-[#4D148C] text-white border-white/20 shadow-md', x: '60%', y: '82%', delay: 0.9 },
 ];
 

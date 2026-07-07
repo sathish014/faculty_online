@@ -27,7 +27,7 @@ export default function PromoBannerSection() {
   return (
     <section
       ref={ref}
-      className="pt-8 pb-16"
+      className="pt-8 pb-12"
       style={{ background: "var(--bg-primary)" }}
     >
       <div className="line-divider mb-10" />
@@ -54,8 +54,8 @@ export default function PromoBannerSection() {
             style={{
               top: "-100px",
               right: "100px",
-              width: "400px",
-              height: "400px",
+              width: "clamp(150px, 40vw, 400px)",
+              height: "clamp(150px, 40vw, 400px)",
               background: "radial-gradient(circle, rgba(255,107,53,0.06) 0%, transparent 70%)",
             }}
           />

@@ -34,7 +34,7 @@ export default function AuthCard({ children, title, description }: AuthCardProps
         <div
           className="rounded-3xl p-8 sm:p-10 transition-all duration-300"
           style={{
-            background: 'rgba(253, 244, 234, 0.92)',
+            background: 'rgba(255, 255, 255, 0.95)',
             backdropFilter: 'blur(24px)',
             WebkitBackdropFilter: 'blur(24px)',
             boxShadow: '0 8px 48px -8px rgba(77, 20, 140, 0.12), 0 2px 12px -2px rgba(26, 26, 36, 0.05)',

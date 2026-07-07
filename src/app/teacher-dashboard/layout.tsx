@@ -128,7 +128,7 @@ export default function TeacherDashboardLayout({
         {/* Header */}
         <header 
           className="h-16 border-b border-[#1A1A24]/10 flex items-center justify-between px-4 sm:px-6 z-30 sticky top-0 backdrop-blur-md"
-          style={{ background: "rgba(253, 244, 234, 0.85)" }}
+          style={{ background: "rgba(255, 255, 255, 0.95)" }}
         >
           <div className="flex items-center gap-3">
             <button

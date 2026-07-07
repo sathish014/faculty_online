@@ -18,14 +18,17 @@ const footerLinks = {
     { label: "Tutor Resources", href: "#" },
   ],
   students: [
-    { label: "Find Tutors", href: "#tutors" },
+    { label: "Find Tutors", href: "/tutor/search" },
     { label: "Post Requirement", href: "/student-dashboard/post-requirement" },
-    { label: "Explore Skills", href: "#categories" },
-    { label: "Learning Resources", href: "#" },
+    { label: "All Courses", href: "/courses" },
+    { label: "Learning Paths", href: "/learning-path" },
+    { label: "Our Faculty", href: "/faculty" },
   ],
   support: [
     { label: "Contact Us", href: "#" },
-    { label: "FAQs", href: "#" },
+    { label: "FAQs", href: "/faq" },
+    { label: "Blog", href: "/blog" },
+    { label: "Events", href: "/events" },
     { label: "Privacy Policy", href: "#" },
     { label: "Terms of Service", href: "#" },
   ],
@@ -62,20 +65,8 @@ export default function Footer() {
       <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(26,26,36,0.12), transparent)" }} />
 
       {/* ── NEWSLETTER STRIP ── */}
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "3rem 2rem" }}>
-        <div
-          style={{
-            background: "var(--bg-sidebar)",
-            border: "1px solid rgba(26,26,36,0.08)",
-            borderRadius: "16px",
-            padding: "2.5rem",
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "1.5rem",
-          }}
-        >
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-12">
+        <div className="bg-white border border-[#1A1A24]/10 rounded-2xl p-6 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-sm">
           <div>
             <h3 style={{ color: "#1A1A24", fontWeight: 700, fontSize: "1.125rem", margin: "0 0 4px 0" }}>
               Stay sharp.
@@ -85,7 +76,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div style={{ flexShrink: 0 }}>
+          <div className="w-full lg:w-auto flex-shrink-0">
             {subscribed ? (
               <div
                 style={{
@@ -104,7 +95,7 @@ export default function Footer() {
                 ✓ Subscribed! Check your inbox.
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} style={{ display: "flex", gap: "8px" }}>
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
                 <input
                   type="email"
                   value={email}
@@ -112,35 +103,13 @@ export default function Footer() {
                   placeholder="your@email.com"
                   id="footer-newsletter-email"
                   suppressHydrationWarning
-                  style={{
-                    background: "rgba(26,26,36,0.05)",
-                    border: "1px solid rgba(26,26,36,0.15)",
-                    color: "#1A1A24",
-                    borderRadius: "12px",
-                    padding: "10px 16px",
-                    fontSize: "0.875rem",
-                    width: "220px",
-                    outline: "none",
-                  }}
+                  className="bg-[#1A1A24]/5 border border-[#1A1A24]/15 text-[#1A1A24] rounded-xl px-4 py-2.5 text-sm w-full sm:w-60 outline-none focus:border-[#ff6200] transition-colors"
                 />
                 <button
                   type="submit"
                   id="footer-newsletter-submit"
                   suppressHydrationWarning
-                  style={{
-                    background: "#ff6200",
-                    color: "#FFFFFF",
-                    fontWeight: 700,
-                    borderRadius: "12px",
-                    padding: "10px 20px",
-                    fontSize: "0.875rem",
-                    border: "none",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    whiteSpace: "nowrap",
-                  }}
+                  className="bg-[#ff6200] text-white font-bold rounded-xl px-5 py-2.5 text-sm border-none cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap shadow-md hover:bg-[#e05500] transition-all w-full sm:w-auto"
                 >
                   Subscribe
                   <ArrowRight style={{ width: "14px", height: "14px" }} />
@@ -152,7 +121,7 @@ export default function Footer() {
       </div>
 
       {/* ── MAIN LINK COLUMNS ── */}
-      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 2rem 3rem" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pb-12">
         {/* Thin divider */}
         <div style={{ height: "1px", background: "rgba(26,26,36,0.07)", marginBottom: "3rem" }} />
 
@@ -273,18 +242,7 @@ export default function Footer() {
 
       {/* ── BOTTOM BAR ── */}
       <div style={{ height: "1px", background: "rgba(26,26,36,0.07)" }} />
-      <div
-        style={{
-          maxWidth: "1280px",
-          margin: "0 auto",
-          padding: "20px 2rem",
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "12px",
-        }}
-      >
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
         <p style={{ color: "rgba(26,26,36,0.45)", fontSize: "0.75rem", margin: 0 }}>
           © 2024 Faculties Online. All rights reserved.
         </p>
@@ -298,7 +256,7 @@ export default function Footer() {
             DigiMabbel
           </Link>
         </p>
-        <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+        <div className="flex flex-wrap items-center justify-center gap-4">
           {["Privacy Policy", "Terms of Use", "Cookie Settings"].map((label) => (
             <Link
               key={label}

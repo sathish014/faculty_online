@@ -129,7 +129,7 @@ export default function HowItWorksSection() {
   const steps = activeTab === "student" ? studentSteps : tutorSteps;
 
   return (
-    <section id="how-it-works" className="py-24 bg-gradient-to-b from-slate-50 to-white">
+    <section id="how-it-works" className="py-18 bg-gradient-to-b from-slate-50 to-white">
       <div className="container-xl">
         {/* Header */}
         <div className="text-center mb-14">
