@@ -17,7 +17,7 @@ export default function StudentDashboardHome() {
     <div className="max-w-6xl mx-auto space-y-8 animate-fade-up">
       {/* Welcome Banner */}
       <div 
-        className="rounded-3xl p-8 text-white relative overflow-hidden shadow-xl"
+        className="rounded-3xl p-5 sm:p-8 text-white relative overflow-hidden shadow-xl"
         style={{ background: "linear-gradient(135deg, #4D148C 0%, #2e0854 100%)" }}
       >
         <div className="absolute top-0 right-0 w-80 h-80 bg-[#ff6200]/20 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>

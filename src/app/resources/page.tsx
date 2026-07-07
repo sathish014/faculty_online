@@ -74,11 +74,11 @@ export default function ResourcesPage() {
   ];
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#fff9f0]">
+    <main className="min-h-screen flex flex-col bg-white">
       <Navbar />
       
       {/* Hero Section */}
-      <div className="relative pt-36 pb-16 px-4 bg-gradient-to-b from-[#fdf4ea] to-[#fff9f0] border-b border-[#1A1A24]/5">
+      <div className="relative pt-36 pb-16 px-4 bg-white border-b border-[#1A1A24]/5">
         <div className="max-w-7xl mx-auto text-center space-y-4 animate-fade-up">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-[#4D148C]/15 text-[#4D148C] border border-[#4D148C]/30 uppercase tracking-wider">
             <BookOpen className="w-3.5 h-3.5" /> Study & Teaching Library
@@ -177,7 +177,7 @@ export default function ResourcesPage() {
 
                 {/* Bottom Row 1: Price and Buttons */}
                 <div className="flex items-center justify-between mb-3">
-                  <div className="font-black text-lg text-[#1A1A24] bg-[#fdf4ea] px-3 py-1 rounded-xl border border-[#1A1A24]/5">
+                  <div className="font-black text-lg text-[#1A1A24] bg-[#1A1A24]/5 px-3 py-1 rounded-xl border border-[#1A1A24]/5">
                     ₹{resource.price}
                   </div>
                   <div className="flex items-center gap-2">

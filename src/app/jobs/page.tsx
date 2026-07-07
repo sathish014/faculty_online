@@ -22,11 +22,11 @@ export default function JobsPage() {
   ];
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#fff9f0]">
+    <main className="min-h-screen flex flex-col bg-white">
       <Navbar />
       
       {/* Hero Banner */}
-      <div className="relative pt-36 pb-16 px-4 bg-gradient-to-b from-[#fdf4ea] to-[#fff9f0] border-b border-[#1A1A24]/5">
+      <div className="relative pt-36 pb-16 px-4 bg-white border-b border-[#1A1A24]/5">
         <div className="max-w-7xl mx-auto text-center space-y-4 animate-fade-up">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-[#ff6200]/15 text-[#ff6200] border border-[#ff6200]/30 uppercase tracking-wider">
             <Briefcase className="w-3.5 h-3.5" /> Tutoring Opportunities
@@ -100,7 +100,7 @@ export default function JobsPage() {
                 }`}>
                   <MapPin className="w-3 h-3 inline mr-1 -mt-0.5" />{job.mode}
                 </span>
-                <span className="text-lg font-black text-[#1A1A24] bg-[#fdf4ea] px-3 py-0.5 rounded-xl border border-[#1A1A24]/5">
+                <span className="text-lg font-black text-[#1A1A24] bg-[#1A1A24]/5 px-3 py-0.5 rounded-xl border border-[#1A1A24]/5">
                   {job.rate}
                 </span>
               </div>

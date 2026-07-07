@@ -9,12 +9,21 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       {/* Decorative blobs — Chalk & Space palette (Coral & Deep Violet glow) */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div
-          className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-[0.12] blur-3xl animate-float-gentle"
-          style={{ background: 'radial-gradient(circle, #ff6200 0%, transparent 70%)' }}
+          className="absolute -top-40 -left-40 rounded-full opacity-[0.12] blur-3xl animate-float-gentle"
+          style={{
+            background: 'radial-gradient(circle, #ff6200 0%, transparent 70%)',
+            width: 'clamp(200px, 60vw, 600px)',
+            height: 'clamp(200px, 60vw, 600px)',
+          }}
         />
         <div
-          className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full opacity-[0.15] blur-3xl animate-float-gentle"
-          style={{ background: 'radial-gradient(circle, #4D148C 0%, transparent 70%)', animationDelay: '2s' }}
+          className="absolute -bottom-40 -right-40 rounded-full opacity-[0.15] blur-3xl animate-float-gentle"
+          style={{
+            background: 'radial-gradient(circle, #4D148C 0%, transparent 70%)',
+            animationDelay: '2s',
+            width: 'clamp(200px, 60vw, 600px)',
+            height: 'clamp(200px, 60vw, 600px)',
+          }}
         />
       </div>
 

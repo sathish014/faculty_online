@@ -30,11 +30,11 @@ export default function SearchTutorsPage() {
   ];
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#fff9f0]">
+    <main className="min-h-screen flex flex-col bg-white">
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative pt-36 pb-20 px-4 bg-gradient-to-b from-[#fdf4ea] to-[#fff9f0] border-b border-[#1A1A24]/5">
+      <div className="relative pt-36 pb-20 px-4 bg-white border-b border-[#1A1A24]/5">
         <div className="max-w-5xl mx-auto text-center space-y-6 animate-fade-up">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-[#4D148C]/15 text-[#4D148C] border border-[#4D148C]/30 uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" /> Verified Faculty Directory
@@ -117,7 +117,7 @@ export default function SearchTutorsPage() {
                   {/* Left: Avatar & Badges */}
                   <div className="flex flex-col items-center w-full md:w-44 flex-shrink-0">
                     <img src={tutor.image} alt={tutor.name} className="w-28 h-28 rounded-2xl object-cover mb-4 border-2 border-[#ff6200]/20 shadow-md group-hover:scale-105 transition-transform" />
-                    <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-[#fdf4ea] border border-[#ff6200]/20 rounded-xl text-xs font-extrabold text-[#ff6200] w-full mb-2">
+                    <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-[#ff6200]/10 border border-[#ff6200]/20 rounded-xl text-xs font-extrabold text-[#ff6200] w-full mb-2">
                       {tutor.experience}
                     </div>
                   </div>
@@ -214,7 +214,7 @@ export default function SearchTutorsPage() {
                 </span>
                 <h3 className="font-black text-2xl leading-tight">Build Your Custom Profile Page</h3>
                 <p className="text-white/80 text-xs font-medium leading-relaxed">Stand out to top tier students with verified credentials & intro videos.</p>
-                <button className="w-full py-3 bg-white text-[#4D148C] font-extrabold rounded-xl text-xs hover:bg-[#fff9f0] transition-colors shadow-md">
+                <button className="w-full py-3 bg-white text-[#4D148C] font-extrabold rounded-xl text-xs hover:bg-gray-100 transition-colors shadow-md">
                   Upgrade Today
                 </button>
               </div>
