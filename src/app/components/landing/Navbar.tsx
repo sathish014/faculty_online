@@ -21,7 +21,7 @@ export default function Navbar() {
       setIsLoggedIn(true);
       setUserRole(role);
     }
-    const handleScroll = () => setScrolled(window.scrollY > 8);
+    const handleScroll = () => setScrolled(window.scrollY > 4);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -46,53 +46,44 @@ export default function Navbar() {
       onClick: () => setRequestModalOpen(true),
       show: !isLoggedIn,
     },
-    {
-      label: "Find Jobs",
-      href: "/jobs",
-      show: true,
-    },
+    { label: "Find Jobs", href: "/jobs", show: true },
     { label: "Resources", href: "/resources", show: true },
   ].filter((l) => l.show);
 
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300"
+        className="fixed top-0 left-0 right-0 z-50 bg-white"
         style={{
-          borderBottom: "1px solid #e8eaf0",
-          boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.07)" : "none",
+          borderBottom: "1px solid #e2e8f0",
+          boxShadow: scrolled ? "0 2px 8px rgba(0,0,0,0.08)" : "none",
         }}
       >
         <div className="container-xl">
           <div className="flex items-center justify-between h-16">
+
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-sm">
-                <GraduationCap className="w-4.5 h-4.5 text-white" style={{ width: "18px", height: "18px" }} />
+            <Link href="/" className="flex items-center gap-2 group">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center"
+                style={{ background: "#0d9488" }}
+              >
+                <GraduationCap className="w-4 h-4 text-white" />
               </div>
-              <span className="font-heading text-base font-bold text-slate-900">
+              <span className="font-heading font-bold text-slate-900 text-base">
                 Faculties{" "}
-                <span
-                  style={{
-                    background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Online
-                </span>
+                <span style={{ color: "#0d9488" }}>Online</span>
               </span>
             </Link>
 
             {/* Center Nav */}
-            <nav className="hidden lg:flex items-center gap-0.5">
-              {navLinks.map((link) => (
+            <nav className="hidden lg:flex items-center gap-1">
+              {navLinks.map((link) =>
                 link.onClick ? (
                   <button
                     key={link.label}
                     onClick={link.onClick}
-                    className="relative px-4 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all duration-200"
+                    className="px-4 py-2 text-sm font-medium text-slate-700 rounded hover:bg-slate-100 transition-colors"
                   >
                     {link.label}
                   </button>
@@ -100,27 +91,27 @@ export default function Navbar() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="relative px-4 py-2 text-sm font-medium text-slate-600 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all duration-200"
+                    className="px-4 py-2 text-sm font-medium text-slate-700 rounded hover:bg-slate-100 transition-colors"
                   >
                     {link.label}
                   </Link>
                 )
-              ))}
+              )}
             </nav>
 
             {/* Right Actions */}
-            <div className="hidden lg:flex items-center gap-2.5">
+            <div className="hidden lg:flex items-center gap-2">
               {isMounted && isLoggedIn ? (
                 <>
                   <Link
                     href={userRole === "tutor" ? "/teacher-dashboard" : "/student-dashboard"}
-                    className="px-4 py-2 text-sm font-semibold text-indigo-600 rounded-lg border border-indigo-200 hover:bg-indigo-50 transition-all"
+                    className="px-4 py-2 text-sm font-semibold rounded border border-slate-300 text-slate-700 hover:bg-slate-50 transition-colors"
                   >
                     Dashboard
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="p-2 rounded-lg border border-slate-200 text-slate-500 hover:text-red-500 hover:border-red-200 hover:bg-red-50 transition-all"
+                    className="p-2 rounded text-slate-500 hover:text-red-500 hover:bg-red-50 transition-colors"
                     title="Logout"
                   >
                     <LogOut className="w-4 h-4" />
@@ -131,20 +122,19 @@ export default function Navbar() {
                   <Link
                     href="/login"
                     id="navbar-login-btn"
-                    className="px-5 py-2 text-sm font-semibold text-slate-700 rounded-lg hover:bg-slate-50 transition-all"
+                    className="px-4 py-2 text-sm font-semibold text-slate-700 rounded hover:bg-slate-100 transition-colors"
                   >
-                    Login
+                    Log in
                   </Link>
                   <Link
                     href="/register"
                     id="navbar-signup-btn"
-                    className="px-5 py-2 text-sm font-semibold text-white rounded-lg transition-all hover:-translate-y-0.5"
-                    style={{
-                      background: "linear-gradient(135deg, #4f46e5, #7c3aed)",
-                      boxShadow: "0 4px 12px rgba(79,70,229,0.35)",
-                    }}
+                    className="px-4 py-2 text-sm font-semibold text-white rounded transition-colors"
+                    style={{ background: "#0d9488" }}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#0f766e")}
+                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#0d9488")}
                   >
-                    Sign Up
+                    Sign up
                   </Link>
                 </>
               )}
@@ -154,7 +144,7 @@ export default function Navbar() {
             <button
               id="navbar-mobile-toggle"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
+              className="lg:hidden p-2 rounded text-slate-600 hover:bg-slate-100 transition-colors"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -165,48 +155,44 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
+        className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-200 ${
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
         <div
-          className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/30"
           onClick={() => setMobileOpen(false)}
         />
         <div
-          className={`absolute top-0 right-0 h-full w-72 bg-white shadow-2xl transform transition-transform duration-300 ${
+          className={`absolute top-0 right-0 h-full w-72 bg-white shadow-xl transform transition-transform duration-250 ${
             mobileOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <div className="flex flex-col h-full">
             <div className="flex items-center justify-between p-5 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
-                  <GraduationCap className="w-4 h-4 text-white" />
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "#0d9488" }}>
+                  <GraduationCap className="w-3.5 h-3.5 text-white" />
                 </div>
                 <span className="font-heading font-bold text-slate-900 text-sm">
-                  Faculties{" "}
-                  <span className="gradient-text">Online</span>
+                  Faculties <span style={{ color: "#0d9488" }}>Online</span>
                 </span>
               </div>
               <button
                 onClick={() => setMobileOpen(false)}
-                className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500"
+                className="p-1.5 rounded hover:bg-slate-100 text-slate-500"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            <nav className="flex flex-col gap-1 p-4 flex-1">
-              {navLinks.map((link) => (
+            <nav className="flex flex-col gap-0.5 p-4 flex-1">
+              {navLinks.map((link) =>
                 link.onClick ? (
                   <button
                     key={link.label}
-                    onClick={() => {
-                      setMobileOpen(false);
-                      link.onClick();
-                    }}
-                    className="px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors text-left"
+                    onClick={() => { setMobileOpen(false); link.onClick(); }}
+                    className="px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded text-left transition-colors"
                   >
                     {link.label}
                   </button>
@@ -215,12 +201,12 @@ export default function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                    className="px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded transition-colors"
                   >
                     {link.label}
                   </Link>
                 )
-              ))}
+              )}
             </nav>
 
             <div className="p-4 border-t border-slate-100 flex flex-col gap-2">
@@ -228,14 +214,14 @@ export default function Navbar() {
                 <>
                   <Link
                     href={userRole === "tutor" ? "/teacher-dashboard" : "/student-dashboard"}
-                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-lg text-white"
-                    style={{ background: "linear-gradient(135deg, #4f46e5, #7c3aed)" }}
+                    className="px-4 py-2.5 text-center text-sm font-semibold rounded text-white"
+                    style={{ background: "#0d9488" }}
                   >
                     Dashboard
                   </Link>
                   <button
                     onClick={() => { handleLogout(); setMobileOpen(false); }}
-                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-lg border border-red-200 text-red-600 hover:bg-red-50"
+                    className="px-4 py-2.5 text-center text-sm font-semibold rounded border border-red-200 text-red-600 hover:bg-red-50"
                   >
                     Logout
                   </button>
@@ -244,16 +230,16 @@ export default function Navbar() {
                 <>
                   <Link
                     href="/login"
-                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50"
+                    className="px-4 py-2.5 text-center text-sm font-semibold rounded border border-slate-300 text-slate-700 hover:bg-slate-50"
                   >
-                    Login
+                    Log in
                   </Link>
                   <Link
                     href="/register"
-                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-lg text-white"
-                    style={{ background: "linear-gradient(135deg, #4f46e5, #7c3aed)" }}
+                    className="px-4 py-2.5 text-center text-sm font-semibold rounded text-white"
+                    style={{ background: "#0d9488" }}
                   >
-                    Sign Up
+                    Sign up
                   </Link>
                 </>
               )}
@@ -262,9 +248,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      <RequestTutorModal 
-        isOpen={requestModalOpen} 
-        onClose={() => setRequestModalOpen(false)} 
+      <RequestTutorModal
+        isOpen={requestModalOpen}
+        onClose={() => setRequestModalOpen(false)}
       />
     </>
   );

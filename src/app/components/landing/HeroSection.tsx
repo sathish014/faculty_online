@@ -27,7 +27,7 @@ export default function HeroSection() {
     const r = btnRef.current.getBoundingClientRect();
     setDropdownStyle({
       position: "fixed",
-      top: r.bottom + 6,
+      top: r.bottom + 4,
       left: r.left,
       width: 240,
       zIndex: 9999,
@@ -54,69 +54,81 @@ export default function HeroSection() {
     };
   }, []);
 
-  return (
-    <section className="pt-24 pb-12 bg-white">
-      <div className="container-xl px-4 md:px-8 max-w-[1340px] mx-auto">
-        <div className="relative w-full overflow-hidden" style={{ minHeight: "450px" }}>
-          
-          {/* Background Image Banner */}
-          <div className="absolute inset-0 z-0">
-            <img 
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 
-              alt="Students learning"
-              className="w-full h-full object-cover"
-            />
-          </div>
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (subject) params.set("subject", subject);
+    if (mode.label !== "Any Mode") params.set("mode", mode.label);
+    window.location.href = `/tutor/search${params.toString() ? "?" + params.toString() : ""}`;
+  };
 
-          {/* Floating Box */}
-          <div className="relative z-10 p-6 md:p-12 lg:p-14 md:my-16 md:ml-16 bg-white shadow-2xl max-w-xl flex flex-col justify-center h-full">
-            <h1 className="text-3xl md:text-[2.5rem] font-bold text-slate-900 leading-tight mb-4 font-serif" style={{ fontFamily: "Georgia, serif" }}>
-              Upgrade Your Skills with Faculties Online
+  return (
+    <section className="pt-16">
+      {/* Photo Banner */}
+      <div className="relative w-full overflow-hidden" style={{ minHeight: "420px" }}>
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop"
+            alt="Students learning together"
+            className="w-full h-full object-cover"
+          />
+          {/* Simple dark overlay */}
+          <div className="absolute inset-0" style={{ background: "rgba(15,23,42,0.55)" }} />
+        </div>
+
+        {/* Content box — left-aligned floating panel */}
+        <div className="relative z-10 container-xl h-full flex items-center" style={{ minHeight: "420px" }}>
+          <div
+            className="bg-white p-8 md:p-10 max-w-lg w-full"
+            style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.15)" }}
+          >
+            <h1 className="font-heading font-bold text-slate-900 text-3xl md:text-[2.2rem] leading-tight mb-3">
+              Find the perfect tutor for your goals
             </h1>
-            <p className="text-base text-slate-700 mb-8 leading-relaxed">
-              Connect with verified tutors for online, offline & home tuition. Learn at your pace, from India&apos;s best educators in any subject you desire.
+            <p className="text-slate-600 text-base mb-6 leading-relaxed">
+              Connect with verified tutors for online, offline &amp; home tuition across India.
             </p>
 
-            {/* Search Form inside Box */}
-            <div className="w-full flex flex-col gap-3">
-              <div className="flex items-center border border-slate-900 px-4 py-3 bg-white">
-                <Search className="w-5 h-5 text-slate-500 mr-3" />
-                <input 
-                  type="text" 
+            {/* Search inputs */}
+            <div className="flex flex-col gap-2">
+              {/* Subject input */}
+              <div className="flex items-center border border-slate-900 px-3 py-3 bg-white">
+                <Search className="w-4 h-4 text-slate-500 mr-2.5 flex-shrink-0" />
+                <input
+                  type="text"
                   placeholder="What do you want to learn?"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full focus:outline-none text-slate-800 placeholder-slate-500"
+                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                  className="w-full focus:outline-none text-slate-800 placeholder-slate-400 text-sm"
                 />
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
+              {/* Mode selector + Search button row */}
+              <div className="flex gap-2">
+                {/* Mode dropdown */}
                 <div className="relative flex-1" ref={modeRef}>
                   <button
                     ref={btnRef}
-                    onClick={() => {
-                      recalcDropdown();
-                      setModeOpen((o) => !o);
-                    }}
-                    className="w-full flex items-center justify-between border border-slate-900 px-4 py-3 bg-white hover:bg-slate-50 transition-colors text-slate-700"
+                    onClick={() => { recalcDropdown(); setModeOpen((o) => !o); }}
+                    className="w-full flex items-center justify-between border border-slate-900 px-3 py-3 bg-white hover:bg-slate-50 transition-colors text-slate-700"
                   >
                     <div className="flex items-center gap-2">
-                      <mode.icon className="w-4 h-4 text-slate-600" />
-                      <span className="text-sm font-bold">{mode.label}</span>
+                      <mode.icon className="w-4 h-4 text-slate-500" />
+                      <span className="text-sm font-medium">{mode.label}</span>
                     </div>
-                    <ChevronDown className={`w-4 h-4 text-slate-600 transition-transform ${modeOpen ? 'rotate-180' : ''}`} />
+                    <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${modeOpen ? "rotate-180" : ""}`} />
                   </button>
 
-                  {/* Mode Dropdown Portal */}
                   {modeOpen && mounted && createPortal(
                     <div
                       ref={portalRef}
                       style={{
                         ...dropdownStyle,
                         background: "#fff",
-                        border: "1px solid #1e293b",
-                        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
-                        padding: "8px",
+                        border: "1px solid #e2e8f0",
+                        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+                        padding: "6px",
                       }}
                     >
                       {modeOptions.map((m) => {
@@ -124,19 +136,15 @@ export default function HeroSection() {
                         return (
                           <button
                             key={m.label}
-                            onMouseDown={(e) => {
-                              e.preventDefault();
-                              setMode(m);
-                              setModeOpen(false);
-                            }}
-                            className={`w-full flex cursor-pointer items-center gap-3 px-3 py-2 text-sm transition-all hover:bg-slate-100 ${active ? 'bg-slate-100' : ''}`}
+                            onMouseDown={(e) => { e.preventDefault(); setMode(m); setModeOpen(false); }}
+                            className={`w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors hover:bg-slate-100 ${active ? "bg-slate-100" : ""}`}
                           >
-                            <m.icon className="w-4 h-4 text-slate-700" />
+                            <m.icon className="w-4 h-4 text-slate-500" />
                             <div className="flex-1 text-left">
-                              <p className="font-bold text-slate-900">{m.label}</p>
-                              <p className="text-xs text-slate-500">{m.desc}</p>
+                              <p className="font-semibold text-slate-900">{m.label}</p>
+                              <p className="text-xs text-slate-400">{m.desc}</p>
                             </div>
-                            {active && <CheckCircle className="w-4 h-4 text-slate-900" />}
+                            {active && <CheckCircle className="w-4 h-4" style={{ color: "#0d9488" }} />}
                           </button>
                         );
                       })}
@@ -144,13 +152,43 @@ export default function HeroSection() {
                     document.body
                   )}
                 </div>
-                
-                <button className="bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-8 transition-colors whitespace-nowrap">
-                  Find Tutor
+
+                {/* Search button */}
+                <button
+                  onClick={handleSearch}
+                  className="px-6 py-3 font-bold text-white text-sm transition-colors whitespace-nowrap"
+                  style={{ background: "#0d9488" }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#0f766e")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#0d9488")}
+                >
+                  Search
                 </button>
               </div>
             </div>
 
+            {/* Trust line */}
+            <p className="text-slate-500 text-xs mt-4">
+              Trusted by <strong className="text-slate-700">10,000+</strong> students across India
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats bar below hero */}
+      <div className="bg-white border-b border-slate-200">
+        <div className="container-xl">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-8 gap-y-3 py-4">
+            {[
+              { value: "10K+", label: "Active Students" },
+              { value: "5K+", label: "Expert Tutors" },
+              { value: "100+", label: "Subjects" },
+              { value: "4.9★", label: "Avg. Rating" },
+            ].map((s) => (
+              <div key={s.label} className="flex items-center gap-2">
+                <span className="font-heading font-bold text-slate-900 text-base">{s.value}</span>
+                <span className="text-slate-500 text-sm">{s.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
