@@ -190,7 +190,7 @@ export default function Footer() {
 
       {/* ── BOTTOM BAR ── */}
       <div style={{ height: "1px", background: "rgba(255,255,255,0.12)" }} />
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-6 pb-24 md:py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
         <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.75rem", margin: 0 }}>
           © 2026 Faculties Online. All rights reserved.
         </p>

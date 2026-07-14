@@ -493,9 +493,9 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* ══ RIGHT COLUMN ══ */}
+          {/* ══ RIGHT COLUMN (Hidden on mobile view per request) ══ */}
           <motion.div
-            className="w-full lg:flex-1 flex justify-center lg:justify-end"
+            className="hidden lg:flex w-full lg:flex-1 justify-center lg:justify-end"
             variants={fadeRight}
             initial="hidden"
             animate="visible"
