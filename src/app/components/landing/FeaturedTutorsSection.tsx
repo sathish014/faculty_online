@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const tutors = [
@@ -28,17 +29,6 @@ const tutors = [
   },
   {
     id: "tutor-3",
-    name: "Anjali Mehta",
-    subject: "Spoken English",
-    rating: 4.9,
-    reviews: "2,150",
-    price: "₹600/hr",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop",
-    badge: "Top Pick",
-    specialty: "Communication Coach",
-  },
-  {
-    id: "tutor-4",
     name: "Amit Patel",
     subject: "Python & Data Science",
     rating: 4.7,
@@ -49,7 +39,7 @@ const tutors = [
     specialty: "Full Stack Dev",
   },
   {
-    id: "tutor-5",
+    id: "tutor-4",
     name: "Sneha Reddy",
     subject: "Biology & Botany",
     rating: 4.8,
@@ -59,7 +49,7 @@ const tutors = [
     specialty: "NEET Biology",
   },
   {
-    id: "tutor-6",
+    id: "tutor-5",
     name: "Vikram Malhotra",
     subject: "Computer Science & AI",
     rating: 4.9,
@@ -70,7 +60,7 @@ const tutors = [
     specialty: "AI & ML Mentor",
   },
   {
-    id: "tutor-7",
+    id: "tutor-6",
     name: "Divya Nair",
     subject: "Economics & Finance",
     rating: 4.8,
@@ -81,7 +71,7 @@ const tutors = [
     specialty: "CA & Commerce",
   },
   {
-    id: "tutor-8",
+    id: "tutor-7",
     name: "Rohan Gupta",
     subject: "Organic Chemistry",
     rating: 4.9,
@@ -101,7 +91,7 @@ export default function FeaturedTutorsSection() {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = 260; // card width (240px) + gap (20px)
+      const scrollAmount = 295; // card width (275px) + gap (20px)
       scrollRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -124,7 +114,7 @@ export default function FeaturedTutorsSection() {
       ref={ref}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="pt-8 pb-16"
+      className="pt-8 "
       style={{ background: "var(--bg-secondary)" }}
     >
       <div className="line-divider mb-10" />
@@ -143,7 +133,7 @@ export default function FeaturedTutorsSection() {
           style={{ transitionDelay: "100ms" }}
         >
           <h2 className="text-3xl md:text-4xl font-black tracking-tight leading-tight text-[#1A1A24]">
-            Trending Mentors
+            Trending Tutors
           </h2>
 
           <div className="flex items-center gap-3 self-start sm:self-auto">
@@ -169,10 +159,13 @@ export default function FeaturedTutorsSection() {
               </button>
             </div> */}
 
-            <button className="btn-ghost rounded-lg px-5 py-2.5 flex items-center gap-2 text-sm font-semibold">
+            <Link
+              href="/tutor/search"
+              className="btn-ghost rounded-lg px-5 py-2.5 flex items-center gap-2 text-sm font-semibold cursor-pointer"
+            >
               View all tutors
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -192,77 +185,68 @@ export default function FeaturedTutorsSection() {
           {/* Tutor Cards — horizontal scroll */}
           <div
             ref={scrollRef}
-            className={`flex gap-5 overflow-x-auto pb-4 scroll-smooth custom-scrollbar w-full min-w-0 max-w-full transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+            className={`flex gap-5 overflow-x-auto pt-3 pb-6 px-1 scroll-smooth custom-scrollbar w-full min-w-0 max-w-full transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             style={{ transitionDelay: "250ms" }}
           >
-          {tutors.map((tutor, i) => (
-            <div
+          {tutors.map((tutor) => (
+            <Link
               key={tutor.id}
-              className="w-[240px] flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer group transition-all duration-300"
+              href={`/tutor/${tutor.id}`}
+              className="w-[265px] sm:w-[275px] flex-shrink-0 bg-white rounded-[20px] overflow-hidden cursor-pointer group transition-all duration-300 flex flex-col hover:-translate-y-1 hover:shadow-xl hover:border-slate-300 transform-gpu block"
               style={{
-                background: "var(--bg-sidebar)",
-                border: "1px solid rgba(26,26,36,0.08)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,107,53,0.35)";
-                e.currentTarget.style.transform = "translateY(-6px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(26,26,36,0.08)";
-                e.currentTarget.style.transform = "translateY(0)";
+                border: "1.5px solid rgba(26, 26, 36, 0.14)",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.05)",
               }}
             >
-              {/* Avatar */}
-              <div className="relative h-44 overflow-hidden">
+              {/* Image & Top-Left Specialty Pill */}
+              <div className="relative h-[210px] overflow-hidden bg-slate-100 flex-shrink-0">
                 <img
                   src={tutor.image}
                   alt={tutor.name}
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
-                {/* Badge */}
-                {tutor.badge && (
+                {/* Specialty Pill Badge */}
+                {tutor.specialty && (
                   <div
-                    className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold shadow-sm"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.95)",
-                      border: "1px solid rgba(255,98,0,0.3)",
-                      color: "#ff6200",
-                      backdropFilter: "blur(4px)",
-                    }}
+                    className="absolute top-3.5 left-3.5 px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-wider text-white shadow-md"
+                    style={{ background: "#8c2445" }}
                   >
-                    {tutor.badge}
+                    {tutor.specialty}
                   </div>
                 )}
               </div>
 
-              {/* Info */}
-              <div className="p-4">
-                <p className="text-[11px] font-semibold uppercase tracking-wider mb-1" style={{ color: "#ff6200" }}>
-                  {tutor.specialty}
-                </p>
-                <h3 className="font-bold text-sm leading-tight mb-0.5 text-[#1A1A24] line-clamp-1">
-                  {tutor.name}
-                </h3>
-                <p className="text-xs mb-3" style={{ color: "rgba(26,26,36,0.55)" }}>
-                  {tutor.subject}
-                </p>
+              {/* Bottom Card Content */}
+              <div className="p-5 flex flex-col justify-between flex-1 bg-white">
+                <div>
+                  <h3 className="font-bold text-base md:text-[17px] leading-tight mb-1 text-[#1A1A24] line-clamp-1">
+                    {tutor.name}
+                  </h3>
+                  <p className="text-xs font-medium text-[#64748b] leading-relaxed line-clamp-2">
+                    {tutor.subject}
+                  </p>
+                </div>
 
-                {/* Rating */}
-                <div className="flex items-center justify-between">
+                {/* Rating & Price Footer Row */}
+                <div className="flex items-center justify-between pt-4 mt-3 border-t border-slate-100/80">
                   <div className="flex items-center gap-1.5">
-                    <span
-                      className="w-1.5 h-1.5 rounded-full"
-                      style={{ background: "#ff6200" }}
-                    />
-                    <span className="text-xs font-bold text-[#1A1A24]">{tutor.rating}</span>
-                    <span className="text-[10px]" style={{ color: "rgba(26,26,36,0.5)" }}>
+                    <span className="text-[#ff6200] text-sm font-black">★</span>
+                    <span className="text-sm font-bold text-[#1A1A24]">{tutor.rating}</span>
+                    <span className="text-xs font-medium text-[#64748b]">
                       ({tutor.reviews})
                     </span>
                   </div>
-                  <span className="text-xs font-bold text-[#1A1A24]">{tutor.price}</span>
+                  <div className="text-right flex items-baseline gap-0.5">
+                    <span className="text-[15px] font-black text-[#4D148C]">
+                      {tutor.price.split("/")[0]}
+                    </span>
+                    <span className="text-xs font-medium text-[#64748b]">
+                      /{tutor.price.split("/")[1] || "hr"}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
           </div>
 

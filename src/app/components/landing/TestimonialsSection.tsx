@@ -101,7 +101,7 @@ export default function TestimonialsSection() {
     <section
       id="testimonials"
       ref={ref}
-      className="pt-8 pb-16"
+      className="pt-8"
       style={{ background: "var(--bg-secondary)" }}
     >
       <div className="line-divider mb-10" />
@@ -232,7 +232,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* Dot indicators */}
-          <div className="flex items-center justify-center gap-2 mb-10">
+          {/* <div className="flex items-center justify-center gap-2 mb-10">
             {testimonials.map((_, i) => (
               <button
                 key={i}
@@ -245,10 +245,10 @@ export default function TestimonialsSection() {
                 }}
               />
             ))}
-          </div>
+          </div> */}
 
           {/* Grid of all testimonials */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
             {testimonials.map((item, i) => (
               <button
                 key={item.id}
@@ -277,7 +277,7 @@ export default function TestimonialsSection() {
                 <p className="text-[11px] text-[rgba(26,26,36,0.6)] line-clamp-2 italic">&ldquo;{item.text.slice(0, 70)}…&rdquo;</p>
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

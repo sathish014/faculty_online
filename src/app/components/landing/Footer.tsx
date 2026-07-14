@@ -59,71 +59,16 @@ export default function Footer() {
   };
 
   return (
-    <footer id="footer" style={{ background: "var(--bg-secondary)" }}>
+    <footer id="footer" style={{ background: "#4D148C", color: "#ffffff" }}>
 
       {/* Top divider */}
-      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(26,26,36,0.12), transparent)" }} />
+      <div style={{ height: "1px", background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)" }} />
 
-      {/* ── NEWSLETTER STRIP ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10 sm:py-12">
-        <div className="bg-white border border-[#1A1A24]/10 rounded-2xl p-6 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 shadow-sm">
-          <div>
-            <h3 style={{ color: "#1A1A24", fontWeight: 700, fontSize: "1.125rem", margin: "0 0 4px 0" }}>
-              Stay sharp.
-            </h3>
-            <p style={{ color: "rgba(26,26,36,0.55)", fontSize: "0.875rem", margin: 0 }}>
-              Tutor tips, student resources & platform updates — weekly.
-            </p>
-          </div>
-
-          <div className="w-full lg:w-auto flex-shrink-0">
-            {subscribed ? (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  padding: "10px 20px",
-                  borderRadius: "12px",
-                  fontSize: "0.875rem",
-                  fontWeight: 600,
-                  background: "rgba(255,98,0,0.1)",
-                  border: "1px solid rgba(255,98,0,0.3)",
-                  color: "#ff6200",
-                }}
-              >
-                ✓ Subscribed! Check your inbox.
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  id="footer-newsletter-email"
-                  suppressHydrationWarning
-                  className="bg-[#1A1A24]/5 border border-[#1A1A24]/15 text-[#1A1A24] rounded-xl px-4 py-2.5 text-sm w-full sm:w-60 outline-none focus:border-[#ff6200] transition-colors"
-                />
-                <button
-                  type="submit"
-                  id="footer-newsletter-submit"
-                  suppressHydrationWarning
-                  className="bg-[#ff6200] text-white font-bold rounded-xl px-5 py-2.5 text-sm border-none cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap shadow-md hover:bg-[#e05500] transition-all w-full sm:w-auto"
-                >
-                  Subscribe
-                  <ArrowRight style={{ width: "14px", height: "14px" }} />
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </div>
 
       {/* ── MAIN LINK COLUMNS ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-12 pb-12">
         {/* Thin divider */}
-        <div style={{ height: "1px", background: "rgba(26,26,36,0.07)", marginBottom: "3rem" }} />
+        <div style={{ height: "1px", background: "rgba(255,255,255,0.1)", marginBottom: "3rem" }} />
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {/* Brand column */}
@@ -145,20 +90,21 @@ export default function Footer() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  border: "1px solid rgba(255,107,53,0.4)",
+                  border: "1px solid rgba(255,98,0,0.6)",
                   borderRadius: "5px",
+                  background: "rgba(255,98,0,0.15)",
                 }}
               >
                 <BookOpen style={{ width: "14px", height: "14px", color: "#ff6200" }} />
               </div>
-              <span style={{ fontWeight: 700, fontSize: "0.875rem", color: "#1A1A24" }}>
+              <span style={{ fontWeight: 700, fontSize: "0.875rem", color: "#ffffff" }}>
                 Faculties<span style={{ color: "#ff6200" }}>.</span>
-                <span style={{ color: "rgba(26,26,36,0.6)" }}>Online</span>
+                <span style={{ color: "rgba(255,255,255,0.8)" }}>Online</span>
               </span>
             </Link>
             <p
               style={{
-                color: "rgba(26,26,36,0.5)",
+                color: "rgba(255,255,255,0.7)",
                 fontSize: "0.875rem",
                 lineHeight: 1.7,
                 marginBottom: "24px",
@@ -180,19 +126,21 @@ export default function Footer() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: "rgba(26,26,36,0.05)",
-                    border: "1px solid rgba(26,26,36,0.1)",
-                    color: "rgba(26,26,36,0.5)",
+                    background: "rgba(255,255,255,0.08)",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    color: "rgba(255,255,255,0.85)",
                     transition: "all 0.2s ease",
                     textDecoration: "none",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(255,98,0,0.4)";
+                    e.currentTarget.style.borderColor = "#ff6200";
                     e.currentTarget.style.color = "#ff6200";
+                    e.currentTarget.style.background = "rgba(255,98,0,0.15)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(26,26,36,0.1)";
-                    e.currentTarget.style.color = "rgba(26,26,36,0.5)";
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.85)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.08)";
                   }}
                 >
                   <Icon style={{ width: "14px", height: "14px" }} />
@@ -206,7 +154,7 @@ export default function Footer() {
             <div key={title}>
               <h4
                 style={{
-                  color: "rgba(26,26,36,0.4)",
+                  color: "rgba(255,255,255,0.55)",
                   fontSize: "10px",
                   fontWeight: 700,
                   textTransform: "uppercase",
@@ -222,13 +170,13 @@ export default function Footer() {
                     <Link
                       href={link.href}
                       style={{
-                        color: "rgba(26,26,36,0.65)",
+                        color: "rgba(255,255,255,0.82)",
                         fontSize: "0.875rem",
                         textDecoration: "none",
                         transition: "color 0.2s ease",
                       }}
-                      onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#1A1A24")}
-                      onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(26,26,36,0.65)")}
+                      onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#ff6200")}
+                      onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.82)")}
                     >
                       {link.label}
                     </Link>
@@ -241,19 +189,19 @@ export default function Footer() {
       </div>
 
       {/* ── BOTTOM BAR ── */}
-      <div style={{ height: "1px", background: "rgba(26,26,36,0.07)" }} />
+      <div style={{ height: "1px", background: "rgba(255,255,255,0.12)" }} />
       <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-        <p style={{ color: "rgba(26,26,36,0.45)", fontSize: "0.75rem", margin: 0 }}>
-          © 2024 Faculties Online. All rights reserved.
+        <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.75rem", margin: 0 }}>
+          © 2026 Faculties Online. All rights reserved.
         </p>
-        <p style={{ color: "rgba(26,26,36,0.45)", fontSize: "0.75rem", margin: 0 }}>
+        <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.75rem", margin: 0 }}>
           Made by{" "}
           <Link
             href="https://digimabble.com/"
             target="_blank"
-            style={{ color: "rgba(255,107,53,0.8)", textDecoration: "none" }}
+            style={{ color: "#ff6200", fontWeight: 600, textDecoration: "none" }}
           >
-            DigiMabbel
+            DIGI MABBLE  
           </Link>
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
@@ -262,13 +210,13 @@ export default function Footer() {
               key={label}
               href="#"
               style={{
-                color: "rgba(26,26,36,0.45)",
+                color: "rgba(255,255,255,0.65)",
                 fontSize: "0.75rem",
                 textDecoration: "none",
                 transition: "color 0.2s ease",
               }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#1A1A24")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(26,26,36,0.45)")}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#ffffff")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.65)")}
             >
               {label}
             </Link>

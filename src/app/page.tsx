@@ -21,7 +21,7 @@ export default function Home() {
 
       <HeroSection />
 
-      <TrustedCompaniesSection />
+      {/* <TrustedCompaniesSection /> */}
 
       <CategoriesSection />
 
@@ -31,9 +31,9 @@ export default function Home() {
 
       <LearningRoadmapSection />
 
-      <UpcomingEventsSection />
+      {/* <UpcomingEventsSection /> */}
 
-      <PromoBannerSection />
+      {/* <PromoBannerSection /> */}
 
       <LatestBlogsSection />
 

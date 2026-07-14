@@ -1,158 +1,128 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { FiArrowRight, FiGlobe, FiCode } from "react-icons/fi";
+import { TbMath, TbMicroscope } from "react-icons/tb";
+import { MdOutlineScience, MdOutlineSchool, MdTranslate } from "react-icons/md";
+import { BsLaptop, BsBarChartFill } from "react-icons/bs";
+import { RiGovernmentLine } from "react-icons/ri";
+import { HiOutlineSun } from "react-icons/hi2";
+import type { IconType } from "react-icons";
 
-const categories = [
-  { emoji: "📐", name: "Mathematics", count: "2.5M learners" },
-  { emoji: "⚛️", name: "Physics", count: "1.8M learners" },
-  { emoji: "🧪", name: "Chemistry", count: "1.5M learners" },
-  { emoji: "💻", name: "Python", count: "3.2M learners" },
-  { emoji: "🌐", name: "Web Dev", count: "1.1M learners" },
-  { emoji: "🗣️", name: "Spoken English", count: "4M learners" },
-  { emoji: "📊", name: "Data Science", count: "900K learners" },
-  { emoji: "🎓", name: "JEE Mains", count: "2M learners" },
-  { emoji: "🔬", name: "NEET", count: "1.9M learners" },
-  { emoji: "🏛️", name: "UPSC", count: "3.5M learners" },
-  { emoji: "🇪🇸", name: "Spanish", count: "1.2M learners" },
-  { emoji: "☕", name: "Java", count: "900K learners" },
-];
-
-const trendingGroups = [
-  {
-    label: "01",
-    category: "Programming",
-    topics: ["Python", "Web Development", "Java", "React", "Node.js"],
-  },
-  {
-    label: "02",
-    category: "Academics",
-    topics: ["Mathematics", "Physics", "Chemistry", "Biology", "Statistics"],
-  },
-  {
-    label: "03",
-    category: "Languages",
-    topics: ["Spoken English", "Spanish", "French", "Hindi", "German"],
-  },
-  {
-    label: "04",
-    category: "Competitive",
-    topics: ["JEE Mains", "NEET", "UPSC", "CAT", "GMAT"],
-  },
+const categories: {
+  name: string;
+  icon: IconType;
+}[] = [
+  { name: "Mathematics",    icon: TbMath           },
+  { name: "Physics",        icon: HiOutlineSun     },
+  { name: "Chemistry",      icon: MdOutlineScience },
+  { name: "Python",         icon: BsLaptop         },
+  { name: "Web Dev",        icon: FiGlobe          },
+  { name: "Spoken English", icon: MdTranslate      },
+  { name: "Data Science",   icon: BsBarChartFill   },
+  { name: "JEE Mains",      icon: MdOutlineSchool  },
+  { name: "NEET",           icon: TbMicroscope     },
+  { name: "UPSC",           icon: RiGovernmentLine },
+  { name: "Spanish",        icon: FiGlobe          },
+  { name: "Java",           icon: FiCode           },
 ];
 
 export default function CategoriesSection() {
-  const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef   = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.1 }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
+  const headerInView = useInView(headerRef, { once: true, margin: "-60px" });
+  const gridInView   = useInView(gridRef,   { once: true, margin: "-60px" });
 
   return (
     <section
       id="categories"
-      ref={ref}
-      className="pt-8 pb-10"
-      style={{ background: "var(--bg-primary)" }}
+      className="pt-12 "
+      style={{ background: "var(--bg-primary, #ffffff)" }}
     >
-      <div className="line-divider mb-10" />
       <div className="container-xl">
-
-        {/* Section label */}
+        {/* Top Header Row matching user design exactly */}
         <div
-          className={`flex items-center gap-3 mb-4 transition-all duration-600 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          ref={headerRef}
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10"
         >
-          <span className="text-[#ff6200] text-xs font-bold uppercase tracking-widest">Explore</span>
-          <span className="h-px flex-1 max-w-[40px]" style={{ background: "rgba(255,98,0,0.4)" }} />
-        </div>
-
-        {/* Headline */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
-          <h2
-            className={`text-3xl md:text-4xl font-black tracking-tight leading-tight transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-            style={{ color: "#1A1A24", maxWidth: "480px", transitionDelay: "100ms" }}
+          <motion.h2
+            className="text-2xl sm:text-3xl md:text-[32px] font-black tracking-tight text-[#1A1A24]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            Every subject.<br />Every level.
-          </h2>
-          <button
-            className={`btn-ghost rounded-lg px-5 py-2.5 flex items-center gap-2 text-sm font-semibold transition-all duration-700 self-start lg:self-auto ${visible ? "opacity-100" : "opacity-0"}`}
-            style={{ transitionDelay: "200ms" }}
+            Explore All Subjects
+          </motion.h2>
+
+          <motion.a
+            href="/tutor/search"
+            className="inline-flex items-center gap-2 text-sm md:text-base font-bold text-[#ff6200] group self-start sm:self-auto cursor-pointer"
+            initial={{ opacity: 0, x: 16 }}
+            animate={headerInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            whileHover={{ x: 4 }}
           >
-            Browse all subjects
-            <ArrowRight className="w-4 h-4" />
-          </button>
+            <span>View All Categories</span>
+            <FiArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </motion.a>
         </div>
 
-        {/* Category Pills Grid */}
-        <div
-          className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 mb-20 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-          style={{ transitionDelay: "250ms" }}
-        >
-          {categories.map((cat, i) => (
-            <button
-              key={i}
-              className="card-minimal rounded-xl p-4 flex flex-col items-start gap-2 text-left group cursor-pointer"
-            >
-              <span className="text-2xl">{cat.emoji}</span>
-              <div>
-                <p className="text-sm font-semibold text-[#1A1A24] leading-tight">{cat.name}</p>
-                <p className="text-[11px] mt-0.5" style={{ color: "rgba(26,26,36,0.55)" }}>{cat.count}</p>
-              </div>
-            </button>
-          ))}
-        </div>
-
-        {/* Trending Topics Block */}
-        <div
-          className={`rounded-2xl p-5 sm:p-8 md:p-10 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-          style={{
-            background: "var(--bg-secondary)",
-            border: "1px solid rgba(26,26,36,0.08)",
-            transitionDelay: "400ms",
+        {/* Categories Grid matching user design: 6 columns on lg, rounded square orange icon box, title & count */}
+        <motion.div
+          ref={gridRef}
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-5 mb-8"
+          initial="hidden"
+          animate={gridInView ? "visible" : "hidden"}
+          variants={{
+            hidden:  {},
+            visible: { transition: { staggerChildren: 0.06, delayChildren: 0.05 } },
           }}
         >
-          <div className="flex items-center justify-between gap-2 mb-8">
-            <h3 className="text-xl font-bold text-[#1A1A24] whitespace-nowrap">Trending topics</h3>
-            <div className="hidden sm:block h-px flex-1 mx-6" style={{ background: "rgba(26,26,36,0.07)" }} />
-            <span className="text-xs text-[#ff6200] font-semibold uppercase tracking-wider whitespace-nowrap">This week</span>
-          </div>
+          {categories.map((cat, i) => (
+            <motion.a
+              key={i}
+              href={`/tutor/search?subject=${encodeURIComponent(cat.name)}`}
+              className="bg-white rounded-[20px] p-5 sm:p-6 flex flex-col items-start text-left group cursor-pointer relative overflow-hidden block"
+              style={{
+                border: "1.5px solid rgba(26,26,36,0.18)",
+                boxShadow: "0 4px 16px rgba(0,0,0,0.05)",
+                transition: "border-color 0.2s, box-shadow 0.2s",
+              }}
+              variants={{
+                hidden:  { opacity: 0, y: 24, scale: 0.94 },
+                visible: { opacity: 1, y: 0,  scale: 1 },
+              }}
+              transition={{ type: "spring" as const, stiffness: 350, damping: 25 }}
+              whileHover={{
+                y: -5,
+                boxShadow: "0 16px 32px rgba(140, 36, 69, 0.12)",
+                borderColor: "#8c2445",
+              }}
+              whileTap={{ scale: 0.96 }}
+            >
+              {/* Circular Maroon (#8c2445) Icon Box */}
+              <motion.div
+                className="w-13 h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-5 shadow-md"
+                style={{
+                  background: "#8c2445",
+                  color: "#ffffff",
+                  boxShadow: "0 4px 14px rgba(140, 36, 69, 0.28)",
+                }}
+                whileHover={{ scale: 1.08 }}
+                transition={{ type: "spring" as const, stiffness: 400, damping: 20 }}
+              >
+                <cat.icon className="w-6 h-6" />
+              </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {trendingGroups.map((block) => (
-              <div key={block.label}>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-xs font-bold text-[#ff6200] font-mono">{block.label}</span>
-                  <span className="text-sm font-bold text-[#1A1A24]">{block.category}</span>
-                </div>
-                <ul className="space-y-3">
-                  {block.topics.map((topic, tIdx) => (
-                    <li key={tIdx}>
-                      <a
-                        href="#"
-                        className="group flex items-center gap-2 text-sm transition-all duration-200"
-                        style={{ color: "rgba(26,26,36,0.65)" }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = "#ff6200")}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(26,26,36,0.65)")}
-                      >
-                        <span
-                          className="w-1 h-1 rounded-full flex-shrink-0"
-                          style={{ background: "rgba(255,98,0,0.4)" }}
-                        />
-                        {topic}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
+              {/* Title */}
+              <p className="text-[15px] sm:text-base font-bold text-[#1A1A24] leading-tight group-hover:text-[#8c2445] transition-colors">
+                {cat.name}
+              </p>
+            </motion.a>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
