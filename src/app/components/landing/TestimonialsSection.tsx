@@ -101,7 +101,7 @@ export default function TestimonialsSection() {
     <section
       id="testimonials"
       ref={ref}
-      className="pt-8 pb-16"
+      className="pt-8"
       style={{ background: "var(--bg-secondary)" }}
     >
       <div className="line-divider mb-10" />
@@ -113,18 +113,18 @@ export default function TestimonialsSection() {
           </div>
         </ScrollReveal>
 
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-12">
+        <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-5 mb-12 text-center lg:text-left">
           <ScrollReveal delay={100}>
             <h2 className="text-3xl md:text-4xl font-black tracking-tight leading-tight text-[#1A1A24]">
               Real results from<br />
               <span style={{ color: "#ff6200" }}>real learners.</span>
             </h2>
           </ScrollReveal>
-          <ScrollReveal delay={200}>
-            <div className="flex items-center gap-2">
+          <ScrollReveal delay={200} className="w-full lg:w-auto flex justify-center lg:justify-end">
+            <div className="flex items-center justify-center gap-2.5">
               <button
                 onClick={() => { prev(); pauseAuto(); setTimeout(resumeAuto, 3000); }}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-sm"
                 style={{ background: "var(--bg-primary)", border: "1px solid rgba(26,26,36,0.12)" }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLElement).style.background = "#ff6200";
@@ -141,7 +141,7 @@ export default function TestimonialsSection() {
               </button>
               <button
                 onClick={() => { next(); pauseAuto(); setTimeout(resumeAuto, 3000); }}
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-sm"
                 style={{ background: "var(--bg-primary)", border: "1px solid rgba(26,26,36,0.12)" }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLElement).style.background = "#ff6200";
@@ -156,7 +156,7 @@ export default function TestimonialsSection() {
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
-              <span className="text-xs text-[rgba(26,26,36,0.45)] ml-1 font-medium">
+              <span className="text-xs text-[rgba(26,26,36,0.5)] ml-1 font-semibold">
                 {current + 1} / {total}
               </span>
             </div>
@@ -232,7 +232,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* Dot indicators */}
-          <div className="flex items-center justify-center gap-2 mb-10">
+          {/* <div className="flex items-center justify-center gap-2 mb-10">
             {testimonials.map((_, i) => (
               <button
                 key={i}
@@ -245,10 +245,10 @@ export default function TestimonialsSection() {
                 }}
               />
             ))}
-          </div>
+          </div> */}
 
           {/* Grid of all testimonials */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
             {testimonials.map((item, i) => (
               <button
                 key={item.id}
@@ -277,7 +277,7 @@ export default function TestimonialsSection() {
                 <p className="text-[11px] text-[rgba(26,26,36,0.6)] line-clamp-2 italic">&ldquo;{item.text.slice(0, 70)}…&rdquo;</p>
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
