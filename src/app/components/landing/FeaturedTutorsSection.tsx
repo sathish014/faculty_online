@@ -191,7 +191,7 @@ export default function FeaturedTutorsSection() {
           {tutors.map((tutor) => (
             <Link
               key={tutor.id}
-              href={`/tutor/${tutor.id}`}
+              href={`/faculty/f${tutor.id.replace("tutor-", "")}`}
               className="w-[265px] sm:w-[275px] flex-shrink-0 bg-white rounded-[20px] overflow-hidden cursor-pointer group transition-all duration-300 flex flex-col hover:-translate-y-1 hover:shadow-xl hover:border-slate-300 transform-gpu block"
               style={{
                 border: "1.5px solid rgba(26, 26, 36, 0.14)",

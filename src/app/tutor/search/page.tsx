@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
 import Navbar from "../../components/landing/Navbar";
 import Footer from "../../components/landing/Footer";
 import { 
@@ -577,12 +578,12 @@ export default function SearchTutorsPage() {
 
                       {/* Left: Avatar & Badges */}
                       <div className="flex flex-col items-center w-full md:w-44 flex-shrink-0">
-                        <div className="relative w-28 h-28 mb-4">
-                          <img src={tutor.image} alt={tutor.name} className="w-full h-full rounded-2xl object-cover border-2 border-[#ff6200]/20 shadow-md group-hover:scale-105 transition-transform" />
+                        <Link href={`/faculty/f${Math.min(tutor.id, 4)}`} className="relative w-28 h-28 mb-4 block cursor-pointer group-hover:scale-105 transition-transform">
+                          <img src={tutor.image} alt={tutor.name} className="w-full h-full rounded-2xl object-cover border-2 border-[#ff6200]/20 shadow-md" />
                           {tutor.onlineAvailable && (
                             <span className="absolute bottom-1 right-1 w-4 h-4 bg-emerald-500 border-2 border-white rounded-full" title="Online right now" />
                           )}
-                        </div>
+                        </Link>
                         <div className="flex items-center justify-center gap-1.5 px-3 py-1.5 bg-[#ff6200]/10 border border-[#ff6200]/20 rounded-xl text-xs font-extrabold text-[#ff6200] w-full mb-2">
                           {tutor.experience}
                         </div>
@@ -595,7 +596,9 @@ export default function SearchTutorsPage() {
                       <div className="flex-1 flex flex-col">
                         <div className="flex items-start justify-between mb-1">
                           <div className="flex items-center gap-2">
-                            <h3 className="text-xl font-black text-[#1A1A24] group-hover:text-[#4D148C] transition-colors">{tutor.name}</h3>
+                            <Link href={`/faculty/f${Math.min(tutor.id, 4)}`} className="text-xl font-black text-[#1A1A24] group-hover:text-[#4D148C] transition-colors hover:underline">
+                              {tutor.name}
+                            </Link>
                             {tutor.isVerified && (
                               <span className="inline-flex items-center gap-1 text-[10px] font-extrabold text-emerald-700 bg-emerald-100/80 px-2 py-0.5 rounded-full uppercase tracking-wider border border-emerald-300/50">
                                 <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Verified
@@ -633,10 +636,17 @@ export default function SearchTutorsPage() {
                         <div className="mt-auto flex flex-wrap items-center gap-3 pt-4 border-t border-[#1A1A24]/10">
                           <button 
                             onClick={() => handleOpenBooking(tutor)}
-                            className="flex items-center gap-2 px-4 py-2.5 bg-[#4D148C]/10 text-[#4D148C] text-xs font-extrabold rounded-xl hover:bg-[#4D148C] hover:text-white transition-all active:scale-95 shadow-sm"
+                            className="flex items-center gap-2 px-4 py-2.5 bg-[#4D148C]/10 text-[#4D148C] text-xs font-extrabold rounded-xl hover:bg-[#4D148C] hover:text-white transition-all active:scale-95 shadow-sm cursor-pointer"
                           >
                             <Calendar className="w-3.5 h-3.5" /> Book Trial Lesson
                           </button>
+                          <Link 
+                            href={`/faculty/f${Math.min(tutor.id, 4)}`}
+                            className="flex items-center gap-1.5 px-4 py-2.5 bg-[#ff6200]/10 text-[#ff6200] text-xs font-extrabold rounded-xl hover:bg-[#ff6200] hover:text-white transition-all active:scale-95 shadow-sm cursor-pointer"
+                          >
+                            <span>View Profile & Schedule</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
                         </div>
                       </div>
 
