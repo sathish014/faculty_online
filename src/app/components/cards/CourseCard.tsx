@@ -147,13 +147,10 @@ export default function CourseCard({ course }: { course: CourseCardData }) {
               <span className="text-xs text-[rgba(26,26,36,0.4)] line-through">{course.originalPrice}</span>
             )}
           </div>
-          <button
-            onClick={(e) => e.preventDefault()}
-            className="btn-coral rounded-xl px-3.5 py-2 text-xs font-bold flex items-center gap-1.5"
-          >
+          <span className="btn-coral rounded-xl px-3.5 py-2 text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all group-hover:scale-105">
             <BookOpen className="w-3 h-3" />
             Enroll
-          </button>
+          </span>
         </div>
       </div>
     </Link>

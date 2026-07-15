@@ -47,11 +47,9 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "Find Tutors", href: "/tutor/search", show: true },
-    { label: "Courses", href: "/courses", show: true, hasMega: "Courses" },
+    { label: "Courses", href: "/courses", show: true },
     { label: "Faculty", href: "/faculty", show: true },
-    { label: "Resources", href: "/resources", show: true, hasMega: "Resources" },
     { label: "Find Jobs", href: "/jobs", show: true },
-    { label: "Events", href: "/events", show: true },
     {
       label: "Dashboard",
       href: userRole === "tutor" ? "/teacher-dashboard" : "/student-dashboard",
@@ -101,13 +99,14 @@ export default function Navbar() {
                   </button>
                 ) : hasMega ? (
                   <div key={link.label} className="relative">
-                    <button
+                    <Link
+                      href={link.href}
                       className="px-3.5 py-2 text-sm font-medium rounded-md transition-all duration-200 text-white/80 hover:text-white hover:bg-white/10 flex items-center gap-1"
                       onMouseEnter={() => setActiveMenu(hasMega)}
                     >
                       {link.label}
                       <ChevronDown className={`w-3.5 h-3.5 transition-transform ${activeMenu === hasMega ? "rotate-180" : ""}`} />
-                    </button>
+                    </Link>
                     {/* Mega menu dropdown */}
                     {activeMenu === hasMega && (
                       <div
@@ -256,11 +255,9 @@ export default function Navbar() {
             <nav className="flex flex-col gap-1 p-4 flex-1">
               {[
                 { label: "Find Tutors", href: "/tutor/search" },
-                { label: "All Courses", href: "/courses" },
+                { label: "Courses", href: "/courses" },
                 { label: "Faculty", href: "/faculty" },
-                { label: "Resources", href: "/resources" },
                 { label: "Blog", href: "/blog" },
-                { label: "Events", href: "/events" },
                 { label: "Find Jobs", href: "/jobs" },
                 { label: "FAQ", href: "/faq" },
                 { label: "Learning Paths", href: "/learning-path" },
