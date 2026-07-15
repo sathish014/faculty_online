@@ -377,7 +377,7 @@ export default function SearchTutorsPage() {
       )}
 
       {/* Hero Section */}
-      <div className="relative pt-36 pb-20 px-4 bg-white border-b border-[#1A1A24]/5">
+      <div className="relative pt-20 pb-12 px-4 bg-white border-b border-[#1A1A24]/5">
         <div className="max-w-5xl mx-auto text-center space-y-6 animate-fade-up">
           <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-[#4D148C]/15 text-[#4D148C] border border-[#4D148C]/30 uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" /> Verified Faculty Directory
@@ -424,7 +424,7 @@ export default function SearchTutorsPage() {
       </div>
 
       {/* Main Content Section */}
-      <div id="available-mentors-section" className="flex-grow max-w-7xl mx-auto w-full px-4 pt-8 pb-24">
+      <div id="available-mentors-section" className="flex-grow max-w-7xl mx-auto w-full px-4 pt-8 ">
         <div className="flex flex-col lg:flex-row gap-8">
 
           {/* Left Column - Main Content */}
@@ -698,7 +698,7 @@ export default function SearchTutorsPage() {
 
             {/* Pagination */}
             {totalTutorPages > 1 && (
-              <div className="flex items-center justify-center gap-2.5 mt-12 mb-16 pb-8">
+              <div className="flex items-center justify-center gap-2.5 mt-12 mb-4">
                 <button
                   onClick={() => handleTutorPageChange(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
