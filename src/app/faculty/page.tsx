@@ -12,7 +12,7 @@ const faculty: FacultyCardData[] = [
   { id: "f3", name: "Anjali Mehta", image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop", specialty: "Communication Coach", subject: "Spoken English", rating: 4.9, reviewCount: "2,150", students: "35K+", courses: 8, price: "₹600/hr", badge: "Top Pick", isVerified: true },
   { id: "f4", name: "Amit Patel", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop", specialty: "Full Stack Dev", subject: "Python & Data Science", rating: 4.7, reviewCount: "3,412", students: "22K+", courses: 6, price: "₹1,200/hr", badge: "Highest Rated", isVerified: true },
   { id: "f5", name: "Sneha Reddy", image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=400&auto=format&fit=crop", specialty: "NEET Biology", subject: "Biology & Botany", rating: 4.8, reviewCount: "780", students: "9K+", courses: 3, price: "₹650/hr", isVerified: true },
-  { id: "f6", name: "Vikram Malhotra", image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop", specialty: "AI & ML Mentor", subject: "Computer Science & AI", rating: 4.9, reviewCount: "1,540", students: "15K+", courses: 7, price: "₹1,000/hr", badge: "Top Pick", isVerified: true },
+  { id: "f6", name: "Vikram Malhotra", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop", specialty: "AI & ML Mentor", subject: "Computer Science & AI", rating: 4.9, reviewCount: "1,540", students: "15K+", courses: 7, price: "₹1,000/hr", badge: "Top Pick", isVerified: true },
   { id: "f7", name: "Divya Nair", image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop", specialty: "CA & Commerce", subject: "Economics & Finance", rating: 4.8, reviewCount: "890", students: "8K+", courses: 4, price: "₹750/hr", badge: "Highest Rated", isVerified: true },
   { id: "f8", name: "Rohan Gupta", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop", specialty: "JEE Advanced", subject: "Organic Chemistry", rating: 4.9, reviewCount: "1,120", students: "11K+", courses: 4, price: "₹850/hr", isVerified: true },
 ];
@@ -91,7 +91,7 @@ export default function FacultyPage() {
         </div>
 
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full min-w-0 max-w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full min-w-0 max-w-full mb-6">
             {filtered.map((f) => (
               <FacultyCard key={f.id} faculty={f} />
             ))}

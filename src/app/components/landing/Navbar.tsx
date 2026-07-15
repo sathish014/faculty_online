@@ -47,11 +47,9 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "Find Tutors", href: "/tutor/search", show: true },
-    { label: "Courses", href: "/courses", show: true, hasMega: "Courses" },
+    { label: "Courses", href: "/courses", show: true },
     { label: "Faculty", href: "/faculty", show: true },
-    { label: "Resources", href: "/resources", show: true, hasMega: "Resources" },
     { label: "Find Jobs", href: "/jobs", show: true },
-    { label: "Events", href: "/events", show: true },
     {
       label: "Dashboard",
       href: userRole === "tutor" ? "/teacher-dashboard" : "/student-dashboard",
@@ -101,13 +99,14 @@ export default function Navbar() {
                   </button>
                 ) : hasMega ? (
                   <div key={link.label} className="relative">
-                    <button
+                    <Link
+                      href={link.href}
                       className="px-3.5 py-2 text-sm font-medium rounded-md transition-all duration-200 text-white/80 hover:text-white hover:bg-white/10 flex items-center gap-1"
                       onMouseEnter={() => setActiveMenu(hasMega)}
                     >
                       {link.label}
                       <ChevronDown className={`w-3.5 h-3.5 transition-transform ${activeMenu === hasMega ? "rotate-180" : ""}`} />
-                    </button>
+                    </Link>
                     {/* Mega menu dropdown */}
                     {activeMenu === hasMega && (
                       <div
@@ -213,26 +212,27 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ${
-          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 z-[100] lg:hidden overflow-hidden transition-all duration-300 ${
+          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none invisible"
         }`}
       >
         <div
           className="absolute inset-0"
-          style={{ background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)" }}
+          style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }}
           onClick={() => setMobileOpen(false)}
         />
         <div
-          className={`absolute top-0 right-0 h-full w-72 transform transition-transform duration-300 ${
+          className={`absolute top-0 right-0 h-auto max-h-[100vh] w-[80vw] max-w-[320px] rounded-bl-3xl shadow-2xl transform transition-transform duration-300 ${
             mobileOpen ? "translate-x-0" : "translate-x-full"
-          } overflow-y-auto`}
+          } overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
           style={{
             background: "#4D148C",
             borderLeft: "1px solid rgba(255,255,255,0.15)",
+            borderBottom: "1px solid rgba(255,255,255,0.15)",
             color: "#FFFFFF",
           }}
         >
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col pb-5">
             {/* Header */}
             <div className="flex items-center justify-between p-5 border-b border-white/15">
               <div className="flex items-center gap-2.5">
@@ -252,15 +252,13 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Nav Links */}
-            <nav className="flex flex-col gap-1 p-4 flex-1">
+            {/* Nav Links & CTA Buttons */}
+            <nav className="flex flex-col gap-1 p-4">
               {[
                 { label: "Find Tutors", href: "/tutor/search" },
-                { label: "All Courses", href: "/courses" },
+                { label: "Courses", href: "/courses" },
                 { label: "Faculty", href: "/faculty" },
-                { label: "Resources", href: "/resources" },
                 { label: "Blog", href: "/blog" },
-                { label: "Events", href: "/events" },
                 { label: "Find Jobs", href: "/jobs" },
                 { label: "FAQ", href: "/faq" },
                 { label: "Learning Paths", href: "/learning-path" },
@@ -276,46 +274,49 @@ export default function Navbar() {
               ))}
               <button
                 onClick={() => { setMobileOpen(false); setRequestModalOpen(true); }}
-                className="px-4 py-2.5 text-sm font-medium text-left rounded-md transition-colors text-white/85 hover:text-white hover:bg-white/10"
+                className="px-4 py-2.5 text-sm font-medium text-left rounded-md transition-colors text-white/85 hover:text-white hover:bg-white/10 cursor-pointer"
               >
                 Request a Tutor
               </button>
-            </nav>
 
-            {/* Bottom CTA */}
-            <div className="p-4 flex flex-col gap-2 border-t border-white/15">
-              {isMounted && isLoggedIn ? (
-                <>
-                  <Link
-                    href={userRole === "tutor" ? "/teacher-dashboard" : "/student-dashboard"}
-                    className="px-5 py-2.5 text-center text-sm font-bold btn-coral rounded-md"
-                  >
-                    Dashboard
-                  </Link>
-                  <button
-                    onClick={() => { handleLogout(); setMobileOpen(false); }}
-                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10"
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link
-                    href="/register"
-                    className="px-5 py-2.5 text-center text-sm font-bold btn-coral rounded-md"
-                  >
-                    Get Started
-                  </Link>
-                  <Link
-                    href="/login"
-                    className="px-5 py-2.5 text-center text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10"
-                  >
-                    Login
-                  </Link>
-                </>
-              )}
-            </div>
+              {/* Action Buttons immediately below completed nav menu */}
+              <div className="flex flex-col gap-2.5 mt-3 pt-4 border-t border-white/15">
+                {isMounted && isLoggedIn ? (
+                  <>
+                    <Link
+                      href={userRole === "tutor" ? "/teacher-dashboard" : "/student-dashboard"}
+                      onClick={() => setMobileOpen(false)}
+                      className="px-5 py-2.5 text-center text-sm font-bold btn-coral rounded-md block shadow-md"
+                    >
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={() => { handleLogout(); setMobileOpen(false); }}
+                      className="px-5 py-2.5 text-center text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10 w-full cursor-pointer"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/register"
+                      onClick={() => setMobileOpen(false)}
+                      className="px-5 py-2.5 text-center text-sm font-bold btn-coral rounded-md block shadow-md"
+                    >
+                      Get Started
+                    </Link>
+                    <Link
+                      href="/login"
+                      onClick={() => setMobileOpen(false)}
+                      className="px-5 py-2.5 text-center text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10 block cursor-pointer"
+                    >
+                      Login
+                    </Link>
+                  </>
+                )}
+              </div>
+            </nav>
           </div>
         </div>
       </div>

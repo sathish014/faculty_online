@@ -100,10 +100,34 @@ export default function CoursesPage() {
     const matchCat = category === "All" || c.category === category;
     const matchLevel = level === "All Levels" || c.difficulty === level;
     return matchSearch && matchCat && matchLevel;
+  }).sort((a, b) => {
+    if (sort === "Highest Rated") return b.rating - a.rating;
+    if (sort === "Price: Low to High") {
+      const priceA = parseInt(a.price.replace(/[^0-9]/g, "")) || 0;
+      const priceB = parseInt(b.price.replace(/[^0-9]/g, "")) || 0;
+      return priceA - priceB;
+    }
+    if (sort === "Price: High to Low") {
+      const priceA = parseInt(a.price.replace(/[^0-9]/g, "")) || 0;
+      const priceB = parseInt(b.price.replace(/[^0-9]/g, "")) || 0;
+      return priceB - priceA;
+    }
+    if (sort === "Newest") return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0);
+    return b.reviewCount - a.reviewCount;
   });
 
   const totalPages = Math.ceil(filtered.length / perPage);
   const paginated = filtered.slice((page - 1) * perPage, page * perPage);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    const el = document.getElementById("courses-grid-top");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 380, behavior: "smooth" });
+    }
+  };
 
   return (
     <main className="min-h-screen flex flex-col" style={{ background: "var(--bg-primary)" }}>
@@ -143,7 +167,7 @@ export default function CoursesPage() {
         </div>
       </div>
 
-      <div className="container-xl py-8 flex-1 w-full min-w-0 max-w-full">
+      <div id="courses-grid-top" className="container-xl py-8 flex-1 w-full min-w-0 max-w-full">
         {/* Category pills */}
         <div className="flex items-center gap-2 overflow-x-auto pb-4 custom-scrollbar mb-6 w-full min-w-0 max-w-full">
           {categories.map((cat) => (
@@ -221,32 +245,31 @@ export default function CoursesPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-2.5 mt-12 mb-16 pb-8">
             <button
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              onClick={() => handlePageChange(Math.max(1, page - 1))}
               disabled={page === 1}
-              className="px-4 py-2 rounded-xl text-sm font-semibold disabled:opacity-40 transition-all btn-ghost"
+              className="px-5 py-2.5 rounded-xl text-xs font-bold bg-white border border-[#1A1A24]/15 text-[#1A1A24] hover:border-[#ff6200] hover:text-[#ff6200] shadow-sm disabled:opacity-40 disabled:pointer-events-none transition-all active:scale-95"
             >
               Previous
             </button>
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
               <button
                 key={p}
-                onClick={() => setPage(p)}
-                className="w-9 h-9 rounded-xl text-sm font-bold transition-all"
-                style={{
-                  background: p === page ? "#ff6200" : "rgba(26,26,36,0.06)",
-                  color: p === page ? "#fff" : "rgba(26,26,36,0.7)",
-                  border: p === page ? "1px solid #ff6200" : "1px solid rgba(26,26,36,0.1)",
-                }}
+                onClick={() => handlePageChange(p)}
+                className={`w-10 h-10 rounded-xl text-xs font-black transition-all flex items-center justify-center shadow-sm ${
+                  p === page
+                    ? "bg-[#ff6200] text-white border border-[#ff6200] scale-105 shadow-md shadow-[#ff6200]/25"
+                    : "bg-white text-[#1A1A24]/80 border border-[#1A1A24]/15 hover:border-[#ff6200] hover:text-[#ff6200]"
+                }`}
               >
                 {p}
               </button>
             ))}
             <button
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              onClick={() => handlePageChange(Math.min(totalPages, page + 1))}
               disabled={page === totalPages}
-              className="px-4 py-2 rounded-xl text-sm font-semibold disabled:opacity-40 transition-all btn-ghost"
+              className="px-5 py-2.5 rounded-xl text-xs font-bold bg-white border border-[#1A1A24]/15 text-[#1A1A24] hover:border-[#ff6200] hover:text-[#ff6200] shadow-sm disabled:opacity-40 disabled:pointer-events-none transition-all active:scale-95"
             >
               Next
             </button>
