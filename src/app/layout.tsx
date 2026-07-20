@@ -20,10 +20,13 @@ export const metadata: Metadata = {
     "Find expert tutors for any subject. Connect with verified mentors for online, offline, or home tuition. Post your learning requirement and let top tutors reach you.",
   keywords:
     "tutors, online tutoring, home tuition, find tutor, tutor marketplace, mentorship platform",
-  icons: {
-    icon: "/picture1.png",
-    shortcut: "/picture1.png",
-  },
+icons: {
+  icon: [
+    { url: "/picture1.png", type: "image/png" },
+  ],
+  shortcut: "/picture1.png",
+  apple: "/picture1.png",
+},
   openGraph: {
     title: "Faculties Online – Expert Tutor & Mentor Marketplace",
     description:

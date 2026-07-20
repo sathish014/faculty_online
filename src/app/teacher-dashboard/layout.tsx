@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { 
   LayoutDashboard, 
@@ -53,12 +54,15 @@ export default function TeacherDashboardLayout({
         }`}
         style={{ background: "var(--bg-sidebar)" }}
       >
-        {/* Logo */}
         <div className="h-16 flex items-center px-6 border-b border-[#1A1A24]/10 flex-shrink-0">
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-[#4D148C] flex items-center justify-center shadow-md shadow-[#4D148C]/20 transition-transform group-hover:scale-105">
-              <GraduationCap className="w-4 h-4 text-[#ff6200]" />
-            </div>
+          <Link href="/" className="flex items-center gap-[12px] group">
+            <Image 
+              src="/Picture1.png" 
+              alt="Faculties Online Logo" 
+              width={140} 
+              height={36} 
+              className="h-8 w-auto object-contain transition-transform group-hover:scale-105" 
+            />
             <span className="text-lg font-extrabold text-[#1A1A24] tracking-tight">
               Faculties<span className="text-[#ff6200]">.</span><span className="font-normal text-[#1A1A24]/70">Online</span>
             </span>
