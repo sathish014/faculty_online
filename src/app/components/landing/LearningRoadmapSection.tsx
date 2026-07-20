@@ -24,9 +24,8 @@ const roadmapSteps = [
     color: "#1A1A24",
     icon: TbSearch,
     bullets: [
-      "Explore 50,000+ verified teachers across India",
-      "Filter by subject, grade, board & hourly fees",
-      "Get AI-powered instant tutor recommendations",
+      "Explore 50,000+ verified teachers",
+      "Filter by subject, grade & fees",
     ],
   },
   {
@@ -39,9 +38,8 @@ const roadmapSteps = [
     color: "#ff6200",
     icon: TbVideo,
     bullets: [
-      "Schedule a complimentary 30-min trial session",
-      "Interact 1-on-1 and check teaching compatibility",
-      "Zero obligation — switch tutors easily anytime",
+      "Free 30-min trial session",
+      "Zero obligation — switch anytime",
     ],
   },
   {
@@ -54,9 +52,8 @@ const roadmapSteps = [
     color: "#1A1A24",
     icon: TbNotebook,
     bullets: [
-      "Diagnostic test to identify current learning gaps",
-      "Customized syllabus aligned with school & exams",
-      "Structured chapter-wise milestones & target dates",
+      "Diagnostic test for learning gaps",
+      "Customized chapter-wise milestones",
     ],
   },
   {
@@ -69,9 +66,8 @@ const roadmapSteps = [
     color: "#ff6200",
     icon: TbChalkboard,
     bullets: [
-      "HD interactive whiteboard with screen sharing",
-      "100% personalized focus & instant doubt solving",
-      "All sessions recorded & saved for exam revision",
+      "Interactive 1-on-1 whiteboard",
+      "Sessions recorded for revision",
     ],
   },
   {
@@ -84,9 +80,8 @@ const roadmapSteps = [
     color: "#1A1A24",
     icon: TbChartLine,
     bullets: [
-      "Regular chapter-end quizzes & full-length mocks",
-      "Comprehensive parent dashboard & progress stats",
-      "Dynamic adjustments based on accuracy metrics",
+      "Regular quizzes & mock tests",
+      "Track progress on dashboard",
     ],
   },
   {
@@ -99,9 +94,8 @@ const roadmapSteps = [
     color: "#ff6200",
     icon: TbAward,
     bullets: [
-      "Top percentiles in IIT-JEE, NEET, CBSE & Boards",
-      "Verifiable course completion certificates",
-      "Build lifelong conceptual clarity & confidence",
+      "Top percentiles in major exams",
+      "Build lifelong conceptual clarity",
     ],
   },
 ];

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { BookOpen, Menu, X, LogOut, ArrowRight, ChevronDown, GraduationCap, Code, FileText, Calendar, HelpCircle } from "lucide-react";
 import RequestTutorModal from "../ui/RequestTutorModal";
 
@@ -66,8 +67,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 navbar-blur border-b border-white/15"
-        style={{ background: "#4D148C" }}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-white border-b border-[rgba(0,0,0,0.08)] shadow-sm"
         onMouseLeave={() => setActiveMenu(null)}
       >
         <div className="container-xl">
@@ -75,25 +75,30 @@ export default function Navbar() {
 
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-              <div className="w-8 h-8 flex items-center justify-center relative border border-white/30 rounded-md">
-                <BookOpen className="w-4 h-4 text-[#ff6200]" />
-              </div>
-              <span className="text-[15px] font-bold tracking-tight text-[#FFFFFF]">
+              <Image 
+                src="/Picture1.png" 
+                alt="Faculties Online Logo" 
+                width={40} 
+                height={40} 
+                className="h-9 w-9 object-contain" 
+                priority 
+              />
+              <span className="text-[17px] font-bold tracking-tight text-[#1A1A24]">
                 Faculties
                 <span className="text-[#ff6200]">.</span>
-                <span className="text-white/75 font-normal">Online</span>
+                <span className="text-[#1A1A24]/70 font-normal">Online</span>
               </span>
             </Link>
 
             {/* Center Nav */}
-            <nav className="hidden lg:flex items-center gap-0.5">
+            <nav className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => {
                 const hasMega = (link as { hasMega?: string }).hasMega;
                 return link.onClick ? (
                   <button
                     key={link.label}
                     onClick={link.onClick}
-                    className="px-3.5 py-2 text-sm font-medium rounded-md transition-all duration-200 text-white/80 hover:text-white hover:bg-white/10"
+                    className="px-3.5 py-2 text-[14px] font-semibold rounded-md transition-all duration-200 text-[#1A1A24]/75 hover:text-[#1A1A24] hover:bg-[#1A1A24]/5"
                   >
                     {link.label}
                   </button>
@@ -101,7 +106,7 @@ export default function Navbar() {
                   <div key={link.label} className="relative">
                     <Link
                       href={link.href}
-                      className="px-3.5 py-2 text-sm font-medium rounded-md transition-all duration-200 text-white/80 hover:text-white hover:bg-white/10 flex items-center gap-1"
+                      className="px-3.5 py-2 text-[14px] font-semibold rounded-md transition-all duration-200 text-[#1A1A24]/75 hover:text-[#1A1A24] hover:bg-[#1A1A24]/5 flex items-center gap-1"
                       onMouseEnter={() => setActiveMenu(hasMega)}
                     >
                       {link.label}
@@ -110,11 +115,11 @@ export default function Navbar() {
                     {/* Mega menu dropdown */}
                     {activeMenu === hasMega && (
                       <div
-                        className="absolute top-full left-0 mt-1 w-72 rounded-xl p-2 shadow-2xl animate-fade-down"
+                        className="absolute top-full left-0 mt-2 w-72 rounded-xl p-2 shadow-2xl animate-fade-down"
                         style={{
-                          background: "var(--bg-sidebar)",
-                          border: "1px solid rgba(26,26,36,0.1)",
-                          boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
+                          background: "#FFFFFF",
+                          border: "1px solid rgba(0,0,0,0.06)",
+                          boxShadow: "0 20px 60px rgba(0,0,0,0.08)",
                         }}
                         onMouseEnter={() => setActiveMenu(hasMega)}
                         onMouseLeave={() => setActiveMenu(null)}
@@ -138,7 +143,7 @@ export default function Navbar() {
                                 <p className="text-sm font-semibold text-[#1A1A24] group-hover:text-[#ff6200] transition-colors">
                                   {item.label}
                                 </p>
-                                <p className="text-[11px] text-[rgba(26,26,36,0.5)]">{item.desc}</p>
+                                <p className="text-[11px] text-[#1A1A24]/50">{item.desc}</p>
                               </div>
                             </Link>
                           );
@@ -150,7 +155,7 @@ export default function Navbar() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="px-3.5 py-2 text-sm font-medium rounded-md transition-all duration-200 text-white/80 hover:text-white hover:bg-white/10"
+                    className="px-3.5 py-2 text-[14px] font-semibold rounded-md transition-all duration-200 text-[#1A1A24]/75 hover:text-[#1A1A24] hover:bg-[#1A1A24]/5"
                   >
                     {link.label}
                   </Link>
@@ -164,13 +169,13 @@ export default function Navbar() {
                 <>
                   <Link
                     href={userRole === "tutor" ? "/teacher-dashboard" : "/student-dashboard"}
-                    className="px-4 py-2 text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10 transition-all"
+                    className="px-4 py-2 text-sm font-semibold rounded-md text-[#1A1A24] border border-[rgba(0,0,0,0.1)] hover:bg-[#1A1A24]/5 transition-all"
                   >
                     Dashboard
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="p-2 rounded-md transition-all text-white/80 hover:text-white border border-white/20 hover:bg-white/10"
+                    className="p-2 rounded-md transition-all text-[#1A1A24]/70 hover:text-[#1A1A24] border border-[rgba(0,0,0,0.1)] hover:bg-[#1A1A24]/5"
                     title="Logout"
                   >
                     <LogOut className="w-4 h-4" />
@@ -181,7 +186,7 @@ export default function Navbar() {
                   <Link
                     href="/login"
                     id="navbar-login-btn"
-                    className="px-4 py-2 text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10 transition-all"
+                    className="px-4 py-2 text-sm font-semibold rounded-md text-[#1A1A24] border border-[rgba(0,0,0,0.1)] hover:bg-[#1A1A24]/5 transition-all"
                   >
                     Login
                   </Link>
@@ -201,7 +206,7 @@ export default function Navbar() {
             <button
               id="navbar-mobile-toggle"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-md transition-colors text-white/90 border border-white/20 hover:bg-white/10"
+              className="lg:hidden p-2 rounded-md transition-colors text-[#1A1A24]/80 border border-[rgba(0,0,0,0.1)] hover:bg-[#1A1A24]/5"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -218,7 +223,7 @@ export default function Navbar() {
       >
         <div
           className="absolute inset-0"
-          style={{ background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)" }}
+          style={{ background: "rgba(0,0,0,0.4)", backdropFilter: "blur(4px)" }}
           onClick={() => setMobileOpen(false)}
         />
         <div
@@ -226,27 +231,32 @@ export default function Navbar() {
             mobileOpen ? "translate-x-0" : "translate-x-full"
           } overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]`}
           style={{
-            background: "#4D148C",
-            borderLeft: "1px solid rgba(255,255,255,0.15)",
-            borderBottom: "1px solid rgba(255,255,255,0.15)",
-            color: "#FFFFFF",
+            background: "#FFFFFF",
+            borderLeft: "1px solid rgba(0,0,0,0.05)",
+            borderBottom: "1px solid rgba(0,0,0,0.05)",
+            color: "#1A1A24",
           }}
         >
           <div className="flex flex-col pb-5">
             {/* Header */}
-            <div className="flex items-center justify-between p-5 border-b border-white/15">
+            <div className="flex items-center justify-between p-5 border-b border-[rgba(0,0,0,0.05)]">
               <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 flex items-center justify-center border border-white/30 rounded-[5px]">
-                  <BookOpen className="w-3.5 h-3.5 text-[#ff6200]" />
-                </div>
-                <span className="font-bold text-sm text-[#FFFFFF]">
+                <Image 
+                  src="/Picture1.png" 
+                  alt="Faculties Online Logo" 
+                  width={36} 
+                  height={36} 
+                  className="h-8 w-8 object-contain" 
+                  priority 
+                />
+                <span className="font-bold text-[15px] text-[#1A1A24]">
                   Faculties<span className="text-[#ff6200]">.</span>
-                  <span className="text-white/75 font-normal">Online</span>
+                  <span className="text-[#1A1A24]/70 font-normal">Online</span>
                 </span>
               </div>
               <button
                 onClick={() => setMobileOpen(false)}
-                className="p-1.5 rounded-md text-white/70 hover:text-white hover:bg-white/10"
+                className="p-1.5 rounded-md text-[#1A1A24]/60 hover:text-[#1A1A24] hover:bg-[#1A1A24]/5"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -267,20 +277,20 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="px-4 py-2.5 text-sm font-medium rounded-md transition-colors text-white/85 hover:text-white hover:bg-white/10"
+                  className="px-4 py-2.5 text-sm font-semibold rounded-md transition-colors text-[#1A1A24]/80 hover:text-[#1A1A24] hover:bg-[#1A1A24]/5"
                 >
                   {link.label}
                 </Link>
               ))}
               <button
                 onClick={() => { setMobileOpen(false); setRequestModalOpen(true); }}
-                className="px-4 py-2.5 text-sm font-medium text-left rounded-md transition-colors text-white/85 hover:text-white hover:bg-white/10 cursor-pointer"
+                className="px-4 py-2.5 text-sm font-semibold text-left rounded-md transition-colors text-[#1A1A24]/80 hover:text-[#1A1A24] hover:bg-[#1A1A24]/5 cursor-pointer"
               >
                 Request a Tutor
               </button>
 
               {/* Action Buttons immediately below completed nav menu */}
-              <div className="flex flex-col gap-2.5 mt-3 pt-4 border-t border-white/15">
+              <div className="flex flex-col gap-2.5 mt-3 pt-4 border-t border-[rgba(0,0,0,0.05)]">
                 {isMounted && isLoggedIn ? (
                   <>
                     <Link
@@ -292,7 +302,7 @@ export default function Navbar() {
                     </Link>
                     <button
                       onClick={() => { handleLogout(); setMobileOpen(false); }}
-                      className="px-5 py-2.5 text-center text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10 w-full cursor-pointer"
+                      className="px-5 py-2.5 text-center text-sm font-semibold rounded-md text-[#1A1A24] border border-[rgba(0,0,0,0.1)] hover:bg-[#1A1A24]/5 w-full cursor-pointer"
                     >
                       Logout
                     </button>
@@ -309,7 +319,7 @@ export default function Navbar() {
                     <Link
                       href="/login"
                       onClick={() => setMobileOpen(false)}
-                      className="px-5 py-2.5 text-center text-sm font-semibold rounded-md text-white border border-white/25 hover:bg-white/10 block cursor-pointer"
+                      className="px-5 py-2.5 text-center text-sm font-semibold rounded-md text-[#1A1A24] border border-[rgba(0,0,0,0.1)] hover:bg-[#1A1A24]/5 block cursor-pointer"
                     >
                       Login
                     </Link>

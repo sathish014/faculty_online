@@ -58,7 +58,7 @@ export default function NewsletterSection() {
             {/* Grid pattern */}
             <div className="absolute inset-0 grid-pattern opacity-10 pointer-events-none" />
 
-            <div className="relative z-10 p-6 sm:p-10 md:p-16 flex flex-col lg:flex-row gap-10 items-center">
+            <div className="relative z-10 p-2 sm:p-10 md:p-16 flex flex-col lg:flex-row gap-10 items-center">
               {/* Left */}
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-4">
@@ -80,6 +80,9 @@ export default function NewsletterSection() {
                     "Tutor spotlights",
                     "Exam strategies",
                     "No spam, ever",
+             
+                    "Monthly expert Q&As",
+                    "Discounts on courses",
                   ].map((item) => (
                     <div key={item} className="flex items-center gap-1.5">
                       <CheckCircle className="w-3.5 h-3.5 text-[#ff6200]" />
@@ -150,7 +153,7 @@ export default function NewsletterSection() {
                         type="submit"
                         id="newsletter-submit-btn"
                         disabled={loading}
-                        className="w-full btn-coral rounded-xl py-3 flex items-center justify-center gap-2 text-sm font-bold"
+                        className="w-full btn-coral rounded-xl py-3 flex items-center justify-center gap-2 text-sm font-bold cursor-pointer"
                         style={{ boxShadow: "0 8px 24px rgba(255,98,0,0.4)" }}
                       >
                         {loading ? (

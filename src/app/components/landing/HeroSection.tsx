@@ -405,8 +405,8 @@ export default function HeroSection() {
               {statsData.map((stat, i) => (
                 <motion.div
                   key={i}
-                  className="flex flex-col items-center justify-center py-4 px-3 rounded-xl cursor-default select-none"
-                  style={{ background: "#111118", borderRadius: "14px", boxShadow: "0 4px 20px rgba(0,0,0,0.18)" }}
+                  className="flex flex-col items-center justify-center py-3 px-2.5 rounded-xl cursor-default select-none"
+                  style={{ background: "#ffffffff", borderRadius: "12px", boxShadow: "0 4px 20px rgba(0,0,0,0.18)" }}
                   variants={statVariant}
                   initial="hidden"
                   animate="visible"
