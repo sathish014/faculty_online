@@ -84,7 +84,7 @@ export default function Footer() {
               }}
             >
               <Image 
-                src="/Picture1.png" 
+                src="/logo.png" 
                 alt="Faculties Online Logo" 
                 width={150} 
                 height={40} 

@@ -76,7 +76,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
               <Image 
-                src="/Picture1.png" 
+                src="/logo.png" 
                 alt="Faculties Online Logo" 
                 width={40} 
                 height={40} 
@@ -242,7 +242,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between p-5 border-b border-[rgba(0,0,0,0.05)]">
               <div className="flex items-center gap-2.5">
                 <Image 
-                  src="/Picture1.png" 
+                  src="/logo.png" 
                   alt="Faculties Online Logo" 
                   width={36} 
                   height={36} 
