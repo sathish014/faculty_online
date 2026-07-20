@@ -115,8 +115,8 @@ export default function LoginForm() {
               type="email"
               placeholder="name@example.com"
               {...register('email')}
-              className={`w-full pl-10 pr-4 py-2.5 rounded-xl border bg-white/80 text-[#1A1A24] text-sm transition-all outline-none focus:ring-2 placeholder:text-[#1A1A24]/40
-                ${errors.email ? 'border-red-400 focus:ring-red-200' : 'border-[#1A1A24]/15 focus:ring-[#ff6200]/20 focus:border-[#ff6200]'}`}
+              className={`w-full pl-10 pr-4 py-2.5 rounded-xl border bg-white/80 text-[#1A1A24] text-sm transition-all outline-none placeholder:text-[#1A1A24]/40
+                ${errors.email ? 'border-red-400' : 'border-[#1A1A24]/15 focus:border-[#ff6200]'}`}
             />
           </div>
           {errors.email && <p className="text-xs text-red-500 font-medium">{errors.email.message}</p>}

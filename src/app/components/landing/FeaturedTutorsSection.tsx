@@ -125,7 +125,7 @@ export default function FeaturedTutorsSection() {
           className={`flex items-center gap-3 mb-4 transition-all duration-600 ${visible ? "opacity-100" : "opacity-0"}`}
         >
           <span className="text-[#ff6200] text-xs font-bold uppercase tracking-widest">Tutors</span>
-          <span className="h-px flex-1 max-w-[40px]" style={{ background: "rgba(255,98,0,0.4)" }} />
+          <span className="h-px flex-1 max-w-[40px]" style={{ background: "rgba(152, 65, 160, 0.4)" }} />
         </div>
 
         <div
@@ -175,7 +175,7 @@ export default function FeaturedTutorsSection() {
           <button
             onClick={() => scroll("left")}
             aria-label="Scroll left"
-            className={`absolute -left-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white text-[#1A1A24] border border-slate-200 shadow-xl flex items-center justify-center hover:bg-[#ff6200] hover:text-white hover:border-[#ff6200] transition-all duration-300 hidden md:flex ${
+            className={`absolute -left-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white text-[#1A1A24] border border-slate-200 shadow-xl flex items-center justify-center hover:bg-[#a1519eff] hover:text-white hover:border-[#a1519eff] transition-all duration-300 hidden md:flex ${
               isHovered ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-75 pointer-events-none"
             }`}
           >
@@ -209,7 +209,7 @@ export default function FeaturedTutorsSection() {
                 {tutor.specialty && (
                   <div
                     className="absolute top-3.5 left-3.5 px-3 py-1 rounded-md text-[10px] font-black uppercase tracking-wider text-white shadow-md"
-                    style={{ background: "#8c2445" }}
+                    style={{ background: "#a1519eff" }}
                   >
                     {tutor.specialty}
                   </div>
@@ -254,7 +254,7 @@ export default function FeaturedTutorsSection() {
           <button
             onClick={() => scroll("right")}
             aria-label="Scroll right"
-            className={`absolute -right-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white text-[#1A1A24] border border-slate-200 shadow-xl flex items-center justify-center hover:bg-[#ff6200] hover:text-white hover:border-[#ff6200] transition-all duration-300 hidden md:flex ${
+            className={`absolute -right-5 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white text-[#1A1A24] border border-slate-200 shadow-xl flex items-center justify-center hover:bg-[#a1519eff] hover:text-white hover:border-[#a1519eff] transition-all duration-300 hidden md:flex ${
               isHovered ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-75 pointer-events-none"
             }`}
           >

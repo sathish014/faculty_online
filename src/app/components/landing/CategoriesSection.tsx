@@ -98,7 +98,7 @@ export default function CategoriesSection() {
               whileHover={{
                 y: -5,
                 boxShadow: "0 16px 32px rgba(140, 36, 69, 0.12)",
-                borderColor: "#8c2445",
+                borderColor: "#090909ff",
               }}
               whileTap={{ scale: 0.96 }}
             >
@@ -106,7 +106,7 @@ export default function CategoriesSection() {
               <motion.div
                 className="w-13 h-13 sm:w-14 sm:h-14 rounded-full flex items-center justify-center mb-5 shadow-md"
                 style={{
-                  background: "#8c2445",
+                  background: "#6c42a4ff",
                   color: "#ffffff",
                   boxShadow: "0 4px 14px rgba(140, 36, 69, 0.28)",
                 }}

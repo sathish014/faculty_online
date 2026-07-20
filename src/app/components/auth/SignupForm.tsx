@@ -142,7 +142,7 @@ export default function SignupForm() {
                 onClick={() => setValue('role', role.value, { shouldValidate: true })}
                 className={`relative group flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all duration-200 cursor-pointer select-none
                   ${isSelected
-                    ? `${role.border} ${role.lightBg} shadow-md ring-4 ${role.ring} ring-opacity-30`
+                    ? `${role.border} ${role.lightBg} shadow-sm`
                     : 'border-[#1A1A24]/15 bg-white/80 hover:border-[#1A1A24]/30 hover:bg-white'
                   }`}
               >
@@ -180,8 +180,8 @@ export default function SignupForm() {
               id="fullName"
               placeholder="John Doe"
               {...register('fullName')}
-              className={`w-full pl-10 pr-4 py-2.5 rounded-xl border bg-white/80 text-[#1A1A24] text-sm transition-all outline-none focus:ring-2 placeholder:text-[#1A1A24]/40
-                ${errors.fullName ? 'border-red-400 focus:ring-red-200' : 'border-[#1A1A24]/15 focus:ring-[#ff6200]/20 focus:border-[#ff6200]'}`}
+              className={`w-full pl-10 pr-4 py-2.5 rounded-xl border bg-white/80 text-[#1A1A24] text-sm transition-all outline-none placeholder:text-[#1A1A24]/40
+                ${errors.fullName ? 'border-red-400' : 'border-[#1A1A24]/15 focus:border-[#ff6200]'}`}
             />
           </div>
           {errors.fullName && <p className="text-xs text-red-500 font-medium">{errors.fullName.message}</p>}
@@ -199,8 +199,8 @@ export default function SignupForm() {
               type="email"
               placeholder="name@example.com"
               {...register('email')}
-              className={`w-full pl-10 pr-4 py-2.5 rounded-xl border bg-white/80 text-[#1A1A24] text-sm transition-all outline-none focus:ring-2 placeholder:text-[#1A1A24]/40
-                ${errors.email ? 'border-red-400 focus:ring-red-200' : 'border-[#1A1A24]/15 focus:ring-[#ff6200]/20 focus:border-[#ff6200]'}`}
+              className={`w-full pl-10 pr-4 py-2.5 rounded-xl border bg-white/80 text-[#1A1A24] text-sm transition-all outline-none placeholder:text-[#1A1A24]/40
+                ${errors.email ? 'border-red-400' : 'border-[#1A1A24]/15 focus:border-[#ff6200]'}`}
             />
           </div>
           {errors.email && <p className="text-xs text-red-500 font-medium">{errors.email.message}</p>}

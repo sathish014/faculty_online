@@ -754,7 +754,7 @@ export default function SearchTutorsPage() {
                 <span className="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#ff6200] text-white shadow-sm">
                   Exclusive Offer
                 </span>
-                <h3 className="font-black text-2xl leading-tight">Build Your Custom Profile Page</h3>
+                <h3 className="font-black text-white text-2xl leading-tight">Build Your Custom Profile Page</h3>
                 <p className="text-white/80 text-xs font-medium leading-relaxed">Stand out to top tier students with verified credentials & intro videos.</p>
                 <button 
                   onClick={() => { setShowUpgradeModal(true); setUpgradeSuccess(false); }}

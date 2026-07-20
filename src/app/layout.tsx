@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   keywords:
     "tutors, online tutoring, home tuition, find tutor, tutor marketplace, mentorship platform",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
+    icon: "/picture1.png",
+    shortcut: "/picture1.png",
   },
   openGraph: {
     title: "Faculties Online – Expert Tutor & Mentor Marketplace",

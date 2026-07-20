@@ -16,8 +16,9 @@ import Footer from "./components/landing/Footer";
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden page-enter" style={{ background: "var(--bg-primary)" }}>
+    <>
       <Navbar />
+      <main className="overflow-x-hidden page-enter" style={{ background: "var(--bg-primary)" }}>
 
       <HeroSection />
 
@@ -70,5 +71,6 @@ export default function Home() {
         </Link>
       </div>
     </main>
+    </>
   );
 }

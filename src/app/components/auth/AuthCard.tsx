@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 
+import Image from 'next/image';
+
 interface AuthCardProps {
   children: React.ReactNode;
   title: string;
@@ -21,10 +23,14 @@ export default function AuthCard({ children, title, description }: AuthCardProps
         className="w-full max-w-md"
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 mb-8 group w-fit">
-          <div className="w-9 h-9 rounded-xl bg-[#4D148C] flex items-center justify-center shadow-lg shadow-[#4D148C]/20 border border-white/20 transition-transform group-hover:scale-105">
-            <GraduationCap className="w-5 h-5 text-[#ff6200]" />
-          </div>
+        <Link href="/" className="flex items-center gap-[12px] mb-8 group w-fit">
+          <Image 
+            src="/Picture1.png" 
+            alt="Faculties Online Logo" 
+            width={150} 
+            height={40} 
+            className="h-10 w-auto object-contain transition-transform group-hover:scale-105" 
+          />
           <span className="font-extrabold text-xl text-[#1A1A24] tracking-tight">
             Faculties<span className="text-[#ff6200]">.</span><span className="font-normal text-[#1A1A24]/75">Online</span>
           </span>

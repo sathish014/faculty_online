@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { BookOpen, Globe, Mail, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
@@ -9,28 +10,27 @@ const footerLinks = {
     { label: "About Us", href: "#" },
     { label: "How It Works", href: "#how-it-works" },
     { label: "Careers", href: "#" },
-    { label: "Press & Media", href: "#" },
+    // { label: "Press & Media", href: "#" },
   ],
   tutors: [
     { label: "Become a Tutor", href: "#" },
     { label: "Premium Membership", href: "#" },
     { label: "Find Tutor Jobs", href: "#" },
-    { label: "Tutor Resources", href: "#" },
+    // { label: "Tutor Resources", href: "#" },
   ],
   students: [
     { label: "Find Tutors", href: "/tutor/search" },
     { label: "Post Requirement", href: "/student-dashboard/post-requirement" },
     { label: "All Courses", href: "/courses" },
     { label: "Learning Paths", href: "/learning-path" },
-    { label: "Our Faculty", href: "/faculty" },
+    // { label: "Our Faculty", href: "/faculty" },
   ],
   support: [
     { label: "Contact Us", href: "#" },
     { label: "FAQs", href: "/faq" },
     { label: "Blog", href: "/blog" },
-    { label: "Events", href: "/events" },
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
+   
+   
   ],
 };
 
@@ -66,7 +66,7 @@ export default function Footer() {
 
 
       {/* ── MAIN LINK COLUMNS ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-12 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-12 pb-12 gap-2">
         {/* Thin divider */}
         <div style={{ height: "1px", background: "rgba(255,255,255,0.1)", marginBottom: "3rem" }} />
 
@@ -78,26 +78,19 @@ export default function Footer() {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "10px",
+                gap: "12px",
                 marginBottom: "20px",
                 textDecoration: "none",
               }}
             >
-              <div
-                style={{
-                  width: "28px",
-                  height: "28px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  border: "1px solid rgba(255,98,0,0.6)",
-                  borderRadius: "5px",
-                  background: "rgba(255,98,0,0.15)",
-                }}
-              >
-                <BookOpen style={{ width: "14px", height: "14px", color: "#ff6200" }} />
-              </div>
-              <span style={{ fontWeight: 700, fontSize: "0.875rem", color: "#ffffff" }}>
+              <Image 
+                src="/Picture1.png" 
+                alt="Faculties Online Logo" 
+                width={150} 
+                height={40} 
+                className="h-10  w-auto object-contain" 
+              />
+               <span style={{ fontWeight: 700, fontSize: "0.875rem", color: "#ffffff" }}>
                 Faculties<span style={{ color: "#ff6200" }}>.</span>
                 <span style={{ color: "rgba(255,255,255,0.8)" }}>Online</span>
               </span>
