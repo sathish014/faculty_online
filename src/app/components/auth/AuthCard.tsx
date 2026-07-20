@@ -25,7 +25,7 @@ export default function AuthCard({ children, title, description }: AuthCardProps
         {/* Logo */}
         <Link href="/" className="flex items-center gap-[12px] mb-8 group w-fit">
           <Image 
-            src="/Picture1.png" 
+            src="/logo.png" 
             alt="Faculties Online Logo" 
             width={150} 
             height={40} 

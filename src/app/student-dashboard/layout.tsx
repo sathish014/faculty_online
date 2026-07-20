@@ -65,7 +65,7 @@ export default function StudentDashboardLayout({
         <div className="h-16 flex items-center px-6 border-b border-[#1A1A24]/10 flex-shrink-0">
           <Link href="/" className="flex items-center gap-[12px] group">
             <Image 
-              src="/Picture1.png" 
+              src="/logo.png" 
               alt="Faculties Online Logo" 
               width={140} 
               height={36} 
